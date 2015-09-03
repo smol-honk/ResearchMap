@@ -1,0 +1,28 @@
+.container
+  .jumbotron
+    %h1 Research Map Project
+    %br
+    %br
+    = button_to 'New Person', new_person_path, class: "btn btn-info", method: :get
+    
+.panel.panel-default
+  .panel-heading
+    Researchers
+
+  %table.table
+    %thead
+      %tr
+        %th Name
+        %th Location
+        %th
+        %th
+        %th
+
+    %tbody
+      - @people.each do |person|
+        %tr
+          %td= person.Name
+          %td= person.Location
+          %td= button_to 'Show', person, class: "btn btn-primary", method: :get
+          %td= button_to 'Edit', edit_person_path(person), class: "btn btn-primary", method: :get
+          %td= button_to 'Delete', person, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"

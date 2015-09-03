@@ -1,0 +1,34 @@
+/*
+ *= require_tree .
+ *= require_self
+ *= require leaflet
+ *= require mapbox
+ *= require jquery-ui
+ *= depend_on_asset "layers.png"
+ *= depend_on_asset "layers-2x.png"
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+  padding-top: 70px;
+}
+#map {
+  text-align: center;
+  height: 600px;
+}
+
+#googlemap {
+    text-align: center;
+    height: 500px;
+    margin: 4em;
+}
+
+#form {
+  padding-left: 2em;
+}
+.footer {
+  margin: 2em;
+  text-align: center;
+}

@@ -1,0 +1,34 @@
+// Place all the styles related to the Welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.leaflet-container p {
+    font-family: 'Quicksand Book', Arial, sans-serif;
+}
+.leaflet-container a{
+    background-color: transparent;
+}
+
+.leaflet-container h3 {
+    color: slategray;
+    font-family: 'Quicksand Book', Arial, sans-serif;
+}
+
+.popup {
+    font-family: 'Quicksand Book', Arial, sans-serif;
+}
+
+#map{
+    .leaflet-popup {
+        a {
+            &.leaflet-popup-close-button {
+                background: unset !important;
+            }
+        }
+    }
+    
+    .leaflet-popup-tip {
+        background: transparent;
+        transform: rotate(0deg);
+    }
+}
