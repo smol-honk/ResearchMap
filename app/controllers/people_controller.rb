@@ -6,8 +6,10 @@ class PeopleController < ApplicationController
 
   def index
     @people = Person.all
+    @search = Person.search(params[:q])
+    @people = @search.result
   end
-
+  
   # GET /people/1
   # GET /people/1.json
   def show
@@ -70,6 +72,6 @@ class PeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.require(:person).permit(:Name, :Location, :bio, :title)
+      params.require(:person).permit(:Name, :Location, :bio, :title, :donor, :dateStart, :dateEnd, :keyword)
     end
 end

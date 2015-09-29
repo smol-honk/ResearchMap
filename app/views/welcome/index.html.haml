@@ -1,7 +1,39 @@
-.container
+.container-field
   .jumbotron
-    %h1 Research Map Project
-  %body{data: {'no-transition-cache': 'true'}}
-    %h2 Where are our Researchers?
-    #map
-  
+    %head
+      %h1 Research Map Project
+  .container
+    %body{data: {'no-transition-cache': 'true'}}
+      %h2 Where are our Researchers?
+      %nav.menu-ui#menu-ui
+        %a.active#filter-all{href: :'#'} Show all
+        %a#filter-donor{href: :'#'} Can visit?
+      .sidebar
+        .heading
+          %h2
+            %i.fa.fa-globe
+            %a#backToSize{href: :'#'} Locations
+        .listings#listings
+      #map 
+    
+  %p#searchanthro
+    .panel-group#accordion{role: :"tablist", 'aria-multiselectable': :"true"}
+      .panel.panel-default
+        .panel-heading#headingOne{role: :"tab"}
+          %h4.panel-title
+            %a{role: :"button", 'data-toggle': :"collapse", 'data-parent': :"#accordion", href: :"#collapseOne", 'aria-expanded': :"true", 'aria-controls': :"collapseOne"}
+              %i.fa.fa-search
+              Search For a Researcher!
+        .panel-collapse.collapse.in#collapseOne{role: :'tabpanel', 'aria-labelledby': :'headingOne'}    
+          .panel-body
+            Search through fields to find your researcher!
+            
+            
+            = search_form_for @search do |f|
+              = f.condition_fields do |c|
+                = render "condition_fields", f: c
+              %p
+                = link_to_add_fields "Add Conditions", f, :condition
+              .actions
+                = f.submit 'Search', class: "btn btn-default"
+

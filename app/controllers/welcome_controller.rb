@@ -1,7 +1,10 @@
 class WelcomeController < ApplicationController
   before_filter :set_people, only: [:map]
-  
-  def index; end
+  def index
+    @search = Person.search(params[:q])
+    @people = @search.result
+    @search.build_condition
+  end
   
   def map
     @geojson = []
@@ -10,17 +13,20 @@ class WelcomeController < ApplicationController
       @geojson << {
         type: 'Feature',
         geometry: {
+          coordinates: [person.longitude, person.latitude],
           type: 'Point',
-          coordinates: [person.longitude, person.latitude]
         },
         properties: {
           id: person.id,
           name: person.Name,
           bio: person.bio,
           title: person.title,
+          donor: person.donor,
+          location: person.Location,
           "marker-color": :"#00607d",
-          "marker-symbol": :"circle",
-          "marker-size": :"medium"
+          "marker-size": :"medium",
+          "marker-symbol": :"pitch"
+          
         }
       }
     end

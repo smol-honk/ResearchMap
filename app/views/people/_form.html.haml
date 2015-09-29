@@ -1,25 +1,49 @@
+// Ruby created a form that will loop through for each person.
+
 = form_for @person do |f|
   - if @person.errors.any?
+    // If there are any errors in saving changes in the object (person), then a message will be produced.
+    
     #error_explanation
       %h2= "#{pluralize(@person.errors.count, "error")} prohibited this person from being saved:"
       %ul
         - @person.errors.full_messages.each do |msg|
           %li= msg
   
+  // Our fields are where the user inputs the information that will be saved. f.label is the label of the field, and depending on what data type the information is, we will be using f.[datatypefield] to take in the user info.
+  
   .field
-    = f.label :Name
-    = f.text_field :Name, placeholder: 'First and Last Name'
+    = f.label :Name, class: 'form-group'
+    = f.text_field :Name, placeholder: 'First and Last Name', class: "form-control"
+  
+  // We are utilizing the gem geocomplete here to geocomplete the location for geocoding.  
+  .field
+    = f.label :Location, class: 'form-group'
+    = f.text_field :Location, id: 'geocomplete', placeholder: 'Type in an address...', class: 'form-control'
     
   .field
-    = f.label :Location
-    = f.text_field :Location, id: 'geocomplete', placeholder: 'Type in an address...'
+    = f.label :title, class: 'form-group'
+    = f.text_field :title, class: 'form-control'
+  
+  .field
+    = f.label :dateStart, 'Start date of Research'
+    = f.date_select(:dateStart, :start_year => 1800)
+    =f.label :dateEnd, 'End date of Research'
+    = f.date_select(:dateEnd, :start_year => 1800)
+  
+  .field
+    = f.label :keyword, 'Keywords for your research'
+    = f.text_field :keyword, class: 'form-control'
     
   .field
-    = f.label :title
-    = f.text_field :title
+    = f.label :donor, class: 'form-group'
+    = f.check_box :donor
+    Can accept a donor?
   .field
-    = f.label :biography
-    = f.text_area :bio
+    = f.label :biography, class: 'form-group'
+    = f.text_area :bio, class: 'form-control', rows: '8'
+  
+  // Saves the changes.
   .actions
     = f.submit 'Save', class: "btn btn-default"
     

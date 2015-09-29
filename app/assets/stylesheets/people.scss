@@ -6,6 +6,15 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.jumbotron{
+    h1 {
+    text-align: center;
+    }
+    button {
+        text-align: center;
+    }
+}
+
 .panel {
     min-width: 768px;
     margin: auto 60px;
@@ -21,6 +30,10 @@
 }
 
 #location {
+    display:block;
+}
+
+#donor {
     display:block;
 }
 
@@ -40,7 +53,9 @@ label {
     display: block;
 }
 
-
+.form-control{
+    width: 600px;
+}
 
 textarea {
     height: 200px;
@@ -50,4 +65,12 @@ textarea {
 .panel-heading {
     text-align: center;
     font-weight: bold;
+}
+
+.button_to{
+    text-align: center;   
+}
+
+#googlemap {
+    margin-bottom: 10em;
 }

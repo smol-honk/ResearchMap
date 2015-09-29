@@ -10,15 +10,13 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
 
 body {
-  padding-top: 70px;
+  padding-top: 51px;
 }
-#map {
-  text-align: center;
-  height: 600px;
-}
-
 #googlemap {
     text-align: center;
     height: 500px;

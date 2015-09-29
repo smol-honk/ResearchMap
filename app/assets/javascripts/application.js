@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require jquery-ui
@@ -20,8 +19,8 @@
 //= require mapbox.js
 //= require d3
 //= require gmaps/google
-//= require_tree .
 //= require turbolinks
+//= require_tree .
 
 
 $(function() {

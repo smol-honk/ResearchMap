@@ -4,8 +4,6 @@
       = @person.Name
       %small
         = @person.title
-  %p#notice
-    = notice
   #information
     %strong
       Name:
@@ -15,20 +13,23 @@
       %strong
         Location:
       = @person.Location
+    #donor  
+      %strong
+        Can accept Donor?:
+      = @person.donor
   #bio
     %strong
       Biography:
     %p
       = @person.bio
-  
+      
   .text-center
     .btn-group{role: :group}
       = link_to 'Edit', edit_person_path(@person), class: "btn btn-default", method: :get
 
-      = link_to 'Back', root_path, class: "btn btn-default", method: :get
+      = link_to 'Back', :back, class: "btn btn-default", method: :get
 
       = link_to 'Delete', @person, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"
-
 
   #googlemap
     %script{:src=> "//maps.google.com/maps/api/js?v=3.13&amp;sensor=false&amp;libraries=geometry", :type => "text/javascript"}

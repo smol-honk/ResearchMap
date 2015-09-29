@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
-  resources :people
+  devise_for :users
+  resources :people do
+    collection do
+      get :search
+    end
+  end
+
   get 'welcome/map'
   get 'welcome/index'
   get 'welcome/data', :defaults => { format: :'json'}  
   get 'people/index'
-  root 'welcome#index'
+  root to:'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
