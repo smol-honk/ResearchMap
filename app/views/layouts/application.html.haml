@@ -30,8 +30,9 @@
         %ul.nav.navbar-nav
           %li
             %a{:href => "/people"} Researchers
-          %li
-            %a{:href => "/people/new/", data: {'no-turbolink': 'true'}} New Person
+          - if admin_signed_in?
+            %li
+              %a{:href => "/people/new/", data: {'no-turbolink': 'true'}} New Person
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
               Dropdown
@@ -60,11 +61,13 @@
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
               - if user_signed_in?
                 Logged in as #{current_user.email}
+              - elsif admin_signed_in?
+                Admin logged in as #{current_admin.email}
               - else
                 Log In
               %span.caret
             %ul.dropdown-menu{:role => "menu"}
-              - if user_signed_in?
+              - if user_signed_in? or admin_signed_in?
                 %li
                   = link_to "Sign Out", destroy_user_session_path, method: :delete
               - else

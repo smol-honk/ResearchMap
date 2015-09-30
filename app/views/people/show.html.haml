@@ -25,11 +25,11 @@
       
   .text-center
     .btn-group{role: :group}
-      = link_to 'Edit', edit_person_path(@person), class: "btn btn-default", method: :get
-
+      -if admin_signed_in?
+        = link_to 'Edit', edit_person_path(@person), class: "btn btn-default", method: :get
+        = link_to 'Delete', @person, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"
       = link_to 'Back', :back, class: "btn btn-default", method: :get
-
-      = link_to 'Delete', @person, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"
+      
 
   #googlemap
     %script{:src=> "//maps.google.com/maps/api/js?v=3.13&amp;sensor=false&amp;libraries=geometry", :type => "text/javascript"}

@@ -68,6 +68,44 @@ $(function() {
 
       el.className += ' active';
     }
+    // Will append the listings to the sidebar.
+    locations.on('ready', function(){
+        locations.eachLayer(function(locale){
+            var prop = locale.feature.properties;
+            var listing = listings.appendChild(document.createElement('div'));
+                listing.className = 'item';
+
+            var link = listing.appendChild(document.createElement('a'));
+                link.href = '#';
+                link.className = 'title';
+
+            link.innerHTML = prop.name;
+    
+
+            var details = listing.appendChild(document.createElement('div'));
+            details.innerHTML = prop.location;
+
+            link.onclick = function() {
+              setActive(listing);
+
+              // When a menu item is clicked, animate the map to center
+              // its associated locale and open its popup.
+              map.setView(locale.getLatLng(), 16);
+              locale.openPopup();
+              return false;
+            };
+
+            // Marker interaction
+            locale.on('click', function(e) {
+                // 1. center the map on the selected marker.
+                map.panTo(locale.getLatLng());
+
+                // 2. Set active the markers associated listing.
+                setActive(listing);
+            });
+        });
+    });
+    
     
     locations.on('layeradd', function(e){
         var locale = e.layer,
@@ -81,37 +119,7 @@ $(function() {
              '</h3>' +'<b>'+ prop.title + '</b>'  + '</p>' + prop.bio +
              '</p>'+ '</p>' + '<a href= /people/' + prop.id + '>Read more...</a>' + '</div>';
 
-        var listing = listings.appendChild(document.createElement('div'));
-            listing.className = 'item';
-
-        var link = listing.appendChild(document.createElement('a'));
-            link.href = '#';
-            link.className = 'title';
-
-        link.innerHTML = prop.name;
         
-
-        var details = listing.appendChild(document.createElement('div'));
-        details.innerHTML = prop.location;
-
-        link.onclick = function() {
-          setActive(listing);
-
-          // When a menu item is clicked, animate the map to center
-          // its associated locale and open its popup.
-          map.setView(locale.getLatLng(), 16);
-          locale.openPopup();
-          return false;
-        };
-
-        // Marker interaction
-        locale.on('click', function(e) {
-            // 1. center the map on the selected marker.
-            map.panTo(locale.getLatLng());
-
-            // 2. Set active the markers associated listing.
-            setActive(listing);
-        });
 
         popup += '</div>';
         locale.bindPopup(popup, {

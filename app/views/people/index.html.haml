@@ -3,7 +3,8 @@
     %h1 Research Map Project
     %br
     %br
-    = button_to 'New Person', new_person_path, class: "btn btn-info", method: :get
+    - if admin_signed_in?
+      = button_to 'New Person', new_person_path, class: "btn btn-info", method: :get
 .container    
   .panel.panel-default
     .panel-heading
@@ -24,5 +25,6 @@
             %td= person.Name
             %td= person.Location
             %td= button_to 'Show', person, class: "btn btn-primary", method: :get
-            %td= button_to 'Edit', edit_person_path(person), class: "btn btn-primary", method: :get
-            %td= button_to 'Delete', person, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"
+            - if admin_signed_in?
+              %td= button_to 'Edit', edit_person_path(person), class: "btn btn-primary", method: :get
+              %td= button_to 'Delete', person, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"
