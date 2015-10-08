@@ -1,22 +1,19 @@
-.container-field
-  .jumbotron
-    %head
-      %h1 Research Map Project
-  .container
-    %body{data: {'no-transition-cache': 'true'}}
-      %h2 Where are our Researchers?
-      %nav.menu-ui#menu-ui
-        %a.active#filter-all{href: :'#'} Show all
-        %a#filter-donor{href: :'#'} Can visit?
-      .sidebar
-        .heading
-          %h2
-            %i.fa.fa-globe
-            %a#backToSize{href: :'#'} Locations
-        .listings#listings
-      #map 
-    
-  %p#searchanthro
+.container
+  %body{data: {'no-transition-cache': 'true'}}
+    %h1
+      %center Where are our Researchers?
+    %nav.menu-ui#menu-ui
+      %a.active#filter-all{href: :'#'} Show all
+      %a#filter-donor{href: :'#'} Can visit?
+    .sidebar
+      .heading
+        %h2
+          %i.fa.fa-globe
+          %a#backToSize{href: :'#'} Locations
+      .listings#listings
+    #map 
+  
+  #searchanthro
     .panel-group#accordion{role: :"tablist", 'aria-multiselectable': :"true"}
       .panel.panel-default
         .panel-heading#headingOne{role: :"tab"}

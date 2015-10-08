@@ -12,6 +12,9 @@ body {
   box-sizing:border-box;
 }
 
+.panel.panel-default {
+  margin: 0px;
+}
 .listings {
   height:87.4%;
   overflow:auto;
@@ -110,28 +113,28 @@ body {
     height: 500px;
     left: 25.5%;
     width: 75%;
-    .leaflet-popup {
-        a {
-            &.leaflet-popup-close-button {
-                background: unset !important;
-            }
-        }
-    }
-    
     .leaflet-popup-tip {
-        background: transparent;
-        transform: rotate(0deg);
+      background: transparent;
+      transform: rotate(0deg);
     }
 }
 
 #searchanthro {
     padding-top: 20px;
 }
+
+.leaflet-control-mapbox-geocoder-results{
+  a:hover {
+    width: 180px !important;
+    }
+  }
+
+        
 .menu-ui {
   background:#fff;
   position:relative;
-  top:100px;
-  left:71em;
+  top:6.4em;
+  left:72.5em;
   z-index:1;
   border-radius:3px;
   width:120px;

@@ -16,7 +16,10 @@ $(function() {
             // This option makes only one copy of the world show up
             noWrap: true
             }
-        }),
+        })
+        .addControl(L.mapbox.geocoderControl('mapbox.places', {
+            autocomplete:true
+        })),
         donor = document.getElementById('filter-donor'),
         all = document.getElementById('filter-all'),
         back = document.getElementById('backToSize');
@@ -68,16 +71,18 @@ $(function() {
 
       el.className += ' active';
     }
-    // Will append the listings to the sidebar.
+    
+    // Will append the listings to the sidebar
     locations.on('ready', function(){
         locations.eachLayer(function(locale){
             var prop = locale.feature.properties;
             var listing = listings.appendChild(document.createElement('div'));
-                listing.className = 'item';
+            listing.className = 'item';
 
             var link = listing.appendChild(document.createElement('a'));
-                link.href = '#';
-                link.className = 'title';
+            link.href = '#';
+            link.className = 'title';
+            link.id = 'person';
 
             link.innerHTML = prop.name;
     

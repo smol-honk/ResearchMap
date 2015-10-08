@@ -20,6 +20,9 @@ gem 'responders'
 gem 'font-awesome-sass'
 gem 'jquery-turbolinks'
 gem 'gmaps4rails'
+gem 'execjs'
+gem 'therubyracer'
+gem 'whenever', :require => false
 gem 'progress_bar'
 gem 'protected_attributes'
 gem 'cancan'
@@ -36,6 +39,5 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'better_errors'
-  gem 'sunspot_solr'
   gem 'binding_of_caller'
 end

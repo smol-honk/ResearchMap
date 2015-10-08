@@ -73,6 +73,6 @@ class PeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.require(:person).permit(:Name, :Location, :bio, :title, :donor, :dateStart, :dateEnd, :keyword)
+      params.require(:person).permit(:Name, :Location, :bio, :title, :donor, :dateStart, :dateEnd, :keyword, :activeDateStart, :activeDateEnd)
     end
 end

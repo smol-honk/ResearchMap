@@ -10,11 +10,25 @@ class Person < ActiveRecord::Base
                   :dateStart,
                   :dateEnd,
                   :keyword,
-                  :id
+                  :id,
+                  :activeDateStart,
+                  :activeDateEnd
   # Geocoder gem that takes in location and turns it into lat and long.                
   geocoded_by :Location
   after_validation :geocode, :if => :Location_changed?
 
+  def active?
+    self.dateEnd > Time.now.localtime
+  end
+  
+  def update_donor_status
+    if self.active?
+      self.update_attribute(:donor, true)
+    else
+      self.update_attribute(:donor, false)
+    end
+  end
+  
   def self.ransackable_attributes(auth_object = nil)
     super - ['id', 'created_at', 'longitude', 'latitude', 'updated_at']
   end
