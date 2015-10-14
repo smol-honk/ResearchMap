@@ -13,10 +13,23 @@
       %strong
         Location:
       = @person.Location
-    #donor  
+    #donor 
       %strong
         Can accept Donor?:
       = @person.donor
+    #date
+      %strong
+        Active Research From:
+      = @person.activeDateStart
+      to
+      = @person.activeDateEnd
+      %p
+        %strong
+          In Field From:
+          %br
+        = @person.dateStart
+        to
+        = @person.dateEnd
   #bio
     %strong
       Biography:

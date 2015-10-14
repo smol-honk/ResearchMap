@@ -2,7 +2,7 @@
 // Additional options to the map are continuous world and noWrap(to stop the duplicate worlds from showing on the map)
 $(function() {
     L.mapbox.accessToken = 'pk.eyJ1IjoiYW1waGl0aGVyZSIsImEiOiIyZGE2MWJhYTdlNjJkM2E4NTZhYjUyODE3NDFmNzY3MSJ9.EDkcexR3h8zGfuPOXADctQ';
-    
+
     // Creates bounds for the map so no white space is shown
     var southWest = L.latLng(-180, -180),
         northEast = L.latLng(180, 180),
@@ -23,16 +23,22 @@ $(function() {
         donor = document.getElementById('filter-donor'),
         all = document.getElementById('filter-all'),
         back = document.getElementById('backToSize');
-        
+
         map.fitBounds(bounds);
-        
+
         // This function is used for the filtering of the datatype: donor. On the 'click' of the donor button, only markers with donor labeled as true will show on the map. If all is clicked, then all markers will show.
-        
+        // window.onload = function(){
+        //     locations.setFilter(function(f){
+        //         return f.properties['active'] === true;
+        //     });
+        //     return false;
+        // };
+        //
         back.onclick = function() {
             map.setView([25, 5], 2);
             return false;
         };
-        
+
         donor.onclick = function(e) {
             all.className = '';
             this.className = 'active';
@@ -46,11 +52,11 @@ $(function() {
             donor.className = '';
             this.className = 'active';
             locations.setFilter(function(f) {
-                return true;
+                return f.properties['active'] === true;
             });
             return false;
         };
-        
+
 
     // Disables the scroll wheel zoom
     map.scrollWheelZoom.disable();
@@ -58,7 +64,7 @@ $(function() {
     // checks the html for 'listings'
     var listings = document.getElementById('listings');
     var locations = L.mapbox.featureLayer().addTo(map);
-    
+
     // loads our json from the welcome controller
     locations.loadURL('welcome/map.json');
 
@@ -71,23 +77,23 @@ $(function() {
 
       el.className += ' active';
     }
-    
+
     // Will append the listings to the sidebar
     locations.on('ready', function(){
         locations.eachLayer(function(locale){
-            var prop = locale.feature.properties;
+            window.prop = locale.feature.properties;
             var listing = listings.appendChild(document.createElement('div'));
             listing.className = 'item';
 
-            var link = listing.appendChild(document.createElement('a'));
+            window.link = listing.appendChild(document.createElement('a'));
             link.href = '#';
             link.className = 'title';
             link.id = 'person';
 
             link.innerHTML = prop.name;
-    
 
-            var details = listing.appendChild(document.createElement('div'));
+
+            window.details = listing.appendChild(document.createElement('div'));
             details.innerHTML = prop.location;
 
             link.onclick = function() {
@@ -110,8 +116,6 @@ $(function() {
             });
         });
     });
-    
-    
     locations.on('layeradd', function(e){
         var locale = e.layer,
         feature = locale.feature;
@@ -124,18 +128,17 @@ $(function() {
              '</h3>' +'<b>'+ prop.title + '</b>'  + '</p>' + prop.bio +
              '</p>'+ '</p>' + '<a href= /people/' + prop.id + '>Read more...</a>' + '</div>';
 
-        
-
         popup += '</div>';
         locale.bindPopup(popup, {
             minWidth: 320
         });
     });
+
  });
- 
+
 // Search Form Function (remove and add conditions)
 
-jQuery(function() {
+$(function() {
   $('form').on('click', '.remove_fields', function(event) {
     $(this).closest('.field').remove();
     return event.preventDefault();
@@ -148,4 +151,3 @@ jQuery(function() {
     return event.preventDefault();
   });
 });
-

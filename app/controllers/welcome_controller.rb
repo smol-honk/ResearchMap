@@ -22,6 +22,7 @@ class WelcomeController < ApplicationController
           bio: person.bio,
           title: person.title,
           donor: person.donor,
+          active: person.active,
           location: person.Location,
           "marker-color": :"#00607d",
           "marker-size": :"medium",

@@ -22,7 +22,7 @@ gem 'jquery-turbolinks'
 gem 'gmaps4rails'
 gem 'execjs'
 gem 'therubyracer'
-gem 'whenever', :require => false
+gem 'bootstrap-datepicker-rails'
 gem 'progress_bar'
 gem 'protected_attributes'
 gem 'cancan'

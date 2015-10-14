@@ -24,11 +24,17 @@
   .field
     = f.label :title, class: 'form-group'
     = f.text_field :title, class: 'form-control'
-  
   .field
-    = f.label :dateStart, 'Start date of Research'
+    = f.label :dateStart, 'Start date of Active Research'
+    = f.date_select(:activeDateStart, :start_year => 1800)
+    =f.label :dateEnd, 'End date of Active Research'
+    = f.date_select(:activeDateEnd, :start_year => 1800)
+    
+  %hr{align: :'left', width: :'50%'}
+  .field
+    = f.label :dateStart, 'Start date of Research in field'
     = f.date_select(:dateStart, :start_year => 1800)
-    =f.label :dateEnd, 'End date of Research'
+    =f.label :dateEnd, 'End date of Research in field'
     = f.date_select(:dateEnd, :start_year => 1800)
   
   .field

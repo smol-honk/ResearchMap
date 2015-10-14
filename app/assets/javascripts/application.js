@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require jquery-ui
+//= require bootstrap-datepicker
 //= require jquery.geocomplete
 //= require leaflet
 //= require mapbox.js
@@ -26,3 +27,11 @@
 $(function() {
 $("#geo-input").geocomplete();
 });  
+
+$(function () {
+    $('#datepicker').datepicker({
+        todayBtn: "linked",
+        autoclose: true,
+        todayHighlight: true
+    });
+});
