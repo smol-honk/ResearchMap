@@ -42,18 +42,22 @@ $(function() {
         donor.onclick = function(e) {
             all.className = '';
             this.className = 'active';
+            listings.innerHTML = '';
             locations.setFilter(function(f) {
                 return f.properties['donor'] === true;
             });
+            updateNav()
             return false;
         };
 
         all.onclick = function() {
             donor.className = '';
             this.className = 'active';
+            listings.innerHTML = '';
             locations.setFilter(function(f) {
-                return f.properties['active'] === true;
+                return true;
             });
+            updateNav()
             return false;
         };
 
@@ -79,21 +83,20 @@ $(function() {
     }
 
     // Will append the listings to the sidebar
-    locations.on('ready', function(){
+    function updateNav(){
         locations.eachLayer(function(locale){
-            window.prop = locale.feature.properties;
+            var prop = locale.feature.properties;
             var listing = listings.appendChild(document.createElement('div'));
             listing.className = 'item';
 
-            window.link = listing.appendChild(document.createElement('a'));
+            var link = listing.appendChild(document.createElement('a'));
             link.href = '#';
             link.className = 'title';
             link.id = 'person';
 
             link.innerHTML = prop.name;
 
-
-            window.details = listing.appendChild(document.createElement('div'));
+            var details = listing.appendChild(document.createElement('div'));
             details.innerHTML = prop.location;
 
             link.onclick = function() {
@@ -115,7 +118,12 @@ $(function() {
                 setActive(listing);
             });
         });
+    }
+
+    locations.on('ready', function(){
+      updateNav()
     });
+
     locations.on('layeradd', function(e){
         var locale = e.layer,
         feature = locale.feature;
