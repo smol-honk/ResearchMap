@@ -14,6 +14,35 @@
         text-align: center;
     }
 }
+table {
+        width: 100%;
+    }
+
+thead, tbody, tr, td, th { display: block; }
+
+tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+tbody {
+    height: 35em;
+    overflow-y: auto;
+}
+
+thead {
+    /* fallback */
+}
+
+
+tbody td, thead th {
+    width: 14%;
+    float: left;
+    border-bottom: unset;
+}
+
 
 .panel {
     min-width: 768px;

@@ -26,7 +26,7 @@
 
 $(function() {
 $("#geo-input").geocomplete();
-});  
+});
 
 $(function () {
     $('#datepicker').datepicker({

@@ -9,10 +9,10 @@
       .heading
         %h2
           %i.fa.fa-globe
-          %a#backToSize{href: :'#'} Locations
+          %a#backToSize{href: :'#', title: :"CLICK MEEE", 'data-placement': :'top'} Locations
       .listings#listings
-    #map 
-  
+    #map
+
   #searchanthro
     .panel-group#accordion{role: :"tablist", 'aria-multiselectable': :"true"}
       .panel.panel-default
@@ -21,15 +21,25 @@
             %a{role: :"button", 'data-toggle': :"collapse", 'data-parent': :"#accordion", href: :"#collapseOne", 'aria-expanded': :"true", 'aria-controls': :"collapseOne"}
               %i.fa.fa-search
               Search For a Researcher!
-        .panel-collapse.collapse.in#collapseOne{role: :'tabpanel', 'aria-labelledby': :'headingOne'}    
+        .panel-collapse.collapse.in#collapseOne{role: :'tabpanel', 'aria-labelledby': :'headingOne'}
           .panel-body
-            Search through fields to find your researcher!
-            
-            
+            Search for your researcher!
+            %p
             = search_form_for @search do |f|
-              = f.condition_fields do |c|
-                = render "condition_fields", f: c
-              %p
-                = link_to_add_fields "Add Conditions", f, :condition
+              .field
+                = f.label :Name_cont
+                = f.text_field :Name_cont
+
+                = f.label :Location_cont
+                = f.text_field :Location_or_full_State_or_abr_Country_cont
               .actions
-                = f.submit 'Search', class: "btn btn-info"
+                = f.submit 'Search', class: "btn btn-default"
+                %hr
+                %p
+                  %strong Advanced Search
+                  = f.condition_fields do |c|
+                    = render "condition_fields", f: c
+                  %p
+                    = link_to_add_fields "Add Conditions", f, :condition
+              .actions
+                = f.submit 'Search', class: "btn btn-default"

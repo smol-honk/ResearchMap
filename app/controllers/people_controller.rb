@@ -1,19 +1,21 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_admin!, :except => [:show, :index]
-  
+
   # GET /people
   # GET /people.json
-  
+
   def index
     @people = Person.all
     @search = Person.search(params[:q])
     @people = @search.result
   end
-  
+
   # GET /people/1
   # GET /people/1.json
   def show
+    @search = Person.search(params[:q])
+    @people = @search.result
   end
 
   # GET /people/new

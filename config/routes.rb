@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-
-  devise_for :admins
   devise_for :users
-  
+  devise_for :admins
+
   resources :users
-  
+
   resources :people do
     collection do
       get :search
@@ -13,7 +12,7 @@ Rails.application.routes.draw do
 
   get 'welcome/map'
   get 'welcome/index'
-  get 'welcome/data', :defaults => { format: :'json'}  
+  get 'welcome/data', :defaults => { format: :'json'}
   get 'people/index'
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.

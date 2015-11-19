@@ -1,20 +1,21 @@
 !!!
 %html
   %head
+    %link{href: :'//mapbox.com/base/latest/base.css', rel: :'stylesheet'}
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title Research Map Project
     = stylesheet_link_tag 'application', params[:controller], media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', params[:controller], 'data-turbolinks-track' => true
     = csrf_meta_tags
     %link{rel:"stylesheet", href: "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"}
-  
+
   / Scripts to allow Mapbox API to work
   %script{src: :'https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.js'}
   %link{href: :'https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.css', rel: :'stylesheet'}
- 
+
   %body
-    
-  // The navagation bar from bootstrap  
+
+  // The navagation bar from bootstrap
   %nav.navbar.navbar-default.navbar-fixed-top{:role => "navigation"}
     .container-fluid
       / Brand and toggle get grouped for better mobile display
@@ -33,27 +34,13 @@
           - if admin_signed_in?
             %li
               %a{:href => "/people/new/", data: {'no-turbolink': 'true'}} New Person
-          %li.dropdown
-            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-              Dropdown
-              %span.caret
-            %ul.dropdown-menu{:role => "menu"}
-              %li
-                %a{:href => "#"} Action
-              %li
-                %a{:href => "#"} Another action
-              %li
-                %a{:href => "#"} Something else here
-              %li.divider
-              %li
-                %a{:href => "#"} Separated link
-              %li.divider
-              %li
-                %a{:href => "#"} One more separated link
-        %form.navbar-form.navbar-left{:role => "search"}
-          .form-group
-            %input.form-control{:placeholder => "Search", :type => "text"}
-          %button.btn.btn-default{:type => "submit"} Submit
+        .navbar-form.navbar-left
+          = search_form_for @search do |f|
+            .field
+              = f.text_field :Name_or_Location_or_bio_or_keyword_cont, class: :'form-control'
+              .form-group
+                %button.btn.btn-default.navbar-right{type: "submit"} Submit
+
         %ul.nav.navbar-nav.navbar-right
           %li
             %a{:href => "#"} Link
@@ -78,19 +65,19 @@
               %li.divider
               %li
                 %a{:href => "#"} Separated link
-                
-  
+
+
   // Google map scripts
   %script{:src => "http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"}
   %script{:src => "http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"}
   = javascript_include_tag "jquery.geocomplete"
-  
+
   - if notice
     %p.alert.alert-success= notice
   - if alert
     %p.alert.alert-danger= alert
-       
+
   =yield
-  
+
   .footer
-    &copy; Lisa Zhang 
+    &copy; Lisa Zhang

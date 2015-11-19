@@ -3,12 +3,12 @@ class WelcomeController < ApplicationController
   def index
     @search = Person.search(params[:q])
     @people = @search.result
-    @search.build_condition
+    # @search.build_condition
   end
-  
+
   def map
     @geojson = []
-    
+
     @people.each do |person|
       @geojson << {
         type: 'Feature',
@@ -27,17 +27,17 @@ class WelcomeController < ApplicationController
           "marker-color": :"#00607d",
           "marker-size": :"medium",
           "marker-symbol": :"pitch"
-          
+
         }
       }
     end
-  
+
     respond_to do |format|
       format.html
       format.json { render json: @geojson }
     end
   end
-  
+
   def set_people
     @people = Person.all
   end

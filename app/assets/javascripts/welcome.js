@@ -72,6 +72,7 @@ $(function() {
     // loads our json from the welcome controller
     locations.loadURL('welcome/map.json');
 
+
     function setActive(el) {
       var siblings = listings.getElementsByTagName('div');
       for (var i = 0; i < siblings.length; i++) {
@@ -91,10 +92,14 @@ $(function() {
 
             var link = listing.appendChild(document.createElement('a'));
             link.href = '#';
+            link.title = "Click to see this anthropologist!";
             link.className = 'title';
             link.id = 'person';
 
             link.innerHTML = prop.name;
+            var anthroTitle = listing.appendChild(document.createElement('div'));
+            anthroTitle.className = 'personTitle';
+            anthroTitle.innerHTML = prop.title;
 
             var details = listing.appendChild(document.createElement('div'));
             details.innerHTML = prop.location;
@@ -133,8 +138,8 @@ $(function() {
 
         // Each marker on the map.
         var popup = '<div class="popup">' + '<h3>' + prop.name +
-             '</h3>' +'<b>'+ prop.title + '</b>'  + '</p>' + prop.bio +
-             '</p>'+ '</p>' + '<a href= /people/' + prop.id + '>Read more...</a>' + '</div>';
+             '</h3>' +'<b>'+ prop.title + '</b>'  + '<p>' + '<div class = "line-clamp">' + prop.bio +
+             '</div>'  + '</p>' + '<a href= /people/' + prop.id + '>Read more...</a>';
 
         popup += '</div>';
         locale.bindPopup(popup, {
@@ -144,8 +149,11 @@ $(function() {
 
  });
 
-// Search Form Function (remove and add conditions)
+ $(function () {
+   $('#backToSize').tooltip()
+ });
 
+// Search Form Function (remove and add conditions)
 $(function() {
   $('form').on('click', '.remove_fields', function(event) {
     $(this).closest('.field').remove();

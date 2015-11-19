@@ -7,4 +7,8 @@ module ApplicationHelper
      end
      link_to(name, '#', class: "add_fields btn btn-default", data: {id: id, fields: fields.gsub("\n", "")})
    end
+
+   def donor_bool(boolean)
+     boolean ? 'Yes' : 'No'
+   end
 end

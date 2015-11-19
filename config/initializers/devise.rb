@@ -6,7 +6,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` on Rails 4+ applications as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'bea7a236478b9f0da7109945bc805fabea33d94f006a9d5b5d88b0f8573f6c1fd685cbfa451cec4c0216c882004f65a9a2ef4129226b79f86eb7fcc0f1d80bc2'
+  # config.secret_key = '2680775627a35edf74c11cd6cd9e7985ea6578249bc476167f4c1ccea4fa43ed33013550c75987b089b920589f421f1cb8d129e77dafa7c9335017c6bd91455c'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -99,7 +99,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = '24b47428587020bc3590ea8b0875379527715174aeab376cc5c6ea7fb88779f7fcb253b1d995d1a1b8f203fb61a8f91aefc61f97a98fca939754b718074e2f49'
+  # config.pepper = 'a79743c7cffae9bbd9b65be29f01fc5e85993b32c4034ec0b8ba30237858104570540df95f406deb5a5a268669abfa8e4ba9c346c325f2abbbb0b4c3cb536174'
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -231,6 +231,7 @@ Devise.setup do |config|
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
+
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
@@ -244,7 +245,7 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(scope: :user).unshift :some_external_strategy
   # end
-  config.secret_key = 'bcaef4207607007364d540d29340b21b337070cc5a3d522016f8c076431042868b2c47f68669db63216bc1d28c3d66f8d87defebc7728e42805dfa2eef39e5cd'
+
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine
   # is mountable, there are some extra configurations to be taken into account.

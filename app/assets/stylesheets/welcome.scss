@@ -12,16 +12,21 @@ body {
   box-sizing:border-box;
 }
 
+.line-clamp {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
 .panel.panel-default {
   margin: 0px;
 }
 .listings {
-  height:87.4%;
+  height:85.4%;
   overflow:auto;
   padding-bottom:60px;
-  a {
-      background-color: transparent;
-  }
+
 }
 
 .listings .item {
@@ -35,10 +40,16 @@ body {
   display:block;
   color:slategray;
   font-weight:700;
+  margin-bottom: 3px;
+}
+
+.listings .item .personTitle {
+  padding-bottom: 5px;
+  color: green;
 }
 .listings .item .title small { font-weight:400; }
 .listings .item.active .title,
-.listings .item .title:hover { 
+.listings .item .title:hover {
     color: #20B2AA;
     text-decoration: none;
 }
@@ -47,7 +58,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width:3px;
+  width:7px;
   height:3px;
   border-left:0;
   background:rgba(0,0,0,0.1);
@@ -56,8 +67,8 @@ body {
   background:none;
 }
 ::-webkit-scrollbar-thumb {
-  background:slategray;
-  border-radius:0;
+  background:cadetblue;
+  border-radius:8px;
 }
 
 .clearfix { display:block; }
@@ -129,7 +140,7 @@ body {
     }
   }
 
-        
+
 .menu-ui {
   background:#fff;
   position:relative;
