@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  location: MyString
+  abstract: MyText
+  dateStart: 2015-11-30
+  dateEnd: 2015-11-30
+  lat: 1.5
+  lng: 1.5
+
+two:
+  name: MyString
+  location: MyString
+  abstract: MyText
+  dateStart: 2015-11-30
+  dateEnd: 2015-11-30
+  lat: 1.5
+  lng: 1.5

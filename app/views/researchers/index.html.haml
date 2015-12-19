@@ -1,0 +1,27 @@
+.container-field
+  .jumbotron
+    %h1 UA Anthropology Researchers
+    %br
+.container
+  .panel.panel-default
+    .panel-heading
+      Researchers
+
+    %table.table
+      %thead
+        %tr
+          %th
+            = sort_link(@search, :first_name, "First Name")
+          %th
+            = sort_link(@search, :last_name, "Last Name")
+
+      %tbody
+        - @researchers.each do |researcher|
+          %tr
+            %td
+              = link_to researcher.first_name, researcher
+            %td
+              = link_to researcher.last_name, researcher
+            - if current_user.try(:admin?)
+              %td= button_to 'Edit', edit_researcher_path(researcher), class: "btn btn-primary", method: :get
+              %td= button_to 'Delete', researcher, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"

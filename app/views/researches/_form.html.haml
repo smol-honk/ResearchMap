@@ -1,0 +1,25 @@
+= form_for @research do |f|
+  - if @research.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@research.errors.count, "error")} prohibited this research from being saved:"
+      %ul
+        - @research.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :location
+    = f.text_field :location
+  .field
+    = f.label :abstract
+    = f.text_area :abstract
+  .field
+    = f.label :dateStart
+    = f.date_select :dateStart
+  .field
+    = f.label :dateEnd
+    = f.date_select :dateEnd
+  .actions
+    = f.submit 'Save'

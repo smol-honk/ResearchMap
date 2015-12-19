@@ -16,7 +16,7 @@ class Person < ActiveRecord::Base
                   :active
   # Geocoder gem that takes in location and turns it into lat and long.
   geocoded_by :Location
-  after_validation :geocode
+  after_validation :geocode, :if => :Location_changed?
 
   COUNTRIES = {
     "Aruba" => "ABW",

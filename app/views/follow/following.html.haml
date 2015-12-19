@@ -1,0 +1,7 @@
+- if @followings.blank?
+  = @followee.email
+  isn't following anyone!
+- else
+  - @followings.each do |following|
+    = link_to following.email, following
+    %br

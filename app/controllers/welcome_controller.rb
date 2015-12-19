@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
-  before_filter :set_people, only: [:map]
+  before_filter :set_researches, only: [:map]
   def index
-    @search = Person.search(params[:q])
+    @search = Research.search(params[:q])
     @people = @search.result
     # @search.build_condition
   end
@@ -9,21 +9,18 @@ class WelcomeController < ApplicationController
   def map
     @geojson = []
 
-    @people.each do |person|
+    @researches.each do |research|
       @geojson << {
         type: 'Feature',
         geometry: {
-          coordinates: [person.longitude, person.latitude],
+          coordinates: [research.longitude, research.latitude],
           type: 'Point',
         },
         properties: {
-          id: person.id,
-          name: person.Name,
-          bio: person.bio,
-          title: person.title,
-          donor: person.donor,
-          active: person.active,
-          location: person.Location,
+          id: research.id,
+          name: research.name,
+          bio: research.abstract,
+          location: research.location,
           "marker-color": :"#00607d",
           "marker-size": :"medium",
           "marker-symbol": :"pitch"
@@ -38,7 +35,7 @@ class WelcomeController < ApplicationController
     end
   end
 
-  def set_people
-    @people = Person.all
+  def set_researches
+    @researches = Research.all
   end
 end

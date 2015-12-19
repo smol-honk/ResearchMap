@@ -1,0 +1,93 @@
+.row.profile.panel
+  .col-md-4.bg_blur
+  .col-md-8.col-xs-12.info-col
+    %img.img-rounded.picture.hidden-xs{:src => "http://vignette1.wikia.nocookie.net/animalcrossing/images/4/41/Chicken.jpg/revision/latest?cb=20130606165306"}/
+    %img.img-rounded.visible-xs.picture_mob{:src => "http://lorempixel.com/180/180/people/6/"}/
+    .header
+      %h2
+        = @researcher.first_name
+        = @researcher.last_name
+        = @researcher.email
+      %h4 Web Developer
+      %span
+        Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
+        "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
+    .btn-group.btn-block
+      - if user_signed_in?
+        - if current_user.follows?(@researcher)
+          = link_to researcher_unfollow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-inverse btn-lg' do
+            %i.fa.fa-user-times.fa-lg
+            Unfollow
+        - else
+          = link_to researcher_follow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-inverse btn-lg' do
+            %i.fa.fa-user-plus.fa-lg
+            Follow
+      - elsif researcher_signed_in?
+        - if current_researcher == @researcher
+
+        - elsif current_researcher.follows?(@researcher)
+          = link_to researcher_unfollow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-inverse btn-lg' do
+            %i.fa.fa-user-times.fa-lg
+            Unfollow
+        - else
+          = link_to researcher_follow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-inverse btn-lg' do
+            %i.fa.fa-user-plus.fa-lg
+            Follow
+      - else
+
+      = link_to researcher_followers_path(@researcher), role: :"button", method: :get, class: :'button btn btn-inverse btn-lg' do
+        %i.fa.fa-users.fa-lg
+        Followers
+        = @followers
+
+      %button.btn.btn-inverse.btn-lg
+        %i.fa.fa-thumbs-o-up.fa-lg
+        Likes
+        = @likes.count
+
+  #profileInfo
+  %ul.nav.nav-tabs
+    %li.active
+      %a{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#home"}
+        %strong
+          Activity
+    %li
+      %a{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#profile"}
+        %strong
+          Research
+
+  #myTabContent.tab-content
+    #home.tab-pane.fade.active.in
+      %p
+        - @activities.each do |activity|
+          .activity
+            = link_to activity.owner.first_name, activity.owner
+            = render_activity activity
+            on
+            = activity.created_at.localtime.to_date
+    #profile.tab-pane.fade
+      %p
+        %table.table
+          %thead
+            %tr
+              %th
+                = sort_link(@search, :name, "Name")
+              %th
+                = sort_link(@search, :location, "Location")
+              %th
+                = sort_link(@search, :dateStart, "Research Started")
+              %th
+                = sort_link(@search, :dateEnd, "Research Ended")
+          %tbody#research
+            - @researches.each do |research|
+              %tr
+                %td
+                  = link_to research.name, research
+                %td= research.location
+                %td= research.dateStart
+                %td= research.dateEnd
+                - if current_user.try(:admin?)
+                  %td= button_to 'Edit', edit_research_path(research), class: "btn btn-primary", method: :get
+                  %td= button_to 'Delete', research, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"
+
+= link_to "FOOLOWERRSSS", researcher_followers_path(@researcher)

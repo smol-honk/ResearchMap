@@ -139,7 +139,7 @@ $(function() {
         // Each marker on the map.
         var popup = '<div class="popup">' + '<h3>' + prop.name +
              '</h3>' +'<b>'+ prop.title + '</b>'  + '<p>' + '<div class = "line-clamp">' + prop.bio +
-             '</div>'  + '</p>' + '<a href= /people/' + prop.id + '>Read more...</a>';
+             '</div>'  + '</p>' + '<a href= /researches/' + prop.id + '>Read more...</a>';
 
         popup += '</div>';
         locale.bindPopup(popup, {

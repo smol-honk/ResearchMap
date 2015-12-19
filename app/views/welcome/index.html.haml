@@ -1,3 +1,4 @@
+!!!!
 .container
   %body{data: {'no-transition-cache': 'true'}}
     %h1
@@ -9,7 +10,7 @@
       .heading
         %h2
           %i.fa.fa-globe
-          %a#backToSize{href: :'#', title: :"CLICK MEEE", 'data-placement': :'top'} Locations
+          %a#backToSize{href: :'#', title: :"CLICK MEEE", 'data-toggle': :'tooltip', 'data-placement': :'top'} Locations
       .listings#listings
     #map
 
@@ -27,11 +28,11 @@
             %p
             = search_form_for @search do |f|
               .field
-                = f.label :Name_cont
-                = f.text_field :Name_cont
+                = f.label :name_cont
+                = f.text_field :name_cont
 
-                = f.label :Location_cont
-                = f.text_field :Location_or_full_State_or_abr_Country_cont
+                = f.label :location_cont
+                = f.text_field :location_cont
               .actions
                 = f.submit 'Search', class: "btn btn-default"
                 %hr
