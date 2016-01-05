@@ -1,12 +1,16 @@
 .row.profile.panel
   .col-md-4.bg_blur
   .col-md-8.col-xs-12.info-col
-    %img.img-rounded.picture.hidden-xs{:src => "http://vignette1.wikia.nocookie.net/animalcrossing/images/4/41/Chicken.jpg/revision/latest?cb=20130606165306"}/
-    %img.img-rounded.visible-xs.picture_mob{:src => "http://lorempixel.com/180/180/people/6/"}/
+    = image_tag(@researcher.avatar.url, class: :'img-rounded picture hidden-xs')
+    -# %img.img-rounded.picture.hidden-xs{:src => "http://vignette1.wikia.nocookie.net/animalcrossing/images/4/41/Chicken.jpg/revision/latest?cb=20130606165306"}/
+    -# %img.img-rounded.visible-xs.picture_mob{:src => "http://lorempixel.com/180/180/people/6/"}/
     .header
       %h2
         = @researcher.first_name
         = @researcher.last_name
+        - if researcher_signed_in? and current_researcher == @researcher
+          = link_to "Edit Profile", edit_researcher_registration_path, class: :"btn btn-primary btn-sm"
+        %br
         = @researcher.email
       %h4 Web Developer
       %span
@@ -34,6 +38,11 @@
             %i.fa.fa-user-plus.fa-lg
             Follow
       - else
+
+      = link_to researcher_following_path(@researcher), role: :"button", method: :get, class: :'button btn btn-inverse btn-lg' do
+        %i.fa.fa-users.fa-lg
+        Following
+        = @following
 
       = link_to researcher_followers_path(@researcher), role: :"button", method: :get, class: :'button btn btn-inverse btn-lg' do
         %i.fa.fa-users.fa-lg
@@ -89,5 +98,3 @@
                 - if current_user.try(:admin?)
                   %td= button_to 'Edit', edit_research_path(research), class: "btn btn-primary", method: :get
                   %td= button_to 'Delete', research, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"
-
-= link_to "FOOLOWERRSSS", researcher_followers_path(@researcher)

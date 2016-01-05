@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  mount_uploader :avatar, AvatarUploader
   acts_as_messageable
   acts_as_mentionable
   acts_as_liker
@@ -11,7 +12,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :type, :bio
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :type, :bio, :avatar, :avatar_cache, :remove_avatar
 
   def is_admin?
     self.is_a?(Admin)

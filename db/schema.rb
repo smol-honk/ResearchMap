@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151218064850) do
+ActiveRecord::Schema.define(version: 20160105223612) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -155,6 +155,14 @@ ActiveRecord::Schema.define(version: 20151218064850) do
     t.datetime "updated_at",                                      null: false
     t.string   "first_name",             limit: 255
     t.string   "last_name",              limit: 255
+    t.string   "avatar",                 limit: 255
+    t.string   "current_location",       limit: 255
+    t.boolean  "available",              limit: 1
+    t.boolean  "week",                   limit: 1
+    t.boolean  "day",                    limit: 1
+    t.date     "day_available"
+    t.date     "weekDateStart"
+    t.date     "weekDateEnd"
   end
 
   add_index "researchers", ["email"], name: "index_researchers_on_email", unique: true, using: :btree
@@ -200,6 +208,7 @@ ActiveRecord::Schema.define(version: 20151218064850) do
     t.string   "first_name",             limit: 255
     t.string   "last_name",              limit: 255
     t.text     "bio",                    limit: 65535
+    t.string   "avatar",                 limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

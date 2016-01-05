@@ -1,4 +1,8 @@
 class Researcher < ActiveRecord::Base
+  mount_uploader :avatar, AvatarUploader
+  has_and_belongs_to_many :users
+  has_and_belongs_to_many :researchers
+  has_many :researches, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   acts_as_messageable
@@ -7,11 +11,12 @@ class Researcher < ActiveRecord::Base
   acts_as_liker
   acts_as_followable
   acts_as_follower
-  has_and_belongs_to_many :users
-  has_and_belongs_to_many :researchers
-  has_many :researches, dependent: :destroy
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  geocoded_by :current_location
+  after_validation :geocode, :if => :current_location_changed?
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
+  attr_accessible :first_name, :last_name, :email, :password, :bio, :avatar, :avatar_cache, :remove_avatar, :password_confirmation
 end

@@ -16,7 +16,7 @@
           %a{:href => "/researches"} Research
         %li
           %a{:href => "/researchers"} Researchers
-        - if current_user.try(:admin?) or researcher_signed_in?
+        - if researcher_signed_in?
           %li
             %a{:href => "/researches/new/", data: {'no-turbolink': 'true'}} New Research
       .navbar-form.navbar-left

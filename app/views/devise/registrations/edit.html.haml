@@ -1,0 +1,110 @@
+%h2
+  Edit #{resource_name.to_s.humanize}
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put, :multipart => true}) do |f|
+
+  = devise_error_messages!
+  .field
+    = f.label :email
+    = f.email_field :email, autofocus: true
+  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+    %div
+      Currently waiting confirmation for: #{resource.unconfirmed_email}
+
+  .field
+    %br
+    = f.label :avatar, "Your Avatar"
+    - if user_signed_in?
+      - if current_user.avatar.url.present?
+        = image_tag(current_user.avatar.url(:thumb))
+        = f.label :remove_avatar do
+          Remove Avatar
+          = f.check_box :remove_avatar
+    - elsif researcher_signed_in?
+      - if current_researcher.avatar.url.present?
+        = image_tag(current_researcher.avatar.url(:thumb))
+        = f.label :remove_avatar do
+          Remove Avatar
+          = f.check_box :remove_avatar
+
+    = f.file_field :avatar
+    = f.hidden_field :avatar_cache
+    %br
+  .field
+    = f.label :current_location, "Current Location"
+    = f.text_field :current_location
+  - if researcher_signed_in?
+    .field
+      = f.label :available do
+        Can accept visitors?
+        = f.check_box :available, id: :'visitor'
+    .field#dayorweek{style: :"display: none"}
+      = f.label :day do
+        Day visit?
+        = f.check_box :day, id: :'dayselect'
+      = f.label :week do
+        Week visit?
+        = f.check_box :week, id: :'weekselect'
+    .field#day{style: :"display: none"}
+      = f.label :dateStart, "What day are you available? (Please keep time zone in mind)"
+      = f.date_field :day_available
+    .field#week{style: :"display: none"}
+      = f.label :dateStart, "Start of the week you're available"
+      = f.date_field :weekDateStart
+      = f.label :dateEnd, "End of the week when you're available"
+      = f.date_field :weekDateEnd
+  .field
+    = f.label :password
+    %i (leave blank if you don't want to change it)
+    %br/
+    = f.password_field :password, autocomplete: "off"
+  .field
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation, autocomplete: "off"
+  .field
+    = f.label :current_password
+    %i (we need your current password to confirm your changes)
+    %br/
+    = f.password_field :current_password, autocomplete: "off"
+  .actions
+    = f.submit "Update"
+%h3 Cancel my account
+%p
+  Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
+= link_to "Back", :back
+
+:javascript
+  var visitor = document.getElementById('visitor');
+  var weekselect = document.getElementById('weekselect');
+  var dayselect = document.getElementById('dayselect');
+  var visit_div = document.getElementById('dayorweek');
+  var day_div = document.getElementById('day');
+  var week_div = document.getElementById('week');
+
+  var showHiddenVisitor = function(){
+     if(visitor.checked) {
+       visit_div.style['display'] = 'block';
+     } else {
+       visit_div.style['display'] = 'none';
+     }
+  }
+  var showHiddenWeek = function(){
+     if(weekselect.checked) {
+       week_div.style['display'] = 'block';
+     } else {
+       week_div.style['display'] = 'none';
+     }
+  }
+  var showHiddenDay = function(){
+     if(dayselect.checked) {
+       day_div.style['display'] = 'block';
+     } else {
+       day_div.style['display'] = 'none';
+     }
+  }
+
+  visitor.onclick = showHiddenVisitor;
+  dayselect.onclick = showHiddenDay;
+  weekselect.onclick = showHiddenWeek;
+  showHiddenVisitor();
+  showHiddenDay();
+  showHiddenWeek();

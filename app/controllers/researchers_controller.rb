@@ -4,7 +4,7 @@ class ResearchersController < ApplicationController
   end
 
   def show
-    @researcher = Researcher.find(params[:id]) or not_found
+    @researcher = Researcher.find(params[:id])
     @researches = Research.where(researcher_id:@researcher.id)
     @followers = @researcher.followers(User).count + @researcher.followers(Researcher).count
     @following = @researcher.followees(Researcher).count
