@@ -1,7 +1,6 @@
 .container
   .row.profile.panel
     .col-md-4.bg_blur
-      follow_btn hidden-xs btn btn-primary btn-lg
     .col-md-8.col-xs-12.info-col
       = image_tag(@researcher.avatar.url, class: :'img-rounded picture hidden-xs')
       = image_tag(@researcher.avatar.url, class: :'img-rounded visible-xs picture_mob')
@@ -36,7 +35,7 @@
           %br
         %h4
           %i.fa.fa-building.fa-lg
-          Web Developer
+          = @researcher.title
         %h4
           %i.fa.fa-map-marker.fa-lg
           - if @researcher.current_location.nil?
@@ -44,8 +43,7 @@
           - else
             = @researcher.current_location
         %span
-          Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
-          "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
+          = @researcher.headline
 
       .btn-group.btn-block
         = link_to researcher_following_path(@researcher), role: :"button", method: :get, class: :'button btn btn-inverse btn-lg' do
@@ -115,4 +113,5 @@
         %strong
           %u
             About Me
+        %br
         = @researcher.bio

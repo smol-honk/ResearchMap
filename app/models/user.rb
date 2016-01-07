@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :type, :bio, :avatar, :avatar_cache, :remove_avatar
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :type, :bio, :headline, :avatar, :avatar_cache, :remove_avatar
 
   def is_admin?
     self.is_a?(Admin)

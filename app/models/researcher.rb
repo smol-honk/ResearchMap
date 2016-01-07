@@ -17,10 +17,10 @@ class Researcher < ActiveRecord::Base
   geocoded_by :current_location
   after_validation :geocode, :if => :current_location_changed?
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :first_name, :last_name, :email, :password, :bio, :title, :current_location, :avatar, :avatar_cache, :remove_avatar, :password_confirmation
+  attr_accessible :first_name, :last_name, :email, :password, :bio, :title, :headline, :current_location, :avatar, :avatar_cache, :remove_avatar, :password_confirmation
 
   def mailboxer_email(object)
     return self.email
   end
-  
+
 end

@@ -30,5 +30,7 @@
             %td= research.dateStart
             %td= research.dateEnd
             - if current_user.try(:admin?)
-              %td= button_to 'Edit', edit_research_path(research), class: "btn btn-primary", method: :get
-              %td= button_to 'Delete', research, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"
+              %td
+                = button_to 'Edit', edit_research_path(research), class: "btn btn-primary", method: :get
+              %td
+                = button_to 'Delete', research, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"

@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
+  before_action :authenticate!
   before_action :get_user
-  before_action :authenticate_user!, unless: :authenticate_researcher!
+
   def new
 
   end

@@ -32,8 +32,17 @@
       = f.hidden_field :avatar_cache
       %br
     .field
+      = f.label :title
+      = f.text_field :title
+    .field
+      = f.label :headline
+      = f.text_field :headline
+    .field
       = f.label :current_location, "Current Location"
       = f.text_field :current_location
+    .field
+      = f.label :bio
+      = f.text_area :bio
     - if researcher_signed_in?
       .field
         = f.label :available do

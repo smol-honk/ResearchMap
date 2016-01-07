@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-
-  devise_for :users, :researchers
+  devise_for :users, :path_prefix => 'my'
+  resources :users
+  devise_for :researchers, :path_prefix => 'my'
+  resources :researchers
   resources :users, :researchers, :researches
 
   resources :users do
@@ -39,6 +41,9 @@ Rails.application.routes.draw do
       get :search
     end
   end
+
+  get 'add_users', to: 'admins#add_users', as: :add_users
+  get 'templates', to: 'admins#templates', as: :templates
   get 'my_research', to: 'researchers#yourResearch', as: :my_research
   get 'likes', to: 'likes#index', as: :likes
   get 'activity', to: 'activity#index', as: :activity

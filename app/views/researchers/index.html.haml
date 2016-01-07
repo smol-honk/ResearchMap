@@ -23,5 +23,5 @@
             %td
               = link_to researcher.last_name, researcher
             - if current_user.try(:admin?)
-              %td= button_to 'Edit', edit_researcher_path(researcher), class: "btn btn-primary", method: :get
+              %td= button_to 'Edit', edit_researcher_registration_path(researcher), class: "btn btn-primary", method: :get
               %td= button_to 'Delete', researcher, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"

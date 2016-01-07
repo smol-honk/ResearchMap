@@ -1,5 +1,5 @@
 class ConversationsController < ApplicationController
-  before_action :authenticate_user!, unless: :authenticate_researcher!
+  before_action :authenticate!
   before_action :get_user
   before_action :get_mailbox
   before_action :get_conversation, except: [:index]
@@ -58,7 +58,6 @@ class ConversationsController < ApplicationController
 
 
   private
-
   def get_user
     if researcher_signed_in?
       @current = current_researcher

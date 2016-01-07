@@ -28,6 +28,7 @@ class ResearchesController < ApplicationController
   # GET /researches/1/edit
   def edit
     if researcher_signed_in? and @research.researcher == current_researcher
+    elsif current_user.try(:admin?)
     else
       redirect_to :back, alert: "You are not authorized to edit this Research"
     end
@@ -69,7 +70,7 @@ class ResearchesController < ApplicationController
   # DELETE /researches/1.json
   def destroy
     @research.destroy
-    @research.create_activity :destroy, owner: current_researcher
+    # @research.create_activity :destroy, owner: current_researcher
     respond_to do |format|
       format.html { redirect_to researches_url, notice: 'Research was successfully destroyed.' }
       format.json { head :no_content }
