@@ -9,7 +9,11 @@ class ResearchersController < ApplicationController
     @followers = @researcher.followers(User).count + @researcher.followers(Researcher).count
     @following = @researcher.followees(Researcher).count
     @activities = PublicActivity::Activity.order("created_at desc").where(owner_id: @researcher)
-    @likes = @researcher.likees(Researcher)
+    @likes = @researcher.likees(Research)
+  end
 
+  def yourResearch
+    @researcher = current_researcher
+    @researches = Research.where(researcher_id:@researcher.id)
   end
 end

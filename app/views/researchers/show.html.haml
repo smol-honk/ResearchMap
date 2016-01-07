@@ -1,100 +1,118 @@
-.row.profile.panel
-  .col-md-4.bg_blur
-  .col-md-8.col-xs-12.info-col
-    = image_tag(@researcher.avatar.url, class: :'img-rounded picture hidden-xs')
-    -# %img.img-rounded.picture.hidden-xs{:src => "http://vignette1.wikia.nocookie.net/animalcrossing/images/4/41/Chicken.jpg/revision/latest?cb=20130606165306"}/
-    -# %img.img-rounded.visible-xs.picture_mob{:src => "http://lorempixel.com/180/180/people/6/"}/
-    .header
-      %h2
-        = @researcher.first_name
-        = @researcher.last_name
-        - if researcher_signed_in? and current_researcher == @researcher
-          = link_to "Edit Profile", edit_researcher_registration_path, class: :"btn btn-primary btn-sm"
-        %br
-        = @researcher.email
-      %h4 Web Developer
-      %span
-        Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
-        "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
-    .btn-group.btn-block
-      - if user_signed_in?
-        - if current_user.follows?(@researcher)
-          = link_to researcher_unfollow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-inverse btn-lg' do
-            %i.fa.fa-user-times.fa-lg
-            Unfollow
-        - else
-          = link_to researcher_follow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-inverse btn-lg' do
-            %i.fa.fa-user-plus.fa-lg
-            Follow
-      - elsif researcher_signed_in?
-        - if current_researcher == @researcher
+.container
+  .row.profile.panel
+    .col-md-4.bg_blur
+      follow_btn hidden-xs btn btn-primary btn-lg
+    .col-md-8.col-xs-12.info-col
+      = image_tag(@researcher.avatar.url, class: :'img-rounded picture hidden-xs')
+      = image_tag(@researcher.avatar.url, class: :'img-rounded visible-xs picture_mob')
+      .header
+        %h2
+          = @researcher.first_name
+          = @researcher.last_name
+          - if researcher_signed_in? and current_researcher == @researcher
+            = link_to "Edit Profile", edit_researcher_registration_path, class: :"btn btn-primary btn-lg"
+          - else
+            - if user_signed_in?
+              - if current_user.follows?(@researcher)
+                = link_to researcher_unfollow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-inverse btn-lg' do
+                  %i.fa.fa-user-times.fa-lg
+                  Unfollow
+              - else
+                = link_to researcher_follow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-inverse btn-lg' do
+                  %i.fa.fa-user-plus.fa-lg
+                  Follow
+            - elsif researcher_signed_in?
+              - if current_researcher == @researcher
 
-        - elsif current_researcher.follows?(@researcher)
-          = link_to researcher_unfollow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-inverse btn-lg' do
-            %i.fa.fa-user-times.fa-lg
-            Unfollow
-        - else
-          = link_to researcher_follow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-inverse btn-lg' do
-            %i.fa.fa-user-plus.fa-lg
-            Follow
-      - else
+              - elsif current_researcher.follows?(@researcher)
+                = link_to researcher_unfollow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-inverse btn-lg' do
+                  %i.fa.fa-user-times.fa-lg
+                  Unfollow
+              - else
+                = link_to researcher_follow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-inverse btn-lg' do
+                  %i.fa.fa-user-plus.fa-lg
+                  Follow
+            - else
+          %br
+        %h4
+          %i.fa.fa-building.fa-lg
+          Web Developer
+        %h4
+          %i.fa.fa-map-marker.fa-lg
+          - if @researcher.current_location.nil?
+            No Information
+          - else
+            = @researcher.current_location
+        %span
+          Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
+          "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
 
-      = link_to researcher_following_path(@researcher), role: :"button", method: :get, class: :'button btn btn-inverse btn-lg' do
-        %i.fa.fa-users.fa-lg
-        Following
-        = @following
+      .btn-group.btn-block
+        = link_to researcher_following_path(@researcher), role: :"button", method: :get, class: :'button btn btn-inverse btn-lg' do
+          %i.fa.fa-users.fa-lg
+          Following
+          = @following
 
-      = link_to researcher_followers_path(@researcher), role: :"button", method: :get, class: :'button btn btn-inverse btn-lg' do
-        %i.fa.fa-users.fa-lg
-        Followers
-        = @followers
+        = link_to researcher_followers_path(@researcher), role: :"button", method: :get, class: :'button btn btn-inverse btn-lg' do
+          %i.fa.fa-users.fa-lg
+          Followers
+          = @followers
 
-      %button.btn.btn-inverse.btn-lg
-        %i.fa.fa-thumbs-o-up.fa-lg
-        Likes
-        = @likes.count
+        %button.btn.btn-inverse.btn-lg
+          %i.fa.fa-thumbs-o-up.fa-lg
+          Likes
+          = @likes.count
 
-  #profileInfo
-  %ul.nav.nav-tabs
-    %li.active
-      %a{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#home"}
-        %strong
-          Activity
-    %li
-      %a{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#profile"}
-        %strong
-          Research
+    #profileInfo
+    %ul.nav.nav-tabs
+      %li.active
+        %a{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#home"}
+          %strong
+            Activity
+      %li
+        %a{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#profile"}
+          %strong
+            Research
+      %li
+        %a{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#aboutme"}
+          %strong
+            About Me
 
-  #myTabContent.tab-content
-    #home.tab-pane.fade.active.in
-      %p
-        - @activities.each do |activity|
-          .activity
-            = link_to activity.owner.first_name, activity.owner
-            = render_activity activity
-            on
-            = activity.created_at.localtime.to_date
-    #profile.tab-pane.fade
-      %p
-        %table.table
-          %thead
-            %tr
-              %th
-                = sort_link(@search, :name, "Name")
-              %th
-                = sort_link(@search, :location, "Location")
-              %th
-                = sort_link(@search, :dateStart, "Research Started")
-              %th
-                = sort_link(@search, :dateEnd, "Research Ended")
-          %tbody#research
-            - @researches.each do |research|
+    #myTabContent.tab-content
+      #home.tab-pane.fade.active.in
+        %p
+          - @activities.each do |activity|
+            .activity
+              = link_to activity.owner.first_name, activity.owner
+              = render_activity activity
+              on
+              = activity.created_at.localtime.to_date
+      #profile.tab-pane.fade
+        %p
+          %table.table
+            %thead
               %tr
-                %td
-                  = link_to research.name, research
-                %td= research.location
-                %td= research.dateStart
-                %td= research.dateEnd
-                - if current_user.try(:admin?)
-                  %td= button_to 'Edit', edit_research_path(research), class: "btn btn-primary", method: :get
-                  %td= button_to 'Delete', research, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"
+                %th
+                  = sort_link(@search, :name, "Name")
+                %th
+                  = sort_link(@search, :location, "Location")
+                %th
+                  = sort_link(@search, :dateStart, "Research Started")
+                %th
+                  = sort_link(@search, :dateEnd, "Research Ended")
+            %tbody#research
+              - @researches.each do |research|
+                %tr
+                  %td
+                    = link_to research.name, research
+                  %td= research.location
+                  %td= research.dateStart
+                  %td= research.dateEnd
+                  - if current_user.try(:admin?)
+                    %td= button_to 'Edit', edit_research_path(research), class: "btn btn-primary", method: :get
+                    %td= button_to 'Delete', research, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"
+      #aboutme.tab-pane.fade
+        %strong
+          %u
+            About Me
+        = @researcher.bio

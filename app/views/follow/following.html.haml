@@ -1,7 +1,22 @@
 - if @followings.blank?
-  = @followee.email
+  = @followee.first_name
   isn't following anyone!
 - else
-  - @followings.each do |following|
-    = link_to following.email, following
-    %br
+  %table.table-striped.table-responsive
+    %thead
+      %tr
+        %th
+        %th
+          = sort_link(@search, :first_name, "First Name")
+        %th
+          = sort_link(@search, :last_name, "Last Name")
+
+    %tbody
+      - @followings.each do |following|
+        %tr
+          %td
+            = image_tag following.avatar.url(:thumb), class: :'img-circle', height: :'50px', width: :'50px'
+          %td
+            = link_to following.first_name, following
+          %td
+            = link_to following.last_name, following

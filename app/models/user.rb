@@ -22,4 +22,7 @@ class User < ActiveRecord::Base
     self.is_a?(Friend)
   end
 
+  def mailboxer_email(object)
+    return self.email
+  end
 end

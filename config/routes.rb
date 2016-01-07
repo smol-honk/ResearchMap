@@ -12,6 +12,21 @@ Rails.application.routes.draw do
     post 'unlike', to: 'socializations#unlike'
   end
 
+  resources :conversations, only: [:index, :show, :destroy] do
+    member do
+      post :restore
+      post :reply
+    end
+    collection do
+      delete :empty_trash
+    end
+    member do
+      post :mark_as_read
+    end
+  end
+
+  resources :messages, only: [:new, :create]
+
   resources :researchers do
     post 'follow',   to: 'socializations#follow'
     post 'unfollow', to: 'socializations#unfollow'
@@ -24,7 +39,7 @@ Rails.application.routes.draw do
       get :search
     end
   end
-
+  get 'my_research', to: 'researchers#yourResearch', as: :my_research
   get 'likes', to: 'likes#index', as: :likes
   get 'activity', to: 'activity#index', as: :activity
   get 'welcome/map'

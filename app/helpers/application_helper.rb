@@ -11,4 +11,12 @@ module ApplicationHelper
    def donor_bool(boolean)
      boolean ? 'Yes' : 'No'
    end
+
+   def gravatar_for(user, title = user.first_name)
+     if user.is_a?(Researcher)
+       link_to (image_tag user.avatar.url(:thumb), size: '55', title: title, class: 'img-circle'), researcher_path(user.id)
+     else
+       link_to (image_tag user.avatar.url(:thumb), size: '55', title: title, class: 'img-circle'), user_path(user.id)
+     end
+   end
 end

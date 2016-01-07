@@ -9,7 +9,7 @@
         .media
           - message = receipt.message
           .pull-left
-            = gravatar_for message.sender, 45, message.sender.first_name
+            = gravatar_for message.sender, message.sender.first_name
           .media-body
             %h6.media-heading
               = message.sender.first_name
