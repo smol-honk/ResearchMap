@@ -13,8 +13,10 @@
     = render 'conversations/participants', conversation: conversation
   %p
     %b
-      = conversation.last_message.sender.first_name
-      = conversation.last_message.sender.last_name
+      - if conversation.last_message.sender.nil?
+      - else
+        = conversation.last_message.sender.first_name
+        = conversation.last_message.sender.last_name
     = conversation.last_message.body
     %small
       (

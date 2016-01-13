@@ -5,6 +5,8 @@
     %br
     = button_to 'New research', new_research_path, class: "btn btn-info", method: :get
 .container
+  - if current_user.try(:admin?)
+    = link_to "Download Research CSV", researches_path(format: "csv"), class: :"btn btn-info"
   .panel.panel-default
     .panel-heading
       Research
@@ -34,3 +36,10 @@
                 = button_to 'Edit', edit_research_path(research), class: "btn btn-primary", method: :get
               %td
                 = button_to 'Delete', research, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"
+
+  - if current_user.try(:admin?)
+    .page-header
+      %h2 Import Research
+    = form_tag import_researches_path, multipart: true do
+      = file_field_tag :file
+      = submit_tag "Import Research", class: :"btn btn-primary btn-sm"

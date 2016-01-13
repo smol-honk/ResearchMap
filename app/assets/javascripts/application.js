@@ -14,12 +14,10 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require bootstrap-sprockets
-//= require bootstrap-datepicker
 //= require jquery.geocomplete
 //= require leaflet
 //= require mapbox.js
 //= require d3
-//= require gmaps/google
 //= require turbolinks
 //= require_tree .
 

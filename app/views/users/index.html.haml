@@ -1,0 +1,41 @@
+.container
+  .page-header
+    %h1 Current Users
+  - if current_user.try(:admin?)
+    = link_to "Download User CSV", users_path(format: "csv"), class: :"btn btn-info"
+  %br
+  %br
+  %table.table-hover.table-bordered.table-responsive
+    %thead
+      %tr
+        %th ID
+        %th
+          = sort_link(@search, :first_name, "First Name")
+        %th
+          = sort_link(@search, :last_name, "Last Name")
+        %th
+          Edit
+        %th
+          Delete
+
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td
+            = user.id
+          %td
+            = link_to user.first_name, user
+          %td
+            = link_to user.last_name, user
+          - if current_user.try(:admin?)
+            %td
+              = link_to 'Edit', edit_user_path(user), method: :get
+            %td
+              = link_to 'Delete', user, method: :delete, :data => { :confirm => 'Are you sure?' }
+
+  - if current_user.try(:admin?)
+    .page-header
+      %h2 Import Users
+    = form_tag import_users_path, multipart: true do
+      = file_field_tag :file
+      = submit_tag "Import Users", class: :"btn btn-primary btn-sm"

@@ -7,6 +7,13 @@ class ResearchesController < ApplicationController
     @researches = Research.all
     @search = Research.search(params[:q])
     @researches = @search.result
+    if user_signed_in? && current_user.admin?
+      respond_to do |format|
+        format.html
+        format.csv { send_data @researches.to_csv }
+        format.xls
+      end
+    end
   end
 
   # GET /researches/1
@@ -74,6 +81,15 @@ class ResearchesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to researches_url, notice: 'Research was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def import
+    if user_signed_in? && current_user.admin?
+      Research.import(params[:file])
+      redirect_to :back, notice: "Research created/edited."
+    else
+      redirect_to :back
     end
   end
 

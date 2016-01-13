@@ -115,3 +115,6 @@
             About Me
         %br
         = @researcher.bio
+  .adminEdit
+    - if user_signed_in? && current_user.admin?
+      = link_to "Edit me", edit_researcher_path, class: :"btn btn-info"

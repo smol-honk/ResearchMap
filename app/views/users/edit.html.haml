@@ -1,0 +1,39 @@
+.container
+  .page-header
+    %h2
+      Editing
+      = @user.name
+  = form_for(@user) do |f|
+    .field
+      = f.label :first_name
+      = f.text_field :first_name, autofocus: true
+    .field
+      = f.label :last_name
+      = f.text_field :last_name
+    .field
+      = f.label :email
+      = f.email_field :email
+    .field
+      %br
+      = f.label :avatar, "Your Avatar"
+      - if @user.avatar.url.present?
+        = image_tag(current_user.avatar.url(:thumb))
+        = f.label :remove_avatar do
+          Remove Avatar
+          = f.check_box :remove_avatar
+      = f.file_field :avatar
+      = f.hidden_field :avatar_cache
+      %br
+    .field
+      = f.label :headline
+      = f.text_field :headline
+    .field
+      = f.label :bio
+      = f.text_area :bio
+    .actions
+      = f.submit "Update"
+  %h3 Cancel my account
+  %p
+    DELETE #{button_to 'Delete', @user, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"}
+
+  = link_to "Back", :back

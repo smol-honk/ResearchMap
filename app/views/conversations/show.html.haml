@@ -10,12 +10,18 @@
           .media
             - message = receipt.message
             .pull-left
-              = gravatar_for message.sender, message.sender.first_name
+              - if message.sender.nil?
+              - else
+                = gravatar_for message.sender, message.sender.first_name
             .media-body
               %h6.media-heading
-                = message.sender.first_name
-                says at #{message.created_at.localtime.strftime("%-d %B %Y, %H:%M:%S")}
-              = message.body
+                - if message.sender.nil?
+                - else
+                  = message.sender.first_name
+                  says at #{message.created_at.localtime.strftime("%-d %B %Y, %H:%M:%S")}
+              - if message.sender.nil?
+              - else
+                = message.body
   = form_tag reply_conversation_path(@conversation), method: :post do
     .form-group
       = text_area_tag 'body', nil, cols: 4, class: 'form-control replyBody', placeholder: 'Reply here...', required: true

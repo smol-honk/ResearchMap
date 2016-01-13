@@ -1,6 +1,19 @@
 class ResearchersController < ApplicationController
   def index
-    @researchers = Researcher.all
+    @researchers = Researcher.order(:name)
+    respond_to do |format|
+      format.html
+      format.csv { send_data @researchers.to_csv }
+      format.xls
+    end
+  end
+
+  def edit
+    if user_signed_in? && current_user.admin?
+      @researcher = Researcher.find(params[:id])
+    else
+      redirect_to root_path
+    end
   end
 
   def show
@@ -10,6 +23,15 @@ class ResearchersController < ApplicationController
     @following = @researcher.followees(Researcher).count
     @activities = PublicActivity::Activity.order("created_at desc").where(owner_id: @researcher)
     @likes = @researcher.likees(Research)
+  end
+
+  def import
+    if user_signed_in? && current_user.admin?
+      Researcher.import(params[:file])
+      redirect_to :back, notice: "Researchers created/edited."
+    else
+      redirect_to :back
+    end
   end
 
   def yourResearch

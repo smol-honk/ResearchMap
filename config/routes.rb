@@ -1,15 +1,19 @@
 Rails.application.routes.draw do
-  devise_for :users, :path_prefix => 'my'
+  devise_for :users, :path_prefix => 'profile'
   resources :users
-  devise_for :researchers, :path_prefix => 'my'
+
+  devise_for :researchers, :path_prefix => 'profile'
   resources :researchers
+
   resources :users, :researchers, :researches
 
   resources :users do
     get 'following', to: 'follow#following'
+    collection {post :import}
   end
 
   resources :researches do
+    collection {post :import}
     post 'like', to: 'socializations#like'
     post 'unlike', to: 'socializations#unlike'
   end
@@ -30,6 +34,7 @@ Rails.application.routes.draw do
   resources :messages, only: [:new, :create]
 
   resources :researchers do
+    collection {post :import}
     post 'follow',   to: 'socializations#follow'
     post 'unfollow', to: 'socializations#unfollow'
     get 'following', to: 'follow#following'
@@ -42,7 +47,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'add_users', to: 'admins#add_users', as: :add_users
+  get 'import', to: 'admins#import', as: :import
   get 'templates', to: 'admins#templates', as: :templates
   get 'my_research', to: 'researchers#yourResearch', as: :my_research
   get 'likes', to: 'likes#index', as: :likes
