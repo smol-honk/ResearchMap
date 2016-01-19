@@ -1,7 +1,7 @@
 // Javascript initializing of the map from mapbox.
 // Additional options to the map are continuous world and noWrap(to stop the duplicate worlds from showing on the map)
 $(function() {
-    L.mapbox.accessToken = 'pk.eyJ1IjoiYW1waGl0aGVyZSIsImEiOiIyZGE2MWJhYTdlNjJkM2E4NTZhYjUyODE3NDFmNzY3MSJ9.EDkcexR3h8zGfuPOXADctQ';
+    L.mapbox.accessToken = "pk.eyJ1IjoiYW1waGl0aGVyZSIsImEiOiIyZGE2MWJhYTdlNjJkM2E4NTZhYjUyODE3NDFmNzY3MSJ9.EDkcexR3h8zGfuPOXADctQ";
 
     // Creates bounds for the map so no white space is shown
     var southWest = L.latLng(-180, -180),

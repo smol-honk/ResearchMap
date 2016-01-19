@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users, :path_prefix => 'profile'
+  resources :trip_passes
+  devise_for :users, :path_prefix => 'profile', :controllers => { :confirmations => "confirmations" }
   resources :users
 
   devise_for :researchers, :path_prefix => 'profile'
@@ -7,6 +8,10 @@ Rails.application.routes.draw do
 
   resources :users, :researchers, :researches
 
+  as :user do
+      patch '/user/confirmation' => 'confirmations#update', :via => :patch, :as => :update_user_confirmation
+  end
+  
   resources :users do
     get 'following', to: 'follow#following'
     collection {post :import}

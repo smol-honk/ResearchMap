@@ -3,13 +3,5 @@
   doesn't have any followers!
 - else
   - @followers.each do |follower|
-    - if follower.is_a?(Admin)
-      = follower.email
-      %br
-      // transfer all br's into css
-    - elsif follower.is_a?(Researcher)
-      = link_to follower.email, follower
-      %br
-    - else
-      = link_to follower.email, follower
-      %br
+    = link_to follower.email, follower
+    %br

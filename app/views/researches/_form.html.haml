@@ -6,20 +6,20 @@
         - @research.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
+  .form-group
     = f.label :name
-    = f.text_field :name
-  .field
+    = f.text_field :name, class: :"form-control"
+  .form-group
     = f.label :location
-    = f.text_field :location
-  .field
+    = f.text_field :location, class: :"form-control"
+  .form-group
     = f.label :abstract
-    = f.text_area :abstract
-  .field
+    = f.text_area :abstract, class: :"form-control", rows: :"5"
+  .form-group
     = f.label :dateStart
-    = f.date_select :dateStart
-  .field
+    = f.date_select :dateStart, class: :"form-control"
+  .form-group
     = f.label :dateEnd
-    = f.date_select :dateEnd
+    = f.date_select :dateEnd, class: :"form-control"
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: :"btn btn-primary"

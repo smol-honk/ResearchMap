@@ -1,0 +1,2 @@
+module TripPassesHelper
+end
