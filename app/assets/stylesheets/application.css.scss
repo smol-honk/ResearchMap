@@ -14,6 +14,10 @@
 body {
   padding-top: 5em;
 }
+
+tbody td, thead th {
+  margin-left: 1em;
+}
 .navbar {
   border-bottom-color: black !important;
   border-bottom: black;
