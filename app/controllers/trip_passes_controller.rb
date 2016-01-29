@@ -1,17 +1,41 @@
 class TripPassesController < ApplicationController
   before_action :set_trip_pass, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate!
-  before_action :set_user
+  before_action :authenticate!, :set_user
+  before_action :hasDays, only: [:new]
+  before_action :authenticate_researcher!, only: [:tripRequests]
+
 
   # GET /trip_passes
   # GET /trip_passes.json
   def index
-    @trip_passes = TripPass.all
+    if @current.try(:admin?)
+      @trip_passes = TripPass.all
+    else
+      redirect_to root_url
+    end
+  end
+
+  def tripRequests
+    if researcher_signed_in?
+      @trip_passes = TripPass.where(researcher: current_researcher)
+    else
+      redirect_to root_url, alert: "You don't have access to this page!"
+    end
   end
 
   # GET /trip_passes/1
   # GET /trip_passes/1.json
   def show
+  end
+
+  def accept
+    @trip_pass = TripPass.find(params[:id])
+    if @current == @trip_pass.researcher
+      @trip_pass.update_attribute(:researcher_accept, true)
+      redirect_to tripRequests_path
+    else
+      redirect_to root_url, alert: "You don't have permission to approve this trip pass!"
+    end
   end
 
   # GET /trip_passes/new
@@ -27,10 +51,12 @@ class TripPassesController < ApplicationController
   # POST /trip_passes.json
   def create
     @trip_pass = TripPass.new(trip_pass_params)
-    @user = current_user
+    @trip_pass.user = current_user
+    @trip_pass.researcher_id = params['researcher']
 
     respond_to do |format|
       if @trip_pass.save
+        TripPassMailer.trip_request(@trip_pass).deliver_now
         format.html { redirect_to @trip_pass, notice: 'Trip pass was successfully created.' }
         format.json { render :show, status: :created, location: @trip_pass }
       else
@@ -65,26 +91,37 @@ class TripPassesController < ApplicationController
       end
     else
       redirect_to trip_passes_url, alert: 'Not authorized to destroy trip pass.'
+    end
   end
 
   private
-    def set_user
-      if user_signed_in?
-        @current = current_user
-      elsif researcher_signed_in?
-        @current = current_researcher
+
+  def set_user
+    if user_signed_in?
+      @current = current_user
+    elsif researcher_signed_in?
+      @current = current_researcher
+    else
+      redirect_to root_url
+    end
+  end
+
+  def hasDays
+    if user_signed_in?
+      if current_user.days > 0 || current_user.admin?
       else
-        redirect_to root_url
+        redirect_to root_url, alert: "You don't have any available days to visit a Researcher!"
       end
     end
+  end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_trip_pass
-      @trip_pass = TripPass.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_trip_pass
+    @trip_pass = TripPass.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def trip_pass_params
-      params.require(:trip_pass).permit(:location, :longitude, :latitude, :dateStart, :dateEnd, :user_id, :researcher_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def trip_pass_params
+    params.require(:trip_pass).permit(:location, :longitude, :latitude, :dateStart, :dateEnd, :user_id, :researcher_id)
+  end
 end

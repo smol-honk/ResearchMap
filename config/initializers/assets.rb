@@ -9,7 +9,17 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
-
+Rails.application.config.assets.precompile += %w( eden.css )
+Rails.application.config.assets.precompile += %w( jquery_ujs.js )
+Rails.application.config.assets.precompile += %w( default.css )
+Rails.application.config.assets.precompile += %w( default.date.css )
+Rails.application.config.assets.precompile += %w( default.time.css )
+Rails.application.config.assets.precompile += %w( picker.js )
+Rails.application.config.assets.precompile += %w( legacy.js )
+Rails.application.config.assets.precompile += %w( picker.date.js )
+Rails.application.config.assets.precompile += %w( picker.time.js )
+Rails.application.config.assets.precompile += %w( jquery-ui.min.js )
+Rails.application.config.assets.precompile += %w( bootstrap.min.js )
 Rails.application.config.assets.precompile += %w( icons-000000.png )
 Rails.application.config.assets.precompile += %w( icons-ffffff.png )
 Rails.application.config.assets.precompile += %w( icons-000000@2x.png )

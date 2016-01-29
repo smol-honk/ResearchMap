@@ -1,12 +1,22 @@
-= semantic_form_for @trip_pass do |f|
-  = f.inputs do
-    = f.input :location
-    = f.input :longitude
-    = f.input :latitude
-    = f.input :dateStart
-    = f.input :dateEnd
-    = f.input :user
-    = f.input :researcher
-
-  = f.actions do
-    = f.action :submit, :as => :input
+.container
+  = form_for @trip_pass do |f|
+    - if @trip_pass.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@trip_pass.errors.count, "error")} prohibited this trip_pass from being saved:"
+        %ul
+          - @trip_pass.errors.full_messages.each do |msg|
+            %li= msg
+    .form-group
+      = label_tag 'researcher', 'Choose researcher'
+      = select_tag('researcher', researcher_options, multiple: false, class: 'form-control')
+    .form-group
+      = f.label :location
+      = f.text_field :location, class: :"form-control", id: :'geocomplete', placeholder: :"Start typing a location..."
+    .form-group
+      = f.label :dateStart
+      = f.text_field :dateStart, class: :"form-control", id: :"dateStart", title: :"Date of Arrival", 'data-toggle': :'tooltip', 'data-placement': :'top'
+    .form-group
+      = f.label :dateEnd
+      = f.text_field :dateEnd, class: :"form-control", id: :"dateEnd", title: :"Date of Departure", 'data-toggle': :'tooltip', 'data-placement': :'top'
+    .actions
+      = f.submit 'Save', class: :"btn btn-primary"

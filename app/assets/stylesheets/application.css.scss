@@ -8,18 +8,17 @@
  *= depend_on_asset "layers-2x.png"
  */
 
-@import "bootstrap-sprockets";
-@import "bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
-.dropdown.open{
-  .dropdown-toggle {
-    padding-bottom: 20px;
-  }
-}
 
 body {
-  padding-top: 4em;
+  padding-top: 5em;
+}
+.navbar {
+  border-bottom-color: black !important;
+  border-bottom: black;
+  border-bottom-style: double !important;
+  border-bottom-width: medium !important;
 }
 #googlemap {
     text-align: center;

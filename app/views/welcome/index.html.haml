@@ -2,17 +2,18 @@
 .container
   %body{data: {'no-transition-cache': 'true'}}
     %h1
-      %center Where are our Researchers?
+      %center Research Map Project
     %nav.menu-ui#menu-ui
       %a.active#filter-all{href: :'#'} Show all
       %a#filter-donor{href: :'#'} Can visit?
-    .sidebar
-      .heading
-        %h2
-          %i.fa.fa-globe
-          %a#backToSize{href: :'#', title: :"CLICK MEEE", 'data-toggle': :'tooltip', 'data-placement': :'top'} Locations
-      .listings#listings
-    #map
+    .mapArea
+      .sidebar
+        .heading
+          %h2
+            %i.fa.fa-globe
+            %a#backToSize{href: :'#', title: :"Zoom out on map", 'data-toggle': :'tooltip', 'data-placement': :'top'} Locations
+        .listings#listings
+      #map
 
   #searchanthro
     .panel-group#accordion{role: :"tablist", 'aria-multiselectable': :"true"}
@@ -33,6 +34,7 @@
 
                 = f.label :location_cont
                 = f.text_field :location_cont
+              %br
               .actions
                 = f.submit 'Search', class: "btn btn-primary"
                 %hr

@@ -1,5 +1,5 @@
 // The navagation bar from bootstrap
-%nav.navbar.navbar-default.navbar-fixed-top{:role => "navigation"}
+%nav.navbar.navbar-eden.navbar-fixed-top{:role => "navigation"}
   .container
     / Brand and toggle get grouped for better mobile display
     .navbar-header
@@ -17,11 +17,6 @@
         %li
           %a{:href => "/researchers"} Researchers
       .navbar-form.navbar-left
-        = search_form_for @search do |f|
-          .field
-            = f.text_field :name_or_location_cont, class: :'form-control'
-            .form-group
-              %button.btn.btn-default.navbar-right{type: "submit"} Submit
 
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in? && current_user.admin?
@@ -52,9 +47,9 @@
         %li.dropdown
           %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
             - if user_signed_in?
-              Logged in as #{current_user.email}
+              Logged in as #{current_user.name}
             - elsif researcher_signed_in?
-              Researcher logged in as #{current_researcher.email}
+              Researcher logged in as #{current_researcher.name}
             - else
               Log In
             %span.caret

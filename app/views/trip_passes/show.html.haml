@@ -1,27 +1,26 @@
-%p#notice= notice
+.container
+  %p
+    %b Location:
+    = @trip_pass.location
+  %p
+    %b Longitude:
+    = @trip_pass.longitude
+  %p
+    %b Latitude:
+    = @trip_pass.latitude
+  %p
+    %b Datestart:
+    = @trip_pass.dateStart
+  %p
+    %b Dateend:
+    = @trip_pass.dateEnd
+  %p
+    %b User:
+    = @trip_pass.user.name
+  %p
+    %b Researcher:
+    = @trip_pass.researcher.name
 
-%p
-  %b Location:
-  = @trip_pass.location
-%p
-  %b Longitude:
-  = @trip_pass.longitude
-%p
-  %b Latitude:
-  = @trip_pass.latitude
-%p
-  %b Datestart:
-  = @trip_pass.dateStart
-%p
-  %b Dateend:
-  = @trip_pass.dateEnd
-%p
-  %b User:
-  = @trip_pass.user
-%p
-  %b Researcher:
-  = @trip_pass.researcher
-
-= link_to 'Edit', edit_trip_pass_path(@trip_pass)
-\|
-= link_to 'Back', trip_passes_path
+  = link_to 'Edit', edit_trip_pass_path(@trip_pass)
+  \|
+  = link_to 'Back', trip_passes_path

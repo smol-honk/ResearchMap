@@ -37,7 +37,7 @@ class Researcher < ActiveRecord::Base
   end
 
   def name
-    self.name = self.first_name + self.last_name
+    self.name = self.first_name + " " + self.last_name
   end
 
   def mailboxer_email(object)

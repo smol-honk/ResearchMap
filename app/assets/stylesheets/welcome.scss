@@ -20,8 +20,9 @@ body {
 }
 
 .panel.panel-default {
-  margin: 0px;
+    margin: 0px;
 }
+
 .listings {
   height:85.4%;
   overflow:auto;
@@ -80,9 +81,9 @@ body {
   visibility:hidden;
 }
 
-.panel-group a{
-    background-color: transparent;
-}
+// .panel-group a{
+//     background-color: transparent;
+// }
 .leaflet-container p {
     font-family: 'Quicksand Book', Arial, sans-serif;
 }
@@ -104,6 +105,7 @@ body {
     text-decoration: none;
 }
 .sidebar {
+    border-radius: 6px;
     z-index: 1000;
     position: absolute;
     width: 22.5%;
@@ -119,6 +121,7 @@ body {
 }
 
 #map{
+    border-radius: 6px;
     margin:0;
     position: relative;
     height: 500px;

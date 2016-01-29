@@ -1,0 +1,22 @@
+.container
+  %h1 All passes Near You
+  %table.table.table-reponsive
+    %thead
+      %tr
+        %th Name
+        %th Location
+        %th Arrival
+        %th Departure
+        %th Accepted?
+        %th{:colspan => "3"}
+    %tbody
+      - @trip_passes.each do |pass|
+        %tr
+          %td= pass.user.name
+          %td= pass.location
+          %td= pass.dateStart
+          %td= pass.dateEnd
+          %td= translate_bool(pass.researcher_accept)
+          %td
+            = link_to "accept", accept_path(pass), class: :'btn btn-primary'
+  %br/

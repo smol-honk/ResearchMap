@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160115185258) do
+ActiveRecord::Schema.define(version: 20160129181631) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -174,11 +174,6 @@ ActiveRecord::Schema.define(version: 20160115185258) do
   add_index "researchers", ["email"], name: "index_researchers_on_email", unique: true, using: :btree
   add_index "researchers", ["reset_password_token"], name: "index_researchers_on_reset_password_token", unique: true, using: :btree
 
-  create_table "researchers_users", id: false, force: :cascade do |t|
-    t.integer "researcher_id", limit: 4
-    t.integer "user_id",       limit: 4
-  end
-
   create_table "researches", force: :cascade do |t|
     t.string   "name",          limit: 255
     t.string   "location",      limit: 255
@@ -194,11 +189,6 @@ ActiveRecord::Schema.define(version: 20160115185258) do
 
   add_index "researches", ["researcher_id"], name: "index_researches_on_researcher_id", using: :btree
 
-  create_table "researches_users", id: false, force: :cascade do |t|
-    t.integer "research_id", limit: 4
-    t.integer "user_id",     limit: 4
-  end
-
   create_table "roles", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.string   "description", limit: 255
@@ -207,15 +197,16 @@ ActiveRecord::Schema.define(version: 20160115185258) do
   end
 
   create_table "trip_passes", force: :cascade do |t|
-    t.string   "location",      limit: 255
-    t.float    "longitude",     limit: 24
-    t.float    "latitude",      limit: 24
+    t.string   "location",          limit: 255
+    t.float    "longitude",         limit: 24
+    t.float    "latitude",          limit: 24
     t.date     "dateStart"
     t.date     "dateEnd"
-    t.integer  "user_id",       limit: 4
-    t.integer  "researcher_id", limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "user_id",           limit: 4
+    t.integer  "researcher_id",     limit: 4
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.boolean  "researcher_accept", limit: 1,   default: false
   end
 
   add_index "trip_passes", ["researcher_id"], name: "index_trip_passes_on_researcher_id", using: :btree

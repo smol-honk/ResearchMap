@@ -7,23 +7,33 @@
     = stylesheet_link_tag 'application', params[:controller], media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', params[:controller], 'data-turbolinks-track' => true
     = csrf_meta_tags
-    %link{rel:"stylesheet", href: "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"}
-    %script{src: :"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js", integrity: :"sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS", crossorigin: :"anonymous"}
 
-  / Scripts to allow Mapbox API to work
-  %script{src: :'https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.js'}
-  %link{href: :'https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.css', rel: :'stylesheet'}
-  = render "shared/navigationbar"
+
+    / Scripts to allow Mapbox API to work
+    %script{src: :'https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.js'}
+    %link{href: :'https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.css', rel: :'stylesheet'}
+    = stylesheet_link_tag "default"
+    = stylesheet_link_tag "default.date"
+    = stylesheet_link_tag "default.time"
+    = stylesheet_link_tag "eden"
+    = javascript_include_tag "jquery_ujs"
+    = javascript_include_tag "jquery.geocomplete"
+    = javascript_include_tag "bootstrap.min"
+    = javascript_include_tag "jquery-ui.min"
+    -# = javascript_include_tag "legacy"
+    = javascript_include_tag "picker"
+    = javascript_include_tag "picker.date"
+    = javascript_include_tag "picker.time"
+    - if notice
+      %p.alert.alert-success= notice
+    - if alert
+      %p.alert.alert-danger= alert
+
   %body
+    = render "shared/navigationbar"
+
   // Google map scripts
   %script{:src => "http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"}
-  %script{:src => "http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"}
-  = javascript_include_tag "jquery.geocomplete"
-
-  - if notice
-    %p.alert.alert-success= notice
-  - if alert
-    %p.alert.alert-danger= alert
 
   =yield
 

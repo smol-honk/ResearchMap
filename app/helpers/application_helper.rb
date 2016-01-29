@@ -8,7 +8,7 @@ module ApplicationHelper
      link_to(name, '#', class: "add_fields btn btn-primary", data: {id: id, fields: fields.gsub("\n", "")})
    end
 
-   def donor_bool(boolean)
+   def translate_bool(boolean)
      boolean ? 'Yes' : 'No'
    end
 

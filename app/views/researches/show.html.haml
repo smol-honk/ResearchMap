@@ -1,36 +1,37 @@
-%p#notice= notice
+.container
+  %p#notice= notice
 
-%p
-  %b Name:
-  = @research.name
-%p
-  %b Location:
-  = @research.location
-%p
-  %b Abstract:
-  = @research.abstract
-%p
-  %b Datestart:
-  = @research.dateStart
-%p
-  %b Dateend:
-  = @research.dateEnd
+  %p
+    %b Name:
+    = @research.name
+  %p
+    %b Location:
+    = @research.location
+  %p
+    %b Abstract:
+    = @research.abstract
+  %p
+    %b Datestart:
+    = @research.dateStart
+  %p
+    %b Dateend:
+    = @research.dateEnd
 
 
-- if user_signed_in?
-  -if current_user.likes?(@research)
-    = link_to('Unlike', research_unlike_path(@research), method: :post)
-  - else
-    = link_to('Like', research_like_path(@research), method: :post)
-- elsif researcher_signed_in?
-  -if current_researcher.likes?(@research)
-    = link_to('Unlike', research_unlike_path(@research), method: :post)
-  - else
-    = link_to('Like', research_like_path(@research), method: :post)
--else
+  - if user_signed_in?
+    -if current_user.likes?(@research)
+      = link_to('Unlike', research_unlike_path(@research), method: :post)
+    - else
+      = link_to('Like', research_like_path(@research), method: :post)
+  - elsif researcher_signed_in?
+    -if current_researcher.likes?(@research)
+      = link_to('Unlike', research_unlike_path(@research), method: :post)
+    - else
+      = link_to('Like', research_like_path(@research), method: :post)
+  -else
 
-%br
+  %br
 
-= link_to 'Edit', edit_research_path(@research)
-\|
-= link_to 'Back', researches_path
+  = link_to 'Edit', edit_research_path(@research)
+  \|
+  = link_to 'Back', researches_path

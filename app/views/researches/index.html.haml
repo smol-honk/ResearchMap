@@ -35,7 +35,7 @@
               %td
                 = button_to 'Edit', edit_research_path(research), class: "btn btn-primary", method: :get
               %td
-                = button_to 'Delete', research, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"
+                = button_to 'Delete', research_path(research.id), method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"
 
   - if current_user.try(:admin?)
     .page-header

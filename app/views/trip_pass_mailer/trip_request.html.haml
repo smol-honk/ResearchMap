@@ -1,0 +1,20 @@
+%head
+%body
+  .page-header
+    %h1
+      Hi #{@trip_pass.researcher.name}!
+  %h2 You have recieved a Trip Pass!
+  %br
+  = @trip_pass.user.name
+  wants to visit you from
+  #{@trip_pass.dateStart} to #{@trip_pass.dateEnd}.
+  %br
+  Please login to your Researcher account, and
+  approve or disapprove this trip pass!
+  %br
+  #{@url + @login}
+  %br
+  Have a great day!
+
+.footer
+  School of Anthropology

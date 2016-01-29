@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   as :user do
       patch '/user/confirmation' => 'confirmations#update', :via => :patch, :as => :update_user_confirmation
   end
-  
+
   resources :users do
     get 'following', to: 'follow#following'
     collection {post :import}
@@ -52,6 +52,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'trip_requests' => 'trip_passes#tripRequests', as: :tripRequests
+  get 'accept/:id' => 'trip_passes#accept', as: :accept
   get 'import', to: 'admins#import', as: :import
   get 'templates', to: 'admins#templates', as: :templates
   get 'my_research', to: 'researchers#yourResearch', as: :my_research

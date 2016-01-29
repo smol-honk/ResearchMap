@@ -1,4 +1,5 @@
 class Research < ActiveRecord::Base
+  self.table_name = "researches"
   include PublicActivity::Common
   acts_as_likeable
   belongs_to :researcher
