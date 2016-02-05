@@ -6,6 +6,13 @@ $(function() {
   });
 
 $(function() {
+    $('#fieldStart').pickadate();
+    $('#fieldEnd').pickadate();
+    $('#fieldStart').tooltip();
+    $('#fieldEnd').tooltip();
+  });
+
+$(function() {
     $("#geocomplete").geocomplete()
         .bind("geocode:result", function(event, result) {
           $.log("Result: " + result.formatted_address);

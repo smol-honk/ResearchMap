@@ -34,7 +34,7 @@ class ResearchersController < ApplicationController
     end
   end
 
-  def yourResearch
+  def your_research
     @researcher = current_researcher
     @researches = Research.where(researcher_id:@researcher.id)
   end

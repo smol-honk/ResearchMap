@@ -58,7 +58,7 @@ Rails.application.routes.draw do
   get 'accept/:id' => 'trip_passes#accept', as: :accept
   get 'import', to: 'admins#import', as: :import
   get 'templates', to: 'admins#templates', as: :templates
-  get 'my_research', to: 'researchers#yourResearch', as: :my_research
+  get 'my_research', to: 'researchers#your_research', as: :my_research
   get 'activity', to: 'activity#index', as: :activity
   get 'welcome/map'
   # get 'profile/:id' => 'profile#show', as: :profile

@@ -7,19 +7,28 @@
           %li= msg
 
   .form-group
-    = f.label :name
+    = f.label :name, "Title"
     = f.text_field :name, class: :"form-control"
   .form-group
+    = f.label :headline
+    = f.text_field :headline, class: :"form-control"
+  .form-group
     = f.label :location
-    = f.text_field :location, class: :"form-control"
+    = f.text_field :location, class: :"form-control", id: :'geocomplete'
   .form-group
     = f.label :abstract
     = f.text_area :abstract, class: :"form-control", rows: :"5"
   .form-group
     = f.label :dateStart
-    = f.date_select :dateStart, class: :"form-control"
+    = f.text_field :dateStart, class: :"form-control", id: :"dateStart", title: :"Start of your Research", 'data-toggle': :'tooltip', 'data-placement': :'top'
   .form-group
     = f.label :dateEnd
-    = f.date_select :dateEnd, class: :"form-control"
+    = f.text_field :dateEnd, class: :"form-control", id: :"dateEnd", title: :"End of your Research", 'data-toggle': :'tooltip', 'data-placement': :'top'
+  .form-group
+    = f.label :inFieldStart
+    = f.text_field :inFieldStart, class: :"form-control", id: :"fieldStart", title: :"Day of your in field arrival", 'data-toggle': :'tooltip', 'data-placement': :'top'
+  .form-group
+    = f.label :inFieldEnd
+    = f.text_field :inFieldEnd, class: :"form-control", id: :"fieldEnd", title: :"Day of your in field departure", 'data-toggle': :'tooltip', 'data-placement': :'top'
   .actions
     = f.submit 'Save', class: :"btn btn-primary"

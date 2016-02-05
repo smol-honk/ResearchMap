@@ -6,12 +6,21 @@ class Research < ActiveRecord::Base
   has_and_belongs_to_many :researchs
 
   attr_accessible :name,
+                  :headline,
                   :location,
                   :latitude,
                   :longitude,
                   :abstract,
                   :dateStart,
                   :dateEnd,
+                  :inFieldStart,
+                  :inFieldEnd,
+                  :available,
+                  :week,
+                  :day,
+                  :day_date,
+                  :weekStart,
+                  :weekEnd,
                   :id
 
   geocoded_by :location

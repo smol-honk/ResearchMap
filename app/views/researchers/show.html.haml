@@ -56,8 +56,8 @@
           Followers
           = @followers
 
-        %button.btn.btn-inverse.btn-lg
-          %i.fa.fa-thumbs-o-up.fa-lg
+        = link_to researcher_likes_path(@researcher), role: :"button", method: :get, class: :'button btn btn-inverse btn-lg' do
+          %i.fa.fa-users.fa-lg
           Likes
           = @likes.count
 
