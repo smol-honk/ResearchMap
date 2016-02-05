@@ -16,8 +16,6 @@
 //= require bootstrap.min
 //= require bootstrap-sprockets
 //= require jquery.geocomplete
-//= require leaflet
-//= require mapbox.js
 //= require d3
 //= require turbolinks
 //= require_tree .

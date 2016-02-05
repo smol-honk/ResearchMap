@@ -15,7 +15,7 @@ class TripPassesController < ApplicationController
     end
   end
 
-  def tripRequests
+  def trip_requests
     if researcher_signed_in?
       @trip_passes = TripPass.where(researcher: current_researcher)
     else
@@ -31,8 +31,9 @@ class TripPassesController < ApplicationController
   def accept
     @trip_pass = TripPass.find(params[:id])
     if @current == @trip_pass.researcher
+      AdminNotifyMailer.accepted_trip_pass(@trip_pass).deliver_now
       @trip_pass.update_attribute(:researcher_accept, true)
-      redirect_to tripRequests_path
+      redirect_to trip_requests_path
     else
       redirect_to root_url, alert: "You don't have permission to approve this trip pass!"
     end

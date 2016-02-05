@@ -1,0 +1,20 @@
+.jumbotron
+  %h1
+    = @trip_pass.researcher.name
+    has UNACCEPTED
+    = @trip_pass.user.name
+    's trip request!
+%p
+  = @trip_pass.researcher.name
+  has UNACCEPTED
+  = @trip_pass.user.name
+  trip request from
+  = @trip_pass.dateStart
+  to
+  = @trip_pass.dateEnd
+
+%p
+  An email has been sent to
+  = @trip_pass.user.name
+  to let them know that their trip pass is no longer accepted.
+  %br

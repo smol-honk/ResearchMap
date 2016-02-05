@@ -44,6 +44,8 @@
                 = link_to "Add Research", new_research_path
               %li
                 = link_to "Edit/View Your Research", my_research_path
+              %li
+                = link_to "Your Trip Requests", trip_requests_path
         %li.dropdown
           %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
             - if user_signed_in?

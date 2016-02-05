@@ -1,0 +1,31 @@
+.jumbotron
+  %h1
+    = @trip_pass.researcher.name
+    has accepted
+    = @trip_pass.user.name
+    's trip request!
+%p
+  = @trip_pass.researcher.name
+  has accepted
+  = @trip_pass.user.name
+  trip request from
+  = @trip_pass.dateStart
+  to
+  = @trip_pass.dateEnd
+
+%p
+  Please contact
+  %strong
+    = @trip_pass.user.name
+  at
+  %strong
+    = @trip_pass.user.phone_number
+  and
+  %strong
+    = @trip_pass.researcher.name
+  at
+  %strong
+    = @trip_pass.researcher.phone_number
+  to confirm trip logistics.
+  %br
+  Once confirmed, please accept the trip pass in admin approval.

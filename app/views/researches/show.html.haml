@@ -1,9 +1,7 @@
 .container
-  %p#notice= notice
-
-  %p
-    %b Name:
-    = @research.name
+  .page-header
+    %h1
+      = @research.name
   %p
     %b Location:
     = @research.location
@@ -20,14 +18,14 @@
 
   - if user_signed_in?
     -if current_user.likes?(@research)
-      = link_to('Unlike', research_unlike_path(@research), method: :post)
+      = link_to('Unlike', research_unlike_path(@research), class: :'btn btn-info', method: :post)
     - else
-      = link_to('Like', research_like_path(@research), method: :post)
+      = link_to('Like', research_like_path(@research), class: :'btn btn-info', method: :post)
   - elsif researcher_signed_in?
     -if current_researcher.likes?(@research)
-      = link_to('Unlike', research_unlike_path(@research), method: :post)
+      = link_to('Unlike', research_unlike_path(@research), class: :'btn btn-info', method: :post)
     - else
-      = link_to('Like', research_like_path(@research), method: :post)
+      = link_to('Like', research_like_path(@research), class: :'btn btn-info', method: :post)
   -else
 
   %br

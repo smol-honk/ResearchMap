@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160129181631) do
+ActiveRecord::Schema.define(version: 20160203183637) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(version: 20160129181631) do
     t.text     "bio",                    limit: 65535
     t.string   "headline",               limit: 255
     t.string   "name",                   limit: 255
+    t.string   "phone_number",           limit: 255
   end
 
   add_index "researchers", ["email"], name: "index_researchers_on_email", unique: true, using: :btree
@@ -185,6 +186,15 @@ ActiveRecord::Schema.define(version: 20160129181631) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "researcher_id", limit: 4
+    t.date     "inFieldStart"
+    t.date     "inFieldEnd"
+    t.boolean  "available",     limit: 1
+    t.boolean  "day",           limit: 1
+    t.boolean  "week",          limit: 1
+    t.date     "day_date"
+    t.date     "weekStart"
+    t.date     "weekEnd"
+    t.string   "headline",      limit: 255
   end
 
   add_index "researches", ["researcher_id"], name: "index_researches_on_researcher_id", using: :btree
@@ -207,6 +217,7 @@ ActiveRecord::Schema.define(version: 20160129181631) do
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
     t.boolean  "researcher_accept", limit: 1,   default: false
+    t.boolean  "admin_approval",    limit: 1
   end
 
   add_index "trip_passes", ["researcher_id"], name: "index_trip_passes_on_researcher_id", using: :btree
@@ -241,6 +252,7 @@ ActiveRecord::Schema.define(version: 20160129181631) do
     t.string   "unlock_token",           limit: 255
     t.datetime "locked_at"
     t.integer  "days",                   limit: 4
+    t.string   "phone_number",           limit: 255
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
@@ -249,7 +261,6 @@ ActiveRecord::Schema.define(version: 20160129181631) do
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
-  add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
   add_foreign_key "researches", "researchers"

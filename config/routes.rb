@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :users do
     get 'following', to: 'follow#following'
+    get 'likes', to: 'likes#index', as: :likes
     collection {post :import}
   end
 
@@ -44,6 +45,7 @@ Rails.application.routes.draw do
     post 'unfollow', to: 'socializations#unfollow'
     get 'following', to: 'follow#following'
     get 'followers', to: 'follow#followers'
+    get 'likes', to: 'likes#index', as: :likes
   end
 
   resources :people do
@@ -52,12 +54,11 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'trip_requests' => 'trip_passes#tripRequests', as: :tripRequests
+  get 'trip_requests' => 'trip_passes#trip_requests', as: :trip_requests
   get 'accept/:id' => 'trip_passes#accept', as: :accept
   get 'import', to: 'admins#import', as: :import
   get 'templates', to: 'admins#templates', as: :templates
   get 'my_research', to: 'researchers#yourResearch', as: :my_research
-  get 'likes', to: 'likes#index', as: :likes
   get 'activity', to: 'activity#index', as: :activity
   get 'welcome/map'
   # get 'profile/:id' => 'profile#show', as: :profile
