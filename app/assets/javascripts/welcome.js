@@ -99,7 +99,7 @@ $(function() {
             link.innerHTML = prop.name;
             var anthroTitle = listing.appendChild(document.createElement('div'));
             anthroTitle.className = 'personTitle';
-            anthroTitle.innerHTML = prop.title;
+            anthroTitle.innerHTML = prop.researcher;
 
             var details = listing.appendChild(document.createElement('div'));
             details.innerHTML = prop.location;
@@ -138,7 +138,7 @@ $(function() {
 
         // Each marker on the map.
         var popup = '<div class="popup">' + '<h3>' + prop.name +
-             '</h3>' +'<b>'+ prop.title + '</b>'  + '<p>' + '<div class = "line-clamp">' + prop.bio +
+             '</h3>' +'<b>'+ prop.researcher + '</b>'  + '<p>' + '<div class = "line-clamp">' + prop.bio +
              '</div>'  + '</p>' + '<a href= /researches/' + prop.id + '>Read more...</a>';
 
         popup += '</div>';

@@ -1,5 +1,8 @@
-- conversation.participants.each do |participant|
-  - unless participant == @current
-    = gravatar_for participant
-    = participant.first_name
-    = participant.last_name
+- if conversation.participants.nil?
+  
+-else
+  - conversation.participants.each do |participant|
+    - unless participant == @current
+      = gravatar_for participant
+      = participant.first_name
+      = participant.last_name

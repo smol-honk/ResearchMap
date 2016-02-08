@@ -19,7 +19,8 @@ class WelcomeController < ApplicationController
         properties: {
           id: research.id,
           name: research.name,
-          bio: research.abstract,
+          researcher: research.researcher.name,
+          bio: research.headline,
           location: research.location,
           "marker-color": :"#00607d",
           "marker-size": :"medium",

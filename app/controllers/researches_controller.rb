@@ -19,8 +19,7 @@ class ResearchesController < ApplicationController
   # GET /researches/1
   # GET /researches/1.json
   def show
-    @search = Research.search(params[:q]) or not_found
-    @people = @search.result
+    @research = Research.find(params[:id])
   end
 
   # GET /researches/new
@@ -101,6 +100,6 @@ class ResearchesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def research_params
-      params.require(:research).permit(:name, :location, :abstract, :dateStart, :dateEnd, :available, :weekStart, :weekEnd, :day_date, :inFieldStart, :inFieldEnd, :latitude, :longitude, :researcher_id)
+      params.require(:research).permit(:name, :location, :abstract, :dateStart, :dateEnd, :available, :weekStart, :weekEnd, :day_date, :inFieldStart, :inFieldEnd, :headline, :latitude, :longitude, :researcher_id)
     end
 end
