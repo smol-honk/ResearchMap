@@ -10,7 +10,7 @@
     = f.label :name, "Title"
     = f.text_field :name, class: :"form-control"
   .form-group
-    = f.label :headline
+    = f.label :headline, "Short description"
     = f.text_field :headline, class: :"form-control"
   .form-group
     = f.label :location
@@ -19,16 +19,30 @@
     = f.label :abstract
     = f.text_area :abstract, class: :"form-control", rows: :"5"
   .form-group
-    = f.label :dateStart
+    = f.label :dateStart, "When does your Research Begin?"
     = f.text_field :dateStart, class: :"form-control", id: :"dateStart", title: :"Start of your Research", 'data-toggle': :'tooltip', 'data-placement': :'top'
   .form-group
-    = f.label :dateEnd
+    = f.label :dateEnd, "When does your Research End?"
     = f.text_field :dateEnd, class: :"form-control", id: :"dateEnd", title: :"End of your Research", 'data-toggle': :'tooltip', 'data-placement': :'top'
   .form-group
-    = f.label :inFieldStart
+    = f.label :inFieldStart, "When will you be in field?"
     = f.text_field :inFieldStart, class: :"form-control", id: :"fieldStart", title: :"Day of your in field arrival", 'data-toggle': :'tooltip', 'data-placement': :'top'
   .form-group
-    = f.label :inFieldEnd
+    = f.label :inFieldEnd, "When will you leave the field?"
     = f.text_field :inFieldEnd, class: :"form-control", id: :"fieldEnd", title: :"Day of your in field departure", 'data-toggle': :'tooltip', 'data-placement': :'top'
+  .form-group
+    = f.label :available, "Are you able to host visitors?"
+    = f.check_box :available
+  .form-group
+    If you are able to host (Leave blank if not):
+    = f.label :day, "Day Visit?"
+    = f.check_box :day
+  .form-group
+    = f.label :week, "Week Visit?"
+    = f.check_box :week
+  - if current_user.try(:admin?)
+    .form-group
+      = label_tag 'researcher', 'Choose researcher'
+      = select_tag('researcher', researcher_options, multiple: false, class: 'form-control')
   .actions
     = f.submit 'Save', class: :"btn btn-primary"

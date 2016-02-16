@@ -7,7 +7,10 @@
   %br
   = @trip_pass.user.name
   wants to visit you from
-  #{@trip_pass.dateStart} to #{@trip_pass.dateEnd}.
+  #{@trip_pass.dateStart} to #{@trip_pass.dateEnd}
+  for your Research:
+  %b
+    #{@trip_pass.research.name}
   %br
   Please login to your Researcher account, and
   approve or disapprove this trip pass!

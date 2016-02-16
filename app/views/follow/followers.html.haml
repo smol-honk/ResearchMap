@@ -1,7 +1,27 @@
-- if @followers.blank?
-  = @followee.first_name
-  doesn't have any followers!
-- else
-  - @followers.each do |follower|
-    = link_to follower.email, follower
-    %br
+.container
+  .jumbotron
+    %h1
+      Followers
+
+  - if @followers.blank?
+    = @follower.first_name
+    isn't followed by anyone!
+  - else
+    %table.table-striped.table-responsive
+      %thead
+        %tr
+          %th
+            %th
+              = sort_link(@search, :first_name, "First Name")
+          %th
+            = sort_link(@search, :last_name, "Last Name")
+
+      %tbody
+        - @followers.each do |follower|
+          %tr
+            %td
+              = image_tag follower.avatar.url(:thumb), class: :'img-circle', height: :'50px', width: :'50px'
+            %td
+              = link_to follower.first_name, follower
+            %td
+              = link_to follower.last_name, follower

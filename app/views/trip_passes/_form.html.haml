@@ -10,13 +10,19 @@
       = label_tag 'researcher', 'Choose researcher'
       = select_tag('researcher', researcher_options, multiple: false, class: 'form-control')
     .form-group
-      = f.label :location
-      = f.text_field :location, class: :"form-control", id: :'geocomplete', placeholder: :"Start typing a location..."
+      = label_tag 'research', 'Which Research Will you Visit?'
+      = select_tag('research', research_options, multiple: false, class: 'form-control')
     .form-group
-      = f.label :dateStart
+      = f.label :dateStart, "Day of Arrival in field"
       = f.text_field :dateStart, class: :"form-control", id: :"dateStart", title: :"Date of Arrival", 'data-toggle': :'tooltip', 'data-placement': :'top'
     .form-group
-      = f.label :dateEnd
+      = f.label :dateEnd, "Day of Departure from field"
       = f.text_field :dateEnd, class: :"form-control", id: :"dateEnd", title: :"Date of Departure", 'data-toggle': :'tooltip', 'data-placement': :'top'
     .actions
-      = f.submit 'Save', class: :"btn btn-primary"
+      = f.submit 'Submit', class: :"btn btn-primary"
+
+    :javascript
+      function getList() {
+        var listOfThings = Research.all.to_json.html_safe;
+        console.log(listOfThings);
+      }

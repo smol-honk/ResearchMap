@@ -3,9 +3,6 @@
     %h1 UA Anthropology Researchers
     %br
 .container
-  - if current_user.try(:admin?)
-    = link_to "Download Researcher CSV", researchers_path(format: "csv"), class: :"btn btn-info"
-    .page-header
   .panel.panel-default
     .panel-heading
       Researchers
@@ -18,9 +15,7 @@
           %th
             = sort_link(@search, :last_name, "Last Name")
           %th
-            Edit
           %th
-            Delete
       %tbody
         - @researchers.each do |researcher|
           %tr
@@ -34,7 +29,13 @@
 
   - if current_user.try(:admin?)
     .page-header
-      %h2 Import Researchers
-    = form_tag import_researchers_path, multipart: true do
-      = file_field_tag :file
-      = submit_tag "Import Researchers", class: :"btn btn-primary btn-sm"
+      %h1 Administration
+    .row
+      .col-xs-8.col-sm-6
+        %h2 Download Researchers
+        = link_to "Download Researchers CSV", researchers_path(format: "csv"), class: :"btn btn-info"
+      .col-xs-4.col-sm-6
+        %h2 Import Researchers
+        = form_tag import_researchers_path, multipart: true do
+          = file_field_tag :file
+          = submit_tag "Import Researchers", class: :"btn btn-primary btn-sm"

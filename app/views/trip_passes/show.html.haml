@@ -1,13 +1,12 @@
 .container
+  .jumbotron
+    %center
+      %h2
+        Trip Pass: ID
+        = @trip_pass.id
   %p
     %b Location:
     = @trip_pass.location
-  %p
-    %b Longitude:
-    = @trip_pass.longitude
-  %p
-    %b Latitude:
-    = @trip_pass.latitude
   %p
     %b Datestart:
     = @trip_pass.dateStart
@@ -20,7 +19,10 @@
   %p
     %b Researcher:
     = @trip_pass.researcher.name
+  %p
+    %b Research:
+    = @trip_pass.research.name
 
-  = link_to 'Edit', edit_trip_pass_path(@trip_pass)
+  = link_to 'Edit', edit_trip_pass_path(@trip_pass), data: {'no-turbolink': 'true'}
   \|
   = link_to 'Back', trip_passes_path

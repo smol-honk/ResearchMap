@@ -3,7 +3,7 @@ class Research < ActiveRecord::Base
   include PublicActivity::Common
   acts_as_likeable
   belongs_to :researcher
-  has_and_belongs_to_many :researchs
+  has_many :trip_pass
 
   attr_accessible :name,
                   :headline,
@@ -21,6 +21,8 @@ class Research < ActiveRecord::Base
                   :day_date,
                   :weekStart,
                   :weekEnd,
+                  :researcher,
+                  :researcher_id,
                   :id
 
   geocoded_by :location

@@ -51,6 +51,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @following = @user.followees(Researcher).count
+    @likes = @user.likees(Research).count
   end
 
   def likes

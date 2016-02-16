@@ -1,8 +1,9 @@
 !!!!
 .container
   %body{data: {'no-transition-cache': 'true'}}
-    %h1
-      %center Research Map Project
+    .jumbotron
+      %h1
+        %center Research Map Project
     %nav.menu-ui#menu-ui
       %a.active#filter-all{href: :'#'} Show all
       %a#filter-donor{href: :'#'} Can visit?
@@ -29,8 +30,8 @@
             %p
             = search_form_for @search do |f|
               .field
-                = f.label :name_cont
-                = f.text_field :name_cont
+                = f.label :researcher_first_name_or_researcher_last_name_cont
+                = f.text_field :researcher_first_name_or_researcher_last_name_cont
 
                 = f.label :location_cont
                 = f.text_field :location_cont

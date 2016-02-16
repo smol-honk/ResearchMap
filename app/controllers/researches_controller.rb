@@ -4,6 +4,7 @@ class ResearchesController < ApplicationController
   # GET /researches
   # GET /researches.json
   def index
+    # Fix the sorting issue after searching
     @researches = Research.all
     @search = Research.search(params[:q])
     @researches = @search.result
@@ -20,6 +21,12 @@ class ResearchesController < ApplicationController
   # GET /researches/1.json
   def show
     @research = Research.find(params[:id])
+    if user_signed_in?
+      @current = current_user
+    elsif researcher_signed_in?
+      @current = current_researcher
+    else
+    end
   end
 
   # GET /researches/new
@@ -44,8 +51,11 @@ class ResearchesController < ApplicationController
   # POST /researches.json
   def create
     @research = Research.new(research_params)
-    @research.researcher = current_researcher
-
+    if current_user.try(:admin?)
+      @research.researcher_id = params['researcher']
+    else
+      @research.researcher = current_researcher
+    end
     respond_to do |format|
       if @research.save
         @research.create_activity :create, owner: current_researcher
@@ -61,6 +71,11 @@ class ResearchesController < ApplicationController
   # PATCH/PUT /researches/1
   # PATCH/PUT /researches/1.json
   def update
+    if current_user.try(:admin?)
+      @research.researcher_id = params['researcher']
+    else
+      @research.researcher = current_researcher
+    end
     respond_to do |format|
       if @research.update(research_params)
         format.html { redirect_to @research, notice: 'Research was successfully updated.' }
@@ -100,6 +115,6 @@ class ResearchesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def research_params
-      params.require(:research).permit(:name, :location, :abstract, :dateStart, :dateEnd, :available, :weekStart, :weekEnd, :day_date, :inFieldStart, :inFieldEnd, :headline, :latitude, :longitude, :researcher_id)
+      params.require(:research).permit(:name, :location, :abstract, :dateStart, :dateEnd, :available, :week, :day, :weekStart, :weekEnd, :day_date, :inFieldStart, :inFieldEnd, :headline, :latitude, :longitude, :researcher, :researcher_id)
     end
 end

@@ -54,6 +54,8 @@ class TripPassesController < ApplicationController
     @trip_pass = TripPass.new(trip_pass_params)
     @trip_pass.user = current_user
     @trip_pass.researcher_id = params['researcher']
+    @trip_pass.research_id = params['research']
+    @trip_pass.location = Research.find(params['research']).location
 
     respond_to do |format|
       if @trip_pass.save
@@ -123,6 +125,6 @@ class TripPassesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def trip_pass_params
-    params.require(:trip_pass).permit(:location, :longitude, :latitude, :dateStart, :dateEnd, :user_id, :researcher_id)
+    params.require(:trip_pass).permit(:location, :longitude, :latitude, :dateStart, :dateEnd, :user_id, :researcher_id, :research, :research_id)
   end
 end

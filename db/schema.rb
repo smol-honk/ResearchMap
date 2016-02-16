@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160203183637) do
+ActiveRecord::Schema.define(version: 20160208182310) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -218,8 +218,10 @@ ActiveRecord::Schema.define(version: 20160203183637) do
     t.datetime "updated_at",                                    null: false
     t.boolean  "researcher_accept", limit: 1,   default: false
     t.boolean  "admin_approval",    limit: 1
+    t.integer  "research_id",       limit: 4
   end
 
+  add_index "trip_passes", ["research_id"], name: "index_trip_passes_on_research_id", using: :btree
   add_index "trip_passes", ["researcher_id"], name: "index_trip_passes_on_researcher_id", using: :btree
   add_index "trip_passes", ["user_id"], name: "index_trip_passes_on_user_id", using: :btree
 
@@ -265,6 +267,7 @@ ActiveRecord::Schema.define(version: 20160203183637) do
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
   add_foreign_key "researches", "researchers"
   add_foreign_key "trip_passes", "researchers"
+  add_foreign_key "trip_passes", "researches"
   add_foreign_key "trip_passes", "users"
   add_foreign_key "users", "roles"
 end

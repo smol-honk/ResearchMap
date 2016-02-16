@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :researches
   before_save :assign_role
   before_create :name
+  has_and_belongs_to_many :trip_pass
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

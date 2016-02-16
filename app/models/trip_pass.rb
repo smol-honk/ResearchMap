@@ -1,6 +1,7 @@
 class TripPass < ActiveRecord::Base
   belongs_to :user
   belongs_to :researcher
+  belongs_to :research
   before_create :setDays
 
   def setDays

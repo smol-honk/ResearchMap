@@ -2,6 +2,7 @@ class Researcher < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
   has_and_belongs_to_many :users
   has_and_belongs_to_many :researchers
+  has_and_belongs_to_many :trip_pass
   has_many :researches, dependent: :destroy
   before_create :name
   # Include default devise modules. Others available are:

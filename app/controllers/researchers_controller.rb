@@ -1,6 +1,8 @@
 class ResearchersController < ApplicationController
   def index
-    @researchers = Researcher.order(:name)
+    @researchers = Researcher.all
+    @search = Researcher.search(params[:q])
+    @researchers = @search.result
     respond_to do |format|
       format.html
       format.csv { send_data @researchers.to_csv }

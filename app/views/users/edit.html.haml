@@ -15,9 +15,9 @@
       = f.email_field :email
     .field
       %br
-      = f.label :avatar, "Your Avatar"
+      = f.label :avatar, "Avatar"
       - if @user.avatar.url.present?
-        = image_tag(current_user.avatar.url(:thumb))
+        = image_tag(@user.avatar.url(:thumb))
         = f.label :remove_avatar do
           Remove Avatar
           = f.check_box :remove_avatar

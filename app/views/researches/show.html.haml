@@ -3,33 +3,45 @@
     %h1
       = @research.name
   %p
-    %b Location:
+    %b
+      %i.fa.fa-map-marker
+      Location:
     = @research.location
   %p
-    %b Abstract:
-    = @research.abstract
+    %b Researcher:
+    = @research.researcher.name
   %p
     %b Datestart:
     = @research.dateStart
   %p
     %b Dateend:
     = @research.dateEnd
+  %p
+    %b Available for Visits?:
+    = translate_bool(@research.available)
+  -if @research.available
+    %p
+      %b Week Visit?:
+      = translate_bool(@research.week)
+    %p
+      %b Day Visit?:
+      = translate_bool(@research.day)
+  %p
+    %b Abstract:
+    %br
+    = @research.abstract
 
-
-  - if user_signed_in?
-    -if current_user.likes?(@research)
-      = link_to('Unlike', research_unlike_path(@research), class: :'btn btn-info', method: :post)
+  .btn-block
+    - if !@current.nil?
+      -if @current.likes?(@research)
+        = link_to('Unlike', research_unlike_bath(@research), class: :'btn btn-info', method: :post)
+      - else
+        = link_to research_like_path(@research), class: :'btn btn-info', method: :post do
+          %i.fa.fa-thumbs-o-up
+          Like
     - else
-      = link_to('Like', research_like_path(@research), class: :'btn btn-info', method: :post)
-  - elsif researcher_signed_in?
-    -if current_researcher.likes?(@research)
-      = link_to('Unlike', research_unlike_path(@research), class: :'btn btn-info', method: :post)
-    - else
-      = link_to('Like', research_like_path(@research), class: :'btn btn-info', method: :post)
-  -else
 
-  %br
-
-  = link_to 'Edit', edit_research_path(@research)
-  \|
-  = link_to 'Back', researches_path
+    %br
+    %br
+    - if @current.try(:admin?) or current_researcher == @research.researcher
+      = link_to 'Edit', edit_research_path(@research), class: :'btn btn-primary', data: {'no-turbolink': 'true'}

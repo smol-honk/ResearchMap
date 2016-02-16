@@ -39,14 +39,6 @@
     #profileInfo
     %ul.nav.nav-tabs
       %li.active
-        %a{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#home"}
-          %strong
-            Activity
-      %li
-        %a{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#profile"}
-          %strong
-            Research
-      %li
         %a{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#aboutme"}
           %strong
             About Me
@@ -60,4 +52,4 @@
         = @user.bio
   .adminEdit
     - if user_signed_in? && current_user.admin?
-      = link_to "Edit me", edit_user_path, class: :"btn btn-info"
+      = link_to "Edit User", edit_user_path, class: :"btn btn-info"
