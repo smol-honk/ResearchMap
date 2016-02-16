@@ -31,7 +31,7 @@
           Following
           = @following
 
-        = link_to researcher_likes_path(@user), role: :"button", method: :get, class: :'button btn btn-inverse btn-lg' do
+        = link_to user_likes_path(@user), role: :"button", method: :get, class: :'button btn btn-inverse btn-lg' do
           %i.fa.fa-thumbs-o-up.fa-lg
           Likes
           = @likes
