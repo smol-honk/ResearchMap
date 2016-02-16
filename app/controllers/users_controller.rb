@@ -12,6 +12,10 @@ class UsersController < ApplicationController
       redirect_to root_url
     end
   end
+  def trips
+    @user= User.find(params[:user_id])
+    @trip_passes = TripPass.where(user: @user)
+  end
 
   def edit
     if user_signed_in? && current_user.admin?

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :users do
     get 'following', to: 'follow#following'
     get 'likes', to: 'likes#index', as: :likes
+    get 'trips', to: 'users#trips', as: :trips
     collection {post :import}
   end
 

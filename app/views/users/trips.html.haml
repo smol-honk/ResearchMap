@@ -1,0 +1,10 @@
+.container
+  - if @trip_passes.blank?
+    %h2
+      #{@user.name} hasn't had any trips!
+  - else
+    %h2
+      #{@user.name} has traveled to...
+    - @trip_passes.each do |trip_pass|
+      = trip_pass.location
+      %br

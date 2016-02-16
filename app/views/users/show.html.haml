@@ -31,10 +31,13 @@
           Following
           = @following
 
-        %button.btn.btn-inverse.btn-lg
+        = link_to researcher_likes_path(@user), role: :"button", method: :get, class: :'button btn btn-inverse btn-lg' do
           %i.fa.fa-thumbs-o-up.fa-lg
           Likes
           = @likes
+        = link_to user_trips_path(@user), role: :"button", method: :get, class: :'button btn btn-inverse btn-lg' do
+          %i.fa.fa-suitcase.fa-lg
+          My Trips!
 
     #profileInfo
     %ul.nav.nav-tabs
