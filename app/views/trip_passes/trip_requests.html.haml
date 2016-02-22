@@ -18,6 +18,12 @@
           %td= pass.dateStart
           %td= pass.dateEnd
           %td= translate_bool(pass.researcher_accept)
-          %td
-            = link_to "accept", accept_path(pass), class: :'btn btn-primary'
+          - if pass.researcher_accept
+            %td
+              // Add a comment box for when they decline
+              = link_to "decline", decline_path(pass), class: :'btn btn-danger'
+          -else
+            %td
+              = link_to "accept", accept_path(pass), class: :'btn btn-primary'
+
   %br/

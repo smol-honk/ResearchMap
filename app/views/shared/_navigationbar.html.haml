@@ -62,6 +62,9 @@
                 = link_to "Your Profile", user_path(current_user.id)
               %li
                 = link_to "Your Feed", activity_path
+              - if current_user.role_id == 2 || current_user.role_id == 3
+                %li
+                  = link_to "Create a Trip Pass!", new_trip_pass_path, data: {'no-turbolink': true}
               %li
                 = link_to "Your Conversations", conversations_path
               %li

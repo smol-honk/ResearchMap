@@ -91,13 +91,13 @@
             %thead
               %tr
                 %th
-                  = sort_link(@search, :name, "Name")
+                  Title
                 %th
-                  = sort_link(@search, :location, "Location")
+                  Location
                 %th
-                  = sort_link(@search, :dateStart, "Research Started")
+                  Research Started
                 %th
-                  = sort_link(@search, :dateEnd, "Research Ended")
+                  Research Ended
             %tbody#research
               - @researches.each do |research|
                 %tr

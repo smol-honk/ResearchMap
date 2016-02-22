@@ -39,6 +39,16 @@ class TripPassesController < ApplicationController
     end
   end
 
+  def decline
+    @trip_pass = TripPass.find(params[:id])
+    if @current == @trip_pass.researcher
+      @trip_pass.update_attribute(:researcher_accept, false)
+      redirect_to trip_requests_path
+    else
+      redirect_to root_url, alert: "You don't have permission to approve this trip pass!"
+    end
+  end
+
   # GET /trip_passes/new
   def new
     @trip_pass = TripPass.new

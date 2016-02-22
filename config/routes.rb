@@ -57,6 +57,7 @@ Rails.application.routes.draw do
 
   get 'trip_requests' => 'trip_passes#trip_requests', as: :trip_requests
   get 'accept/:id' => 'trip_passes#accept', as: :accept
+  get 'decline/:id' => 'trip_passes#decline', as: :decline
   get 'import', to: 'admins#import', as: :import
   get 'templates', to: 'admins#templates', as: :templates
   get 'my_research', to: 'researchers#your_research', as: :my_research

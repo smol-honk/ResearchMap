@@ -44,7 +44,7 @@ $(function() {
             this.className = 'active';
             listings.innerHTML = '';
             locations.setFilter(function(f) {
-                return f.properties['donor'] === true;
+                return f.properties['available'] === true;
             });
             updateNav()
             return false;

@@ -4,8 +4,9 @@
       Likes
 
   - if @researches.blank?
-    = @current.first_name
-    has no likes!
+    %h2
+      = @current.first_name
+      has no likes!
   - else
     %table.table-striped.table-responsive
       %thead
