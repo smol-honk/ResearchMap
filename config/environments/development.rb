@@ -37,7 +37,7 @@ Rails.application.configure do
   config.assets.raise_runtime_errors = true
 
   # For devise
-  config.action_mailer.default_url_options = {:host => 'localhost:3000'}
+  config.action_mailer.default_url_options = {:host => 'researchmapproject.herokuapp.com'}
   config.action_mailer.perform_deliveries = true
 
   config.action_mailer.delivery_method = :smtp
