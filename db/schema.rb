@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160208182310) do
+ActiveRecord::Schema.define(version: 20160223215936) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -253,7 +253,7 @@ ActiveRecord::Schema.define(version: 20160208182310) do
     t.integer  "failed_attempts",        limit: 4,     default: 0,  null: false
     t.string   "unlock_token",           limit: 255
     t.datetime "locked_at"
-    t.integer  "days",                   limit: 4
+    t.integer  "days",                   limit: 4,     default: 0
     t.string   "phone_number",           limit: 255
   end
 
