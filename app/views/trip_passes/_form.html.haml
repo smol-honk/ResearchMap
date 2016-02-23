@@ -20,9 +20,3 @@
       = f.text_field :dateEnd, class: :"form-control", id: :"dateEnd", title: :"Date of Departure", 'data-toggle': :'tooltip', 'data-placement': :'top'
     .actions
       = f.submit 'Submit', class: :"btn btn-primary"
-
-    :javascript
-      function getList() {
-        var listOfThings = Research.all.to_json.html_safe;
-        console.log(listOfThings);
-      }

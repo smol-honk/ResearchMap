@@ -1,9 +1,7 @@
 /*
- *= require_tree .
- *= require_self
  *= require jquery-ui
- *= depend_on_asset "layers.png"
- *= depend_on_asset "layers-2x.png"
+ *= require_self
+ *= require_tree .
  */
 
 @import "font-awesome-sprockets";
@@ -11,6 +9,10 @@
 
 body {
   padding-top: 5em;
+}
+
+tr {
+  padding: 4px;
 }
 
 tbody td, thead th {

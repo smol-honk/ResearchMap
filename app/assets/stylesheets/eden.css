@@ -2758,11 +2758,11 @@ a.list-group-item-danger.active:focus {
     background-color: rgba(214, 224, 226, 0.2);
     border-radius: 4px;
     overflow: hidden;
-    margin:-21px 0;
+    margin:20px 0;
 }
 .bg_blur
 {
-    background-image:url('./logo.png');
+    background-image:url('http://lorempixel.com/500/500/nature/2/');
     height: 300px;
     background-size: cover;
 }
@@ -2840,7 +2840,15 @@ a.list-group-item-danger.active:focus {
     width: 100%;
     height: 200px;
     text-align: center;
-    background-image: url('./bird.jpg');
+    background: rgb(48,126,221);
+    background: -moz-linear-gradient(-45deg,  rgba(48,126,221,1) 0%, rgba(242,92,137,1) 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(48,126,221,1)), color-stop(100%,rgba(242,92,137,1)));
+    background: -webkit-linear-gradient(-45deg,  rgba(48,126,221,1) 0%,rgba(242,92,137,1) 100%);
+    background: -o-linear-gradient(-45deg,  rgba(48,126,221,1) 0%,rgba(242,92,137,1) 100%);
+    background: -ms-linear-gradient(-45deg,  rgba(48,126,221,1) 0%,rgba(242,92,137,1) 100%);
+    background: linear-gradient(135deg,  rgba(48,126,221,1) 0%,rgba(242,92,137,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#307edd', endColorstr='#f25c89',GradientType=1 );
+
 }
 
 .profile-card .img-container a {
@@ -3018,7 +3026,7 @@ a.list-group-item-danger.active:focus {
     -webkit-transition: padding 400ms ease-in-out;
     transition: padding 400ms ease-in-out;
 }
-
+ 
 
 /** Feature Slider **/
 

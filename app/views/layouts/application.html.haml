@@ -1,29 +1,14 @@
 !!!
 %html
   %head
-    %link{href: :'//mapbox.com/base/latest/base.css', rel: :'stylesheet'}
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title Research Map Project
     = stylesheet_link_tag 'application', params[:controller], media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', params[:controller], 'data-turbolinks-track' => true
     = csrf_meta_tags
-
-
-    / Scripts to allow Mapbox API to work
-    %script{src: :'https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.js'}
-    %link{href: :'https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.css', rel: :'stylesheet'}
-    = stylesheet_link_tag "default"
-    = stylesheet_link_tag "default.date"
-    = stylesheet_link_tag "default.time"
     = stylesheet_link_tag "eden"
-    = javascript_include_tag "jquery_ujs"
-    = javascript_include_tag "jquery.geocomplete"
-    = javascript_include_tag "bootstrap.min"
-    = javascript_include_tag "jquery-ui.min"
+
     -# = javascript_include_tag "legacy"
-    = javascript_include_tag "picker"
-    = javascript_include_tag "picker.date"
-    = javascript_include_tag "picker.time"
     - if notice
       %p.alert.alert-success= notice
     - if alert

@@ -29,7 +29,7 @@ class TripPassesController < ApplicationController
   end
 
   def accept
-    @trip_pass = TripPass.find(params[:id])
+    @trip_pass = TripPass.find(params[:trip_pass_id])
     if @current == @trip_pass.researcher
       AdminNotifyMailer.accepted_trip_pass(@trip_pass).deliver_now
       @trip_pass.update_attribute(:researcher_accept, true)
@@ -40,10 +40,9 @@ class TripPassesController < ApplicationController
   end
 
   def decline
-    @trip_pass = TripPass.find(params[:id])
+    @trip_pass = TripPass.find(params[:trip_pass_id])
     if @current == @trip_pass.researcher
       @trip_pass.update_attribute(:researcher_accept, false)
-      redirect_to trip_requests_path
     else
       redirect_to root_url, alert: "You don't have permission to approve this trip pass!"
     end

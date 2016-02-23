@@ -12,10 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui
 //= require bootstrap.min
-//= require bootstrap-sprockets
+//= require jquery-ui
 //= require jquery.geocomplete
+//= require picker
+//= require picker.date
+//= require picker.time
 //= require d3
 //= require turbolinks
 //= require_tree .

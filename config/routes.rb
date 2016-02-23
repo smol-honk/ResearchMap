@@ -49,6 +49,12 @@ Rails.application.routes.draw do
     get 'likes', to: 'likes#index', as: :likes
   end
 
+  resources :trip_passes do
+    collection {post :import}
+    post 'accept', to: 'trip_passes#accept', as: :accept
+    post 'decline', to: 'trip_passes#decline', as: :decline
+  end
+
   resources :people do
     collection do
       get :search
@@ -56,8 +62,6 @@ Rails.application.routes.draw do
   end
 
   get 'trip_requests' => 'trip_passes#trip_requests', as: :trip_requests
-  get 'accept/:id' => 'trip_passes#accept', as: :accept
-  get 'decline/:id' => 'trip_passes#decline', as: :decline
   get 'import', to: 'admins#import', as: :import
   get 'templates', to: 'admins#templates', as: :templates
   get 'my_research', to: 'researchers#your_research', as: :my_research
