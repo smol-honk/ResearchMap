@@ -34,7 +34,7 @@
   .btn-block
     - if !@current.nil?
       -if @current.likes?(@research)
-        = link_to('Unlike', research_unlike_bath(@research), class: :'btn btn-info', method: :post)
+        = link_to('Unlike', research_unlike_path(@research), class: :'btn btn-info', method: :post)
       - else
         = link_to research_like_path(@research), class: :'btn btn-info', method: :post do
           %i.fa.fa-thumbs-o-up
