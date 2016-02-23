@@ -85,7 +85,8 @@ Rails.application.configure do
     user_name:            ENV["email"],
     password:             ENV["password"],
     authentication:       'plain',
-    enable_starttls_auto: true  }
+    :openssl_verify_mode  => 'none'
+ }
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
