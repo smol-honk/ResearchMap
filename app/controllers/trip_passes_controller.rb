@@ -120,10 +120,11 @@ class TripPassesController < ApplicationController
 
   def hasDays
     if user_signed_in?
-      if current_user.days > 0 || current_user.admin?
+      if current_user.days > 0 || current_user.try(:admin?)
       else
         redirect_to root_url, alert: "You don't have any available days to visit a Researcher!"
       end
+    else
     end
   end
 

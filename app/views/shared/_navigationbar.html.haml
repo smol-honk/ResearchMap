@@ -35,7 +35,7 @@
                 = link_to "Edit/View Researchers", researchers_path
               %li
                 = link_to "Edit/View Trip Passes", trip_passes_path
-        - if researcher_signed_in?
+        - elsif researcher_signed_in?
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
               Researcher Portal
@@ -62,7 +62,7 @@
                 = link_to "Your Profile", user_path(current_user.id)
               %li
                 = link_to "Your Feed", activity_path
-              - if current_user.role_id == 2 || current_user.role_id == 3
+              - if current_user.role.name == "Benefactor" || current_user.role.name == "Patron"
                 %li
                   = link_to "Create a Trip Pass!", new_trip_pass_path, data: {'no-turbolink': true}
               %li
