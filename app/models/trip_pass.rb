@@ -4,11 +4,20 @@ class TripPass < ActiveRecord::Base
   belongs_to :research
   before_create :setDays
 
+  geocoded_by :location
+  after_validation :geocode
+
   def setDays
     totalDays = user.days - (self.dateEnd - self.dateStart)
     user.update_attribute(:days, totalDays)
   end
 
-  geocoded_by :location
-  after_validation :geocode
+  def decline
+      self.update_attribute(:researcher_declined, true)
+  end
+
+  def accept
+    self.update_attribute(:researcher_accept, true)
+  end
+  
 end

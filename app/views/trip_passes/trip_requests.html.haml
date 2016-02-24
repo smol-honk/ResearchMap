@@ -51,5 +51,20 @@
                 = button_to "decline", trip_pass_decline_path(pass), method: :post, class: :'btn btn-danger', "data-target" => "#myModal", "data-toggle" => "modal", remote: :true
 
 
-
-  %br/
+  .page-header
+    %h1 Declined Trip Passes
+  %table.table-striped.table-reponsive.table-hover
+    %thead
+      %tr
+        %th Name
+        %th Location
+        %th Arrival
+        %th Departure
+        %th{:colspan => "3"}
+    %tbody
+      - @declined_trips.each do |pass|
+        %tr
+          %td= pass.user.name
+          %td= pass.location
+          %td= pass.dateStart
+          %td= pass.dateEnd

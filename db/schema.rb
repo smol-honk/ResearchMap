@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160223215936) do
+ActiveRecord::Schema.define(version: 20160224190434) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -207,18 +207,19 @@ ActiveRecord::Schema.define(version: 20160223215936) do
   end
 
   create_table "trip_passes", force: :cascade do |t|
-    t.string   "location",          limit: 255
-    t.float    "longitude",         limit: 24
-    t.float    "latitude",          limit: 24
+    t.string   "location",            limit: 255
+    t.float    "longitude",           limit: 24
+    t.float    "latitude",            limit: 24
     t.date     "dateStart"
     t.date     "dateEnd"
-    t.integer  "user_id",           limit: 4
-    t.integer  "researcher_id",     limit: 4
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
-    t.boolean  "researcher_accept", limit: 1,   default: false
-    t.boolean  "admin_approval",    limit: 1
-    t.integer  "research_id",       limit: 4
+    t.integer  "user_id",             limit: 4
+    t.integer  "researcher_id",       limit: 4
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.boolean  "researcher_accept",   limit: 1,   default: false
+    t.boolean  "admin_approval",      limit: 1
+    t.integer  "research_id",         limit: 4
+    t.boolean  "researcher_declined", limit: 1,   default: false
   end
 
   add_index "trip_passes", ["research_id"], name: "index_trip_passes_on_research_id", using: :btree
