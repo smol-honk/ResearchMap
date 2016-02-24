@@ -6,10 +6,10 @@ class SocializationsController < ApplicationController
     if user_signed_in?
       current_user.follow!(@socializable)
       # render json: { follow: true }
-      redirect_to @socializable, notice: "You have followed #{@socializable.email}"
+      redirect_to @socializable, notice: "You have followed #{@socializable.name}"
     elsif researcher_signed_in?
       current_researcher.follow!(@socializable)
-      redirect_to @socializable, notice: "You have followed #{@socializable.email}"
+      redirect_to @socializable, notice: "You have followed #{@socializable.name}"
       # render json: { follow: true }
     else
       redirect_to :new_user_session, alert: "You need to be logged in to do that!"
@@ -19,10 +19,10 @@ class SocializationsController < ApplicationController
   def unfollow
     if user_signed_in?
       current_user.unfollow!(@socializable)
-      redirect_to @socializable, notice: "You have unfollowed #{@socializable.email}"
+      redirect_to @socializable, notice: "You have unfollowed #{@socializable.name}"
       # render json: { follow: false }
     elsif researcher_signed_in?
-      redirect_to @socializable, notice: "You have unfollowed #{@socializable.email}"
+      redirect_to @socializable, notice: "You have unfollowed #{@socializable.name}"
       current_researcher.unfollow!(@socializable)
       # render json: { follow: false }
     else
