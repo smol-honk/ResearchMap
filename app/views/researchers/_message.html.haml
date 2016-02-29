@@ -1,0 +1,9 @@
+= form_tag messages_path, method: :post do
+  .form-group
+    = hidden_field_tag('recipients', researcher.email)
+  .form-group
+    = label_tag 'message[subject]', 'Subject'
+    = text_field_tag 'message[subject]', nil, class: 'form-control', required: true
+  .form-group
+    = label_tag 'message[body]', 'Message'
+    = text_area_tag 'message[body]', nil, cols: 3, height: :'40', class: 'form-control', required: true

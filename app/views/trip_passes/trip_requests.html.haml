@@ -22,9 +22,9 @@
           - if pass.researcher_accept
             %td
               // Add a comment box for when they decline
-              = link_to "decline", trip_pass_decline_path(pass), method: :post, class: :'btn btn-danger', "data-target" => "#myModal", "data-toggle" => "modal", remote: :true
+              = link_to "decline", trip_pass_decline_path(pass), method: :post, class: :'btn btn-danger', "data-target" => "##{pass.id}", "data-toggle" => "modal", remote: :true
               / Modal
-              #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+              .modal.fade{id: :"#{pass.id}", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
                 .modal-dialog
                   .modal-content
                     .modal-header

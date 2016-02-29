@@ -36,8 +36,8 @@
               - else
                 %i.fa.fa-check{style: :'color:green'}
             %td
-              %a.fa.fa-envelope-o{"data-target" => "#myModal", "data-toggle" => "modal", :href => "#"}
-              #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+              %a.fa.fa-envelope-o{"data-target" => "##{researcher.first_name}", "data-toggle" => "modal", :href => "#"}
+              .modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1", id: :"#{researcher.first_name}"}
                 .modal-dialog
                   .modal-content
                     .modal-header

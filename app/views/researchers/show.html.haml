@@ -87,7 +87,7 @@
               = activity.created_at.localtime.to_date
       #profile.tab-pane.fade
         %p
-          %table.table
+          %table.table-hover.table-striped.table-responsive
             %thead
               %tr
                 %th
@@ -98,6 +98,8 @@
                   Research Started
                 %th
                   Research Ended
+                %th
+                  Can visit?
             %tbody#research
               - @researches.each do |research|
                 %tr
@@ -106,6 +108,11 @@
                   %td= research.location
                   %td= research.dateStart
                   %td= research.dateEnd
+                  %td
+                    - if research.available?
+                      %i.fa.fa-check{style: :'color:green'}
+                    -else
+                      %i.fa.fa-times{style: :'color:red'}
                   - if current_user.try(:admin?)
                     %td= button_to 'Edit', edit_research_path(research), class: "btn btn-primary", method: :get
                     %td= button_to 'Delete', research, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"

@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
   def trips
     @user= User.find(params[:user_id])
-    @trip_passes = TripPass.where(user: @user)
+    @trip_passes = TripPass.where(user: @user).where(admin_approval: true)
   end
 
   def edit
