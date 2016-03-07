@@ -3,24 +3,84 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title Research Map Project
+    / Normalize CSS
+    %link{:href => "//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css", :rel => "stylesheet"}/
+    / Latest icon font stylesheet
+    %link{:href => "//brand.arizona.edu/sites/all/themes/brand/ua-brand-icons/ua-brand-icons.css", :rel => "stylesheet"}/
+    / Latest compiled and minified CSS icon font not included
+    %link{:href => "//bitbucket.org/uadigital/ua-bootstrap/downloads/ua-bootstrap-1.0.0-alpha4.min.css", :rel => "stylesheet"}/
+    / jQuery
+    %script{:src => "//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"}
+    / Latest compiled and minified JavaScript
+    %script{:src => "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"}
+
     = stylesheet_link_tag 'application', params[:controller], media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', params[:controller], 'data-turbolinks-track' => true
     = csrf_meta_tags
-    = stylesheet_link_tag "eden"
+    -# = stylesheet_link_tag "eden"
 
-    -# = javascript_include_tag "legacy"
-    - if notice
+        - if notice
       %p.alert.alert-success= notice
     - if alert
       %p.alert.alert-danger= alert
 
   %body
-    = render "shared/navigationbar"
+    %header#region_header_ua.l-arizona-header.bg-red
+      %section.container.l-container
+        .row
+          %a.arizona-logo{:href => "http://www.arizona.edu", :title => "The University of Arizona homepage"}
+            %img.arizona-line-logo{:alt => "The University of Arizona Wordmark Line Logo White", :src => "https://brand.arizona.edu/sites/default/files/digital-resources/ua_wordmark_line_logo_white_rgb.svg"}/
+    #header_site
+      .container
+        .row
+          #site_identifier
+            %a{:href => "#"}
+              = image_tag "primary-logo.png"
+          #utility_links
+
+          #search
+            %form
+              .form-item
+                %input{:maxlength => "128", :size => "15", :title => "Search", :type => "text", :value => ""}/
+              .form-actions
+                %input#edit-submit.form-submit{:name => "op", :type => "submit", :value => "Search"}/
+    = render "shared/testbar"
 
   // Google map scripts
-  %script{:src => "http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"}
+  -# %script{:src => "http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"}
 
   =yield
 
-  .footer
-    &copy; University of Arizona: School of Anthropology
+  %footer#footer_site
+    .container
+      .row
+        .col-md-6
+          #footer_logo.text-center-sm.text-center-xs.text-left
+            %a{:href => "#"}
+              =image_tag "primary-logo.png"
+        .col-md-6
+          #footer_menu.text-center-sm.text-center-xs.text-right
+            %ul
+              %li
+                %a{:href => "#"} Link 1
+              %li
+                %a{:href => "#"} Link 2
+              %li
+                %a{:href => "#"} Link 3
+              %li
+                %a{:href => "#"} Link 4
+              %li.last
+                %a{:href => "#"} Link 5
+      %hr/
+      .row
+        .col-md-12
+          #footer_copyright.text-center
+            Wilbur Building, Room 1891   |   The University of Arizona   |   Tucson, AZ USA 85721
+            %br/
+            Phone: (520) 621-2211  |   Email: 
+            %a{:href => "#"}>
+              department.name@email.arizona.edu
+              %br/
+            © 2016 The Arizona Board of Regents on behalf of the University of Arizona   | 
+            %a{:href => "#"} Feedback
+    / /.container

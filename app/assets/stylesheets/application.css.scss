@@ -7,23 +7,17 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
-body {
-  padding-top: 5em;
-}
+// body {
+//   padding-top: 5em;
+// }
 
-tr {
-  padding: 4px;
-}
-
-tbody td, thead th {
-  margin-left: 1em;
-}
-.navbar {
-  border-bottom-color: black !important;
-  border-bottom: black;
-  border-bottom-style: double !important;
-  border-bottom-width: medium !important;
-}
+// tr {
+//   padding: 4px;
+// }
+//
+// tbody td, thead th {
+//   margin-left: 1em;
+// }
 #googlemap {
     text-align: center;
     height: 500px;
@@ -33,8 +27,4 @@ tbody td, thead th {
 #form {
   padding-left: 2em;
   color: #00000;
-}
-.footer {
-  margin: 2em;
-  text-align: center;
 }

@@ -1,100 +1,92 @@
-.jumbotron{
-    h1 {
-    text-align: center;
-    }
-    button {
-        text-align: center;
-    }
-}
-table {
-        width: 100%;
-    }
-
-thead, tbody, tr, td, th { display: block; }
-
-tr:after {
-    content: ' ';
-    display: block;
-    visibility: hidden;
-    clear: both;
-}
-
-tbody {
-    // height: 35em;
-    overflow-y: auto;
-}
-
-thead {
-    /* fallback */
-}
-
-
-tbody td, thead th {
-    width: 14%;
-    float: left;
-    border-bottom: unset;
-}
-
-
-.panel {
-    min-width: 768px;
-    margin: auto 60px;
-}
-
-#datepicker {
-  width: 600px;
-}
-#information {
-    line-height:30px;
-    background-color: #eeeeee;
-    height:300px;
-    width:200px;
-    float:left;
-    padding:5px;
-}
-
-#location {
-    display:block;
-}
-
-#donor {
-    display:block;
-}
-
-#bio {
-    padding-top: 7px;
-    padding-bottom: 19em;
-    padding-left: 15em;
-}
-
-.center-block{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-label {
-    display: block;
-}
-
-// .form-control{
-//     width: 600px;
+// table {
+//         width: 100%;
+//     }
+//
+// thead, tbody, tr, td, th { display: block; }
+//
+// tr:after {
+//     content: ' ';
+//     display: block;
+//     visibility: hidden;
+//     clear: both;
 // }
-
-textarea {
-    height: 200px;
-    width: 400px;
-}
-
-.panel-heading {
-    text-align: center;
-    font-weight: bold;
-}
-
-.button_to{
-    text-align: center;
-}
-
-#googlemap {
-    margin-bottom: 10em;
-}
+//
+// tbody {
+//     // height: 35em;
+//     overflow-y: auto;
+// }
+//
+// thead {
+//     /* fallback */
+// }
+//
+//
+// tbody td, thead th {
+//     width: 14%;
+//     float: left;
+//     border-bottom: unset;
+// }
+//
+//
+// .panel {
+//     min-width: 768px;
+//     margin: auto 60px;
+// }
+//
+// #datepicker {
+//   width: 600px;
+// }
+// #information {
+//     line-height:30px;
+//     background-color: #eeeeee;
+//     height:300px;
+//     width:200px;
+//     float:left;
+//     padding:5px;
+// }
+//
+// #location {
+//     display:block;
+// }
+//
+// #donor {
+//     display:block;
+// }
+//
+// #bio {
+//     padding-top: 7px;
+//     padding-bottom: 19em;
+//     padding-left: 15em;
+// }
+//
+// .center-block{
+//     display: block;
+//     margin-left: auto;
+//     margin-right: auto;
+// }
+//
+// label {
+//     display: block;
+// }
+//
+// // .form-control{
+// //     width: 600px;
+// // }
+//
+// textarea {
+//     height: 200px;
+//     width: 400px;
+// }
+//
+// .panel-heading {
+//     text-align: center;
+//     font-weight: bold;
+// }
+//
+// .button_to{
+//     text-align: center;
+// }
+//
+// #googlemap {
+//     margin-bottom: 10em;
+// }

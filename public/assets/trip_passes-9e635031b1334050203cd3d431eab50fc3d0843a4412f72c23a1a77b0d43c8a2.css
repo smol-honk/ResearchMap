@@ -1,0 +1,18 @@
+/* line 5, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/trip_passes.scss */
+.picker__table tbody {
+  height: unset;
+}
+
+/* line 11, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/trip_passes.scss */
+.shorthead th {
+  width: 9%;
+}
+/* line 14, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/trip_passes.scss */
+.shorthead td {
+  width: 9%;
+}
+
+/* line 19, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/trip_passes.scss */
+.acceptgroup {
+  display: -webkit-inline-box;
+}

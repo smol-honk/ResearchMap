@@ -12,25 +12,23 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap.min
 //= require jquery-ui
 //= require jquery.geocomplete
 //= require picker
 //= require picker.date
 //= require picker.time
-//= require d3
 //= require turbolinks
 //= require_tree .
 
 
 $(function() {
-$("#geo-input").geocomplete();
+	$("#geo-input").geocomplete();
 });
 
-$(function () {
-    $('#datepicker').datepicker({
-        todayBtn: "linked",
-        autoclose: true,
-        todayHighlight: true
-    });
+$(function() {
+	$('#datepicker').datepicker({
+		todayBtn: "linked",
+		autoclose: true,
+		todayHighlight: true
+	});
 });

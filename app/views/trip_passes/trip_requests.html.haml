@@ -21,6 +21,7 @@
           %td= translate_bool(pass.researcher_accept)
           - if pass.researcher_accept
             %td
+              = button_to "accept", trip_pass_accept_path(pass), method: :post, class: :'btn btn-primary'
               // Add a comment box for when they decline
               = link_to "decline", trip_pass_decline_path(pass), method: :post, class: :'btn btn-danger', "data-target" => "##{pass.id}", "data-toggle" => "modal", remote: :true
               / Modal
@@ -48,7 +49,7 @@
             %td{width: :"30%"}
               .btn-group.acceptgroup
                 = button_to "accept", trip_pass_accept_path(pass), method: :post, class: :'btn btn-primary'
-                = button_to "decline", trip_pass_decline_path(pass), method: :post, class: :'btn btn-danger', "data-target" => "#myModal", "data-toggle" => "modal", remote: :true
+                = button_to "decline", trip_pass_decline_path(pass), method: :post, class: :'btn btn-danger', "data-target" => "##{pass.id}", "data-toggle" => "modal", remote:true
 
 
   .page-header

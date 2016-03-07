@@ -1,0 +1,11 @@
+/* line 7, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/activity.scss */
+.activity {
+  border-bottom: solid 1px #CCC;
+  padding: 16px 0;
+}
+/* line 10, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/activity.scss */
+.activity em {
+  color: #777;
+  font-size: 12px;
+  padding-left: 5px;
+}

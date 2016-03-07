@@ -24,7 +24,7 @@ body {
 }
 
 .listings {
-  height:85.4%;
+  height:81%;
   overflow:auto;
   padding-bottom:60px;
 
@@ -39,19 +39,19 @@ body {
 .listings .item:last-child { border-bottom:none; }
 .listings .item .title {
   display:block;
-  color:slategray;
+  color:navy;
   font-weight:700;
   margin-bottom: 3px;
 }
 
 .listings .item .personTitle {
   padding-bottom: 5px;
-  color: green;
+  color: purple;
 }
 .listings .item .title small { font-weight:400; }
 .listings .item.active .title,
 .listings .item .title:hover {
-    color: #20B2AA;
+    color: #8f1124;
     text-decoration: none;
 }
 .listings .item.active {
@@ -68,7 +68,7 @@ body {
   background:none;
 }
 ::-webkit-scrollbar-thumb {
-  background:cadetblue;
+  background:#395180;
   border-radius:8px;
 }
 

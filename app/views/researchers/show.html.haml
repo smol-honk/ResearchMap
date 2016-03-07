@@ -1,9 +1,9 @@
 .container
-  .row.profile.panel
+  .row.profile.panel#profilePanel
     .col-md-4.bg_blur
+      = image_tag(@researcher.avatar.thumb.url, class: :'img-rounded picture hidden-xs')
+      = image_tag(@researcher.avatar.thumb.url, class: :'img-rounded visible-xs picture_mob')
     .col-md-8.col-xs-12.info-col
-      = image_tag(@researcher.avatar.url, class: :'img-rounded picture hidden-xs')
-      = image_tag(@researcher.avatar.url, class: :'img-rounded visible-xs picture_mob')
       .header
         %h2
           = @researcher.first_name
@@ -13,22 +13,22 @@
           - else
             - if user_signed_in?
               - if current_user.follows?(@researcher)
-                = link_to researcher_unfollow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-inverse btn-lg' do
+                = link_to researcher_unfollow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-red btn-lg' do
                   %i.fa.fa-user-times.fa-lg
                   Unfollow
               - else
-                = link_to researcher_follow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-inverse btn-lg' do
+                = link_to researcher_follow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-red btn-lg' do
                   %i.fa.fa-user-plus.fa-lg
                   Follow
             - elsif researcher_signed_in?
               - if current_researcher == @researcher
 
               - elsif current_researcher.follows?(@researcher)
-                = link_to researcher_unfollow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-inverse btn-lg' do
+                = link_to researcher_unfollow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-red btn-lg' do
                   %i.fa.fa-user-times.fa-lg
                   Unfollow
               - else
-                = link_to researcher_follow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-inverse btn-lg' do
+                = link_to researcher_follow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-red btn-lg' do
                   %i.fa.fa-user-plus.fa-lg
                   Follow
             - else
@@ -45,18 +45,18 @@
         %span
           = @researcher.headline
 
-      .btn-group.btn-block
-        = link_to researcher_following_path(@researcher), role: :"button", method: :get, class: :'button btn btn-inverse btn-lg' do
+      .btn-group.btn-block#buttons
+        = link_to researcher_following_path(@researcher), role: :"button", method: :get, class: :'button btn btn-red btn-lg' do
           %i.fa.fa-users.fa-lg
           Following
           = @following
 
-        = link_to researcher_followers_path(@researcher), role: :"button", method: :get, class: :'button btn btn-inverse btn-lg' do
+        = link_to researcher_followers_path(@researcher), role: :"button", method: :get, class: :'button btn btn-red btn-lg' do
           %i.fa.fa-users.fa-lg
           Followers
           = @followers
 
-        = link_to researcher_likes_path(@researcher), role: :"button", method: :get, class: :'button btn btn-inverse btn-lg' do
+        = link_to researcher_likes_path(@researcher), role: :"button", method: :get, class: :'button btn btn-red btn-lg' do
           %i.fa.fa-users.fa-lg
           Likes
           = @likes.count

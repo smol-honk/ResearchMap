@@ -12,6 +12,10 @@ Rails.application.routes.draw do
       patch '/user/confirmation' => 'confirmations#update', :via => :patch, :as => :update_user_confirmation
   end
 
+  as :researcher do
+      patch '/researcher/confirmation' => 'confirmations#update', :via => :patch, :as => :update_researcher_confirmation
+  end
+
   resources :users do
     get 'following', to: 'follow#following'
     get 'likes', to: 'likes#index', as: :likes
