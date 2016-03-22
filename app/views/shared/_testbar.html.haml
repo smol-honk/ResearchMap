@@ -64,9 +64,10 @@
                 %li
                   = link_to "Create a Trip Pass!", new_trip_pass_path, data: {'no-turbolink': true}
               %li
-                =link_to "Conversations", conversations_path
-                %span.badge
-                  = @messages_count
+                =link_to conversations_path do
+                  Conversations
+                  %span.badge
+                    = @messages_count
               %li
                 = link_to "Sign Out", destroy_user_session_path, method: :delete
             -elsif researcher_signed_in?

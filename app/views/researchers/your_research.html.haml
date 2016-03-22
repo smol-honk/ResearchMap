@@ -1,28 +1,31 @@
 .container
   .jumbotron
     %h1 Your Research
-  %table.table
-    %thead
-      %tr
-        %th
-          = sort_link(@search, :name, "Name")
-        %th
-          = sort_link(@search, :location, "Location")
-        %th
-          = sort_link(@search, :dateStart, "Research Started")
-        %th
-          = sort_link(@search, :dateEnd, "Research Ended")
-        %th
-          Edit
-        %th
-          Delete
-    %tbody#research
-      - @researches.each do |research|
+  -if @researches.blank?
+    %h2 You haven't created any research!
+  -else
+    %table.table
+      %thead
         %tr
-          %td
-            = link_to research.name, research
-          %td= research.location
-          %td= research.dateStart
-          %td= research.dateEnd
-          %td= button_to 'Edit', edit_research_path(research), class: "btn btn-primary", method: :get
-          %td= button_to 'Delete', research, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"
+          %th
+            = sort_link(@search, :name, "Name")
+          %th
+            = sort_link(@search, :location, "Location")
+          %th
+            = sort_link(@search, :dateStart, "Research Started")
+          %th
+            = sort_link(@search, :dateEnd, "Research Ended")
+          %th
+            Edit
+          %th
+            Delete
+      %tbody#research
+        - @researches.each do |research|
+          %tr
+            %td
+              = link_to research.name, research
+            %td= research.location
+            %td= research.dateStart
+            %td= research.dateEnd
+            %td= button_to 'Edit', edit_research_path(research), class: "btn btn-primary", method: :get
+            %td= button_to 'Delete', research, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"

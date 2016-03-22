@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   protect_from_forgery with: :exception
 
-  before_filter :set_global_search_variable, :mailCount
+  before_filter :set_global_search_variable, :mail_count
 
   def set_global_search_variable
     @researches = Research.all
@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def mailCount
+  def mail_count
     if user_signed_in?
       @messages_count = current_user.mailbox.inbox({:read => false}).count
     elsif researcher_signed_in?

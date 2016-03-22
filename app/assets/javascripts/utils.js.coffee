@@ -1,0 +1,2 @@
+@booleanFormat = (boolean) ->
+  boolean.toString()

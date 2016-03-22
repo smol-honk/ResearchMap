@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224190434) do
+ActiveRecord::Schema.define(version: 20160321232732) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -170,8 +170,14 @@ ActiveRecord::Schema.define(version: 20160224190434) do
     t.string   "headline",               limit: 255
     t.string   "name",                   limit: 255
     t.string   "phone_number",           limit: 255
+    t.string   "confirmation_token",     limit: 255
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email",      limit: 255
+    t.date     "locked_at"
   end
 
+  add_index "researchers", ["confirmation_token"], name: "index_researchers_on_confirmation_token", unique: true, using: :btree
   add_index "researchers", ["email"], name: "index_researchers_on_email", unique: true, using: :btree
   add_index "researchers", ["reset_password_token"], name: "index_researchers_on_reset_password_token", unique: true, using: :btree
 
@@ -217,7 +223,7 @@ ActiveRecord::Schema.define(version: 20160224190434) do
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.boolean  "researcher_accept",   limit: 1,   default: false
-    t.boolean  "admin_approval",      limit: 1
+    t.boolean  "admin_approval",      limit: 1,   default: false
     t.integer  "research_id",         limit: 4
     t.boolean  "researcher_declined", limit: 1,   default: false
   end

@@ -17,8 +17,9 @@ class TripPassesController < ApplicationController
 
   def trip_requests
     if researcher_signed_in?
-      @trip_passes = TripPass.where(researcher: current_researcher).where(researcher_declined: false)
+      @trip_passes = TripPass.where(researcher: current_researcher).where(researcher_declined: false).where(researcher_accept: false)
       @declined_trips = TripPass.where(researcher_declined: true)
+      @accepted_trips = TripPass.where(researcher_accept: true)
     else
       redirect_to root_url, alert: "You don't have access to this page!"
     end
@@ -27,6 +28,24 @@ class TripPassesController < ApplicationController
   # GET /trip_passes/1
   # GET /trip_passes/1.json
   def show
+  end
+
+  def accepted_cancel
+    @trip_pass = TripPass.find(params[:trip_pass_id])
+    if @current == @trip_pass.researcher
+      @trip_pass.accepted_cancel()
+    else
+      redirect_to root_url, alert: "You don't have permission to modify this trip pass!"
+    end
+  end
+
+  def declined_cancel
+    @trip_pass = TripPass.find(params[:trip_pass_id])
+    if @current == @trip_pass.researcher
+      @trip_pass.declined_cancel()
+    else
+      redirect_to root_url, alert: "You don't have permission to modify this trip pass!"
+    end
   end
 
   def accept

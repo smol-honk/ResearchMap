@@ -16,8 +16,18 @@ class TripPass < ActiveRecord::Base
       self.update_attribute(:researcher_declined, true)
   end
 
+  def accepted_cancel
+    self.update_attribute(:researcher_declined, false)
+    self.update_attribute(:researcher_accept, true)
+  end
+
+  def declined_cancel
+    self.update_attribute(:researcher_declined, false)
+    self.update_attribute(:researcher_accept, false)
+  end
+
   def accept
     self.update_attribute(:researcher_accept, true)
   end
-  
+
 end

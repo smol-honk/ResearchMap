@@ -6,11 +6,11 @@ class User < ActiveRecord::Base
   acts_as_liker
   acts_as_follower
   belongs_to :role
-  has_and_belongs_to_many :researchers
-  has_and_belongs_to_many :researches
+  has_many :researchers
+  has_many :researches
   before_save :assign_role
   before_create :name
-  has_and_belongs_to_many :trip_pass
+  belongs_to :trip_pass
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -52,20 +52,15 @@ class User < ActiveRecord::Base
   end
 
   def password_required?
-    # Password is required if it is being set, but not for new records
-    if !persisted?
-      false
-    else
-      !password.nil? || !password_confirmation.nil?
-    end
+    super if confirmed?
   end
 
   def password_match?
-      self.errors[:password] << "can't be blank" if password.blank?
-      self.errors[:password_confirmation] << "can't be blank" if password_confirmation.blank?
-      self.errors[:password_confirmation] << "does not match password" if password != password_confirmation
-      password == password_confirmation && !password.blank?
-    end
+    self.errors[:password] << "can't be blank" if password.blank?
+    self.errors[:password_confirmation] << "can't be blank" if password_confirmation.blank?
+    self.errors[:password_confirmation] << "does not match password" if password != password_confirmation
+    password == password_confirmation && !password.blank?
+  end
 
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|

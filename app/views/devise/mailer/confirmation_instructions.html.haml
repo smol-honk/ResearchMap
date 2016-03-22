@@ -1,5 +1,4 @@
 %p
   Welcome #{@resource.name}!
 %p You can confirm your account email through the link below:
-%p= link_to 'Confirm my account', user_confirmation_url(confirmation_token: @token)
-%p
+%p= link_to "Confirm", confirmation_url(@resource, confirmation_token: @token)

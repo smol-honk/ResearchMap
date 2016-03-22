@@ -2,6 +2,7 @@
   .jumbotron
     %h1 New Trip Pass
 
-  = render 'form'
+  = react_component 'PassForm', {data: @trip_pass}
+
 
   = link_to 'Back', trip_passes_path

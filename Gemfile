@@ -14,6 +14,7 @@ gem 'carrierwave-crop'
 gem 'turbolinks'
 gem "iconv", "~> 1.0.3"
 gem 'geocoder'
+gem 'react-rails', '~> 1.6.0'
 gem 'geocomplete_rails'
 gem 'mapbox-rails'
 gem 'cancancan'

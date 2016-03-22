@@ -1,19 +1,19 @@
 Rails.application.routes.draw do
   resources :trip_passes
   devise_for :users, :path_prefix => 'profile', :controllers => { :confirmations => "confirmations" }
+  devise_for :researchers, :path_prefix => 'profile', :controllers => { :confirmations => "confirmations" }
   resources :users
 
-  devise_for :researchers, :path_prefix => 'profile'
+  # devise_for :researchers, :path_prefix => 'profile'
   resources :researchers
 
   resources :users, :researchers, :researches
 
   as :user do
-      patch '/user/confirmation' => 'confirmations#update', :via => :patch, :as => :update_user_confirmation
+    patch "/user/confirm" => "confirmations#confirm", :as => :user_confirm
   end
-
   as :researcher do
-      patch '/researcher/confirmation' => 'confirmations#update', :via => :patch, :as => :update_researcher_confirmation
+    patch "/researcher/confirm" => "confirmations#confirm", :as => :researcher_confirm
   end
 
   resources :users do
@@ -57,6 +57,8 @@ Rails.application.routes.draw do
     collection {post :import}
     post 'accept', to: 'trip_passes#accept', as: :accept
     post 'decline', to: 'trip_passes#decline', as: :decline
+    post 'accepted_cancel', to: 'trip_passes#accepted_cancel', as: :accepted_cancel
+    post 'declined_cancel', to: 'trip_passes#declined_cancel', as: :declined_cancel
   end
 
   resources :people do

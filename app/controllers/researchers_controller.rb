@@ -58,7 +58,7 @@ class ResearchersController < ApplicationController
     @researches = Research.where(researcher_id:@researcher.id)
   end
 
-  def user_params
+  def researcher_params
     params.require(:researcher).permit(:email, :password, :password_confirmation, :first_name, :last_name, :bio, :headline, :avatar, :avatar_cache, :remove_avatar, :phone_number, :name, :current_location, :longitude, :latitude, :title, :available, :week, :day, :day_available, :weekDateStart, :weekDateEnd)
   end
 end

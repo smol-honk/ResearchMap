@@ -1,12 +1,10 @@
 class Researcher < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
-  has_and_belongs_to_many :users
-  has_and_belongs_to_many :researchers
-  has_and_belongs_to_many :trip_pass
+  belongs_to :users
+  belongs_to :researchers
+  belongs_to :trip_pass
   has_many :researches, dependent: :destroy
   before_create :name
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   acts_as_messageable
   acts_as_mentionable
   acts_as_liker
@@ -14,7 +12,7 @@ class Researcher < ActiveRecord::Base
   acts_as_follower
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable
 
   geocoded_by :current_location
   after_validation :geocode, :if => :current_location_changed?
@@ -71,11 +69,11 @@ class Researcher < ActiveRecord::Base
   end
 
   def password_match?
-      self.errors[:password] << "can't be blank" if password.blank?
-      self.errors[:password_confirmation] << "can't be blank" if password_confirmation.blank?
-      self.errors[:password_confirmation] << "does not match password" if password != password_confirmation
-      password == password_confirmation && !password.blank?
-    end
+    self.errors[:password] << "can't be blank" if password.blank?
+    self.errors[:password_confirmation] << "can't be blank" if password_confirmation.blank?
+    self.errors[:password_confirmation] << "does not match password" if password != password_confirmation
+    password == password_confirmation && !password.blank?
+  end
 
   def mailboxer_email(object)
     return self.email

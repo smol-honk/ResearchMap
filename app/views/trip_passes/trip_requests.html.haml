@@ -1,71 +1,94 @@
 .container
   .jumbotron
     %h1 Trip Requests
-
-  %table.table-striped.table-reponsive.table-hover
-    %thead
-      %tr
-        %th Name
-        %th Location
-        %th Arrival
-        %th Departure
-        %th Accepted?
-        %th{:colspan => "3"}
-    %tbody
-      - @trip_passes.each do |pass|
-        %tr
-          %td= pass.user.name
-          %td= pass.location
-          %td= pass.dateStart
-          %td= pass.dateEnd
-          %td= translate_bool(pass.researcher_accept)
-          - if pass.researcher_accept
-            %td
-              = button_to "accept", trip_pass_accept_path(pass), method: :post, class: :'btn btn-primary'
-              // Add a comment box for when they decline
-              = link_to "decline", trip_pass_decline_path(pass), method: :post, class: :'btn btn-danger', "data-target" => "##{pass.id}", "data-toggle" => "modal", remote: :true
-              / Modal
-              .modal.fade{id: :"#{pass.id}", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-                .modal-dialog
-                  .modal-content
-                    .modal-header
-                      %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-                        %span{"aria-hidden" => "true"} ×
-                      %h4#myModalLabel.modal-title Send a message about why you can't
-                    .modal-body
-                      = form_tag messages_path, method: :post do
-                        .form-group
-                          = hidden_field_tag('recipients', pass.user.email)
-                        .form-group
-                          = hidden_field_tag('message[subject]', "Regarding your recent Trip Request with #{pass.researcher.name}")
-                        .form-group
-                          = label_tag 'message[body]', 'Message'
-                          = text_area_tag 'message[body]', nil, cols: 3, height: :'40', class: 'form-control', required: true
-                        .modal-footer
-                          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-                          = submit_tag 'Send', class: 'btn btn-primary'
-
-          -else
-            %td{width: :"30%"}
-              .btn-group.acceptgroup
-                = button_to "accept", trip_pass_accept_path(pass), method: :post, class: :'btn btn-primary'
-                = button_to "decline", trip_pass_decline_path(pass), method: :post, class: :'btn btn-danger', "data-target" => "##{pass.id}", "data-toggle" => "modal", remote:true
-
-
-  .page-header
-    %h1 Declined Trip Passes
-  %table.table-striped.table-reponsive.table-hover
-    %thead
-      %tr
-        %th Name
-        %th Location
-        %th Arrival
-        %th Departure
-        %th{:colspan => "3"}
-    %tbody
-      - @declined_trips.each do |pass|
-        %tr
-          %td= pass.user.name
-          %td= pass.location
-          %td= pass.dateStart
-          %td= pass.dateEnd
+  -if @trip_passes.blank?
+    %h2 You don't have any Trip Requests!
+  -else
+    = react_component 'TripPasses', {data: @trip_passes}
+    -# %table.table-striped.table-reponsive.table-hover
+    -#   %thead
+    -#     %tr
+    -#       %th Name
+    -#       %th Location
+    -#       %th Arrival
+    -#       %th Departure
+    -#       %th Accepted?
+    -#       %th
+    -#       %th{:colspan => "3"}
+    -#   %tbody
+    -#     - @trip_passes.each do |pass|
+    -#       %tr
+    -#         %td= pass.user.name
+    -#         %td= pass.location
+    -#         %td= pass.dateStart
+    -#         %td= pass.dateEnd
+    -#         %td= translate_bool(pass.researcher_accept)
+    -#         - if pass.researcher_accept
+    -#           %td
+    -#             = button_to "accept", trip_pass_accept_path(pass), method: :post, class: :'btn btn-primary'
+    -#             // Add a comment box for when they decline
+    -#             = link_to "decline", trip_pass_decline_path(pass), method: :post, class: :'btn btn-danger', "data-target" => "##{pass.id}", "data-toggle" => "modal", remote: :true
+    -#             / Modal
+    -#             .modal.fade{id: :"#{pass.id}", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    -#               .modal-dialog
+    -#                 .modal-content
+    -#                   .modal-header
+    -#                     %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+    -#                       %span{"aria-hidden" => "true"} ×
+    -#                     %h4#myModalLabel.modal-title Send a message about why you can't
+    -#                   .modal-body
+    -#                     = form_tag messages_path, method: :post do
+    -#                       .form-group
+    -#                         = hidden_field_tag('recipients', pass.user.email)
+    -#                       .form-group
+    -#                         = hidden_field_tag('message[subject]', "Regarding your recent Trip Request with #{pass.researcher.name}")
+    -#                       .form-group
+    -#                         = label_tag 'message[body]', 'Message'
+    -#                         = text_area_tag 'message[body]', nil, cols: 3, height: :'40', class: 'form-control', required: true
+    -#                       .modal-footer
+    -#                         -# %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Cancel
+    -#                         = button_to "Cancel", trip_pass_cancel_path(pass), method: :post, class: :'btn btn-primary', "data-dismiss": :"modal"
+    -#                         = submit_tag 'Send', class: 'btn btn-primary'
+    -#
+    -#         -else
+    -#           %td{width: :"30%"}
+    -#             .btn-group.acceptgroup
+    -#               = button_to "accept", trip_pass_accept_path(pass), method: :post, class: :'btn btn-primary'
+    -#               = button_to "decline", trip_pass_decline_path(pass), method: :post, class: :'btn btn-danger', "data-target" => "##{pass.id}", "data-toggle" => "modal", remote:true
+    -#
+    -# .page-header
+    -#   %h1 Accepted Trip Passes
+    -# %table.table-striped.table-reponsive.table-hover
+    -#   %thead
+    -#     %tr
+    -#       %th Name
+    -#       %th Location
+    -#       %th Arrival
+    -#       %th Departure
+    -#       %th{:colspan => "3"}
+    -#   %tbody
+    -#     - @accepted_trips.each do |pass|
+    -#       %tr
+    -#         %td= pass.user.name
+    -#         %td= pass.location
+    -#         %td= pass.dateStart
+    -#         %td= pass.dateEnd
+    -#
+    -#
+    -# .page-header
+    -#   %h1 Declined Trip Passes
+    -# %table.table-striped.table-reponsive.table-hover
+    -#   %thead
+    -#     %tr
+    -#       %th Name
+    -#       %th Location
+    -#       %th Arrival
+    -#       %th Departure
+    -#       %th{:colspan => "3"}
+    -#   %tbody
+    -#     - @declined_trips.each do |pass|
+    -#       %tr
+    -#         %td= pass.user.name
+    -#         %td= pass.location
+    -#         %td= pass.dateStart
+    -#         %td= pass.dateEnd
