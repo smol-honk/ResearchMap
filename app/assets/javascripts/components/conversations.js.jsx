@@ -1,17 +1,16 @@
-function convertUTCDateToLocalDate(date) {
-    var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
+// TODO: Add Websocket to chat so it live updates
 
+function convertUTCDateToLocalDate(date) {
+    var newDate = new Date(date.getTime()+ date.getTimezoneOffset() * 60 * 1000);
     var offset = date.getTimezoneOffset() / 60;
     var hours = date.getHours();
-
     newDate.setHours(hours - offset);
-
     return newDate;
 }
 
 var Conversation = React.createClass({
   getInitialState: function (){
-    return {data: []};
+    return {data: [], button: 'Send Message'};
   },
   componentDidMount: function (){
     this.loadMessagesFromServer();
@@ -31,12 +30,14 @@ var Conversation = React.createClass({
     });
   },
   handleMessageSubmit: function(message){
+    this.setState({button: 'Sending...'});
     $.ajax({
       url: Routes.reply_conversation_path(this.props.id),
       type: 'POST',
       data: {body: message},
       success: function(data){
-          alert("success!");
+          // alert("success!");
+          this.setState({button: 'Send Message'});
           this.loadMessagesFromServer();
       }.bind(this),
       error: function(xhr, status, err){
@@ -62,7 +63,7 @@ var Conversation = React.createClass({
             </div>
           </div>
         </div>
-          <Reply onReplySubmit = {this.handleMessageSubmit}/>
+          <Reply button = {this.state.button} onReplySubmit = {this.handleMessageSubmit}/>
       </div>
     )
   }
@@ -126,7 +127,7 @@ var Reply = React.createClass({
       <div className='form-group'>
         <form className = "replyForm" onSubmit = {this.handleSubmit}>
           <textarea rows = '4' required = "true" cols='50' className = 'form-control replyBody' type = 'text' id = "body" name = "body" placeholder = "Reply..." value = {this.state.text} onChange = {this.handleTextChange}/>
-          <input className = 'btn btn-default' type = 'submit' value = 'Send Message'/>
+          <button className = 'btn btn-default' type = 'submit'>{this.props.button}</button>
         </form>
       </div>
     )

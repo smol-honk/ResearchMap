@@ -19,7 +19,7 @@ class ConversationsController < ApplicationController
     @convo = @conversation.receipts_for(@current)
     respond_to do |format|
       format.html # show.html.haml
-      format.json { render json: @convo.map{|u| u.message.as_json(include: { sender: { only: [:name, :avatar] } })} }
+      format.json { render json: @convo.map{|u| u.message.as_json(include: { sender: { only: [:name, :avatar] } })}}
     end
   end
 

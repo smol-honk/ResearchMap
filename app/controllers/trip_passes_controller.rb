@@ -20,6 +20,10 @@ class TripPassesController < ApplicationController
       @trip_passes = TripPass.where(researcher: current_researcher).where(researcher_declined: false).where(researcher_accept: false)
       @declined_trips = TripPass.where(researcher_declined: true)
       @accepted_trips = TripPass.where(researcher_accept: true)
+      respond_to do |format|
+        format.html # trip_requests.html.haml
+        format.json { render json: @trip_passes.map{|u| u.as_json(include: { researcher: { only: [:name] }, user: { only: [:name] } } ) } }
+      end
     else
       redirect_to root_url, alert: "You don't have access to this page!"
     end
