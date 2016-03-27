@@ -18,6 +18,7 @@ gem 'react-rails', '~> 1.6.0'
 gem 'geocomplete_rails'
 gem 'mapbox-rails'
 gem 'cancancan'
+gem "js-routes"
 gem 'figaro'
 gem 'rolify'
 gem 'rmagick'

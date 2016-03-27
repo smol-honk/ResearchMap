@@ -16,12 +16,21 @@ class ConversationsController < ApplicationController
   end
 
   def show
+    @convo = @conversation.receipts_for(@current)
+    respond_to do |format|
+      format.html # show.html.haml
+      format.json { render json: @convo.map{|u| u.message.as_json(include: { sender: { only: [:name, :avatar] } })} }
+    end
+  end
+
+  def info
   end
 
   def reply
     @current.reply_to_conversation(@conversation, params[:body])
-    flash[:success] = 'Reply sent'
-    redirect_to conversation_path(@conversation)
+    respond_to do |format|
+      format.js {render :nothing => true}
+    end
   end
 
   def destroy

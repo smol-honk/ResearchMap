@@ -2,27 +2,6 @@
   %p
     Chatting with
     \#{render 'conversations/participants', conversation: @conversation}
-  .panel.panel-default
-    .panel-heading= @conversation.subject
-    .panel-body
-      .messages
-        - @conversation.receipts_for(@current).each do |receipt|
-          .media
-            - message = receipt.message
-            .pull-left
-              - if message.sender.nil?
-              - else
-                = gravatar_for message.sender, message.sender.first_name
-            .media-body
-              %h6.media-heading
-                - if message.sender.nil?
-                - else
-                  = message.sender.first_name
-                  says at #{message.created_at.localtime.strftime("%-d %B %Y, %H:%M:%S")}
-              - if message.sender.nil?
-              - else
-                = message.body
-  = form_tag reply_conversation_path(@conversation), method: :post do
-    .form-group
-      = text_area_tag 'body', nil, cols: 4, class: 'form-control replyBody', placeholder: 'Reply here...', required: true
-    = submit_tag "Send Message", class: 'btn btn-primary'
+    = react_component('Conversation', {:convo => @conversation, :id => @conversation.id, :subject => @conversation.subject, :data => @convo.map{|u| u.message.as_json(include: { sender: { only: [:name, :avatar] } })}})
+
+  -# -raise 'error'
