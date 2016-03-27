@@ -1,0 +1,216 @@
+/* line 6, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+/* line 9, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+* {
+  box-sizing: border-box;
+}
+
+/* line 15, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.line-clamp {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+/* line 22, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.panel.panel-default {
+  margin: 0px;
+}
+
+/* line 26, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.listings {
+  height: 81%;
+  overflow: auto;
+  padding-bottom: 60px;
+}
+
+/* line 33, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.listings .item {
+  display: block;
+  border-bottom: 1px solid #eee;
+  padding: 10px;
+  text-decoration: none;
+}
+
+/* line 39, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.listings .item:last-child {
+  border-bottom: none;
+}
+
+/* line 40, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.listings .item .title {
+  display: block;
+  color: navy;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+/* line 47, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.listings .item .personTitle {
+  padding-bottom: 5px;
+  color: maroon;
+}
+
+/* line 51, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.listings .item .title small {
+  font-weight: 400;
+}
+
+/* line 52, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.listings .item.active .title,
+.listings .item .title:hover {
+  color: #8f1124;
+  text-decoration: none;
+}
+
+/* line 57, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.listings .item.active {
+  background-color: #f8f8f8;
+}
+
+/* line 61, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 3px;
+  border-left: 0;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* line 67, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+/* line 70, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+::-webkit-scrollbar-thumb {
+  background: #395180;
+  border-radius: 8px;
+}
+
+/* line 75, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.clearfix {
+  display: block;
+}
+
+/* line 76, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.clearfix:after {
+  content: '.';
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+/* line 90, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.leaflet-container a {
+  background-color: transparent;
+}
+
+/* line 94, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.leaflet-container h3 {
+  color: slategray;
+}
+
+/* line 103, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+#backToSize {
+  background-color: transparent;
+  text-decoration: none;
+}
+
+/* line 107, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.sidebar {
+  border-radius: 6px;
+  z-index: 1000;
+  position: absolute;
+  width: 22.5%;
+  height: 500px;
+  left: 5%;
+  min-width: 195px;
+  background-color: lightgray;
+}
+
+/* line 118, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.heading {
+  text-align: center;
+}
+
+/* line 123, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+#map {
+  border-radius: 6px;
+  margin: 0;
+  position: relative;
+  height: 500px;
+  left: 25.5%;
+  width: 75%;
+}
+/* line 130, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+#map .leaflet-popup-tip {
+  background: transparent;
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+}
+
+/* line 136, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+#searchanthro {
+  padding-top: 20px;
+}
+
+/* line 141, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.leaflet-control-mapbox-geocoder-results a:hover {
+  width: 180px !important;
+}
+
+/* line 147, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.menu-ui {
+  background: #fff;
+  position: absolute;
+  top: 23em;
+  left: 72.5em;
+  z-index: 1;
+  border-radius: 3px;
+  width: 120px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+/* line 157, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.menu-ui a {
+  font-size: 13px;
+  color: #404040;
+  display: block;
+  margin: 0;
+  padding: 0;
+  padding: 10px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+/* line 167, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.menu-ui a:first-child {
+  border-radius: 3px 3px 0 0;
+}
+
+/* line 170, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.menu-ui a:last-child {
+  border: none;
+  border-radius: 0 0 3px 3px;
+}
+
+/* line 174, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.menu-ui a:hover {
+  background: #f8f8f8;
+  color: #404040;
+  text-decoration: none;
+}
+
+/* line 179, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/welcome.scss */
+.menu-ui a.active,
+.menu-ui a.active:hover {
+  background: slategray;
+  color: #FFF;
+  text-decoration: none;
+}

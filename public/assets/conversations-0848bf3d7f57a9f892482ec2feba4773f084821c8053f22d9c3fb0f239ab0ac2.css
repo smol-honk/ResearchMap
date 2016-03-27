@@ -1,0 +1,21 @@
+/* line 4, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/conversations.scss */
+.replyBody {
+  height: 10em;
+}
+
+/* line 8, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/conversations.scss */
+.startBtn {
+  margin-left: 15px;
+  width: 262px;
+}
+
+/* line 13, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/conversations.scss */
+#mailSec {
+  background-color: gainsboro;
+  border-radius: 10px;
+}
+
+/* line 18, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/conversations.scss */
+.message {
+  padding: 2em;
+}
