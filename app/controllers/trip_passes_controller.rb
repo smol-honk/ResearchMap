@@ -15,11 +15,33 @@ class TripPassesController < ApplicationController
     end
   end
 
+  def getDeclinedPasses
+    if researcher_signed_in?
+      @declined_trips = TripPass.where(researcher: current_researcher).where(researcher_declined: true)
+      respond_to do |format|
+        format.json { render json: @declined_trips.map{|u| u.as_json(include: { researcher: { only: [:name] }, user: { only: [:name] } } ) } }
+      end
+    else
+      redirect_to root_url, alert: "You don't have access to this page!"
+    end
+  end
+
+  def getAcceptedPasses
+    if researcher_signed_in?
+      @accepted_trips = TripPass.where(researcher: current_researcher).where(researcher_accept: true)
+      respond_to do |format|
+        format.json { render json: @accepted_trips.map{|u| u.as_json(include: { researcher: { only: [:name] }, user: { only: [:name] } } ) } }
+      end
+    else
+      redirect_to root_url, alert: "You don't have access to this page!"
+    end
+  end
+
   def trip_requests
     if researcher_signed_in?
       @trip_passes = TripPass.where(researcher: current_researcher).where(researcher_declined: false).where(researcher_accept: false)
-      @declined_trips = TripPass.where(researcher_declined: true)
-      @accepted_trips = TripPass.where(researcher_accept: true)
+      @declined_trips = TripPass.where(researcher: current_researcher).where(researcher_declined: true)
+      @accepted_trips = TripPass.where(researcher: current_researcher).where(researcher_accept: true)
       respond_to do |format|
         format.html # trip_requests.html.haml
         format.json { render json: @trip_passes.map{|u| u.as_json(include: { researcher: { only: [:name] }, user: { only: [:name] } } ) } }
@@ -57,7 +79,9 @@ class TripPassesController < ApplicationController
     if @current == @trip_pass.researcher
       AdminNotifyMailer.accepted_trip_pass(@trip_pass).deliver_now
       @trip_pass.accept()
-      redirect_to trip_requests_path
+      respond_to do |format|
+        format.js {render :nothing => true}
+      end
     else
       redirect_to root_url, alert: "You don't have permission to approve this trip pass!"
     end
@@ -67,6 +91,9 @@ class TripPassesController < ApplicationController
     @trip_pass = TripPass.find(params[:trip_pass_id])
     if @current == @trip_pass.researcher
       @trip_pass.decline()
+      respond_to do |format|
+        format.js {render :nothing => true}
+      end
     else
       redirect_to root_url, alert: "You don't have permission to decline this trip pass!"
     end

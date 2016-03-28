@@ -67,6 +67,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'accepted_passes', to: 'trip_passes#getAcceptedPasses', as: :accepted_passes
+  get 'declined_passes', to: 'trip_passes#getDeclinedPasses', as: :declined_passes
   get 'trip_requests' => 'trip_passes#trip_requests', as: :trip_requests
   get 'import', to: 'admins#import', as: :import
   get 'templates', to: 'admins#templates', as: :templates

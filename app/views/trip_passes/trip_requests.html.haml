@@ -1,12 +1,24 @@
 .container
   .jumbotron
     %h1 Trip Requests
+  .page-header
+    %h1 New Trip Passes
   -if @trip_passes.blank?
-    %h1 You don't have any new Trip Requests!
+    %h4 You don't have any new Trip Requests!
   -else
     = react_component 'NewTripPasses', {data: @trip_passes}
-  = react_component 'AcceptedTripPasses', {data: @accepted_trips}
-  = react_component 'DeclinedTripPasses', {data: @declined_trips}
+  .page-header
+    %h1 Accepted Trip Passes
+  -if @accepted_trips.blank?
+    %h4 You haven't accepted any trips!
+  - else
+    = react_component 'AcceptedTripPasses', {data: @accepted_trips}
+  .page-header
+    %h1 Declined Trip Passes
+  -if @declined_trips.blank?
+    %h4 You haven't declined any trips!
+  -else
+    = react_component 'DeclinedTripPasses', {data: @declined_trips}
   #accepted
   #declined
   -# %table.table-striped.table-reponsive.table-hover
