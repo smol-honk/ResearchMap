@@ -9,7 +9,7 @@
     = @research.location
   %p
     %b Researcher:
-    = @research.researcher.name
+    = link_to @research.researcher.name, @research.researcher
   %p
     %b Datestart:
     = @research.dateStart

@@ -1,39 +1,34 @@
-function translateBoolean(bool){
-  if (bool.toString() === 'true'){
-    return 'Yes';
-  }
-  else {
-    return 'No';
-  }
-};
-
-var NewTripPasses = React.createClass({
+var DeclinedTripPasses = React.createClass({
   getInitialState: function(){
-    return {data: [], btnAccept: 'Accept', btnDecline: 'Decline'};
+    return {data: [], btn: 'Accept'};
   },
   componentDidMount: function(){
     this.loadTripsFromServer();
   },
   loadTripsFromServer: function(){
     $.ajax({
-      url: Routes.trip_requests_path(),
+      url: Routes.declined_passes_path(),
       type: 'get',
       dataType: 'json',
       success: function(data){
-          this.setState({data: data});
+        this.setState({data: data});
       }.bind(this),
       error: function(xhr, status, err){
-        console.error(this.props.url, status, err.toString());
+        console.error(err.toString());
+        console.error(xhr.status);
+        console.error(xhr.responseText);
       }.bind(this)
     });
   },
   onHandleAccept: function(id){
-    this.setState({btnAccept: 'Accepting..'});
+    this.setState({btn: 'Accepting...'});
     $.ajax({
       url: Routes.trip_pass_accept_path(id),
       type: 'post',
       success: function(data){
         this.loadTripsFromServer();
+        this.setState({btn: 'Accept'});
+        this.props.updateAll();
       }.bind(this),
       error: function(xhr, status, err){
         alert("An Error Occured!");
@@ -45,12 +40,13 @@ var NewTripPasses = React.createClass({
     });
   },
   onHandleDecline: function(id){
-    this.setState({btnDecline: 'Declining'});
+    this.setState({btn: 'Declining...'});
     $.ajax({
       url: Routes.trip_pass_decline_path(id),
       type: 'post',
       success: function(data){
         this.loadTripsFromServer();
+        this.props.updateAll();
       }.bind(this),
       error: function(xhr, status, err){
         alert("An Error Occured!");
@@ -62,32 +58,30 @@ var NewTripPasses = React.createClass({
     });
   },
   render: function(){
-    return (
-        <table className = 'tripPassTable table table-striped table-reponsive table-hover'>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Location</th>
-              <th>Arrival</th>
-              <th>Departure</th>
-              <th>Accepted?</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <Trip_Pass_List btnDecline = {this.state.btnDecline} btnAccept = {this.state.btnAccept} data={this.state.data} handleAccept = {this.onHandleAccept} handleDecline = {this.onHandleDecline}/>
-          </tbody>
-        </table>
+    return(
+      <div>
+          <table className = 'tripPassTable table table-striped table-reponsive table-hover'>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Arrival</th>
+                <th>Departure</th>
+                <th>Accepted?</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <Trip_Pass_List_One btn = {this.state.btn} data={this.state.data} handleAccept = {this.onHandleAccept} handleDecline = {this.onHandleDecline}/>
+            </tbody>
+          </table>
+      </div>
     )
   }
 });
 
-var modalMessage = React.createClass({
-
-});
-
-var Trip_Pass_List = React.createClass({
+var Trip_Pass_List_One = React.createClass({
   accept_pass: function(id){
     this.props.handleAccept(id);
   },
@@ -97,7 +91,7 @@ var Trip_Pass_List = React.createClass({
   render: function(){
     var tripNodes = this.props.data.map(function(trip){
       return (
-          <Trip_Pass btnDecline = {this.props.btnDecline} btnAccept = {this.props.btnAccept} onPassAccept = {this.accept_pass} onPassDecline = {this.decline_pass}  data = {trip} key = {trip.id} />
+          <Trip_Pass_One_Button btn = {this.props.btn} onPassAccept = {this.accept_pass} onPassDecline = {this.decline_pass}  data = {trip} key = {trip.id} />
       );
     }, this);
     return (
@@ -108,14 +102,14 @@ var Trip_Pass_List = React.createClass({
   }
 });
 
-var Trip_Pass = React.createClass({
-  handleAcceptSubmit: function (){
-    console.log(this.props.data.id);
-    console.log(this.props);
-    this.props.onPassAccept(this.props.data.id);
-  },
-  handleDeclineSubmit: function (){
-    this.props.onPassDecline(this.props.data.id);
+var Trip_Pass_One_Button = React.createClass({
+  handleClick: function (){
+    if (this.props.btn === 'Accept'){
+        this.props.onPassAccept(this.props.data.id);
+    }
+    else if (this.props.btn === 'Decline'){
+      this.props.onPassDecline(this.props.data.id);
+    }
   },
   render: function(){
     return (
@@ -137,8 +131,7 @@ var Trip_Pass = React.createClass({
         </td>
         <td>
           <div className = "btn-group" role="group">
-            <button type = "button" onClick = {this.handleAcceptSubmit} className = "btn btn-info">{this.props.btnAccept}</button>
-            <button type = "button" onClick = {this.handleDeclineSubmit} classId = {this.props.id} data-target = {this.props.id} data-toggle = "modal" className = "btn btn-default">{this.props.btnDecline}</button>
+            <button type = "button" onClick = {this.handleClick} className = "btn btn-info">{this.props.btn}</button>
           </div>
         </td>
        </tr>
@@ -147,6 +140,6 @@ var Trip_Pass = React.createClass({
 });
 
 ReactDOM.render(
-  <NewTripPasses />,
-  document.body
+  <AcceptedTripPasses />,
+  document.getElementById('declined')
 );

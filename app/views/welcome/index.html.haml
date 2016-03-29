@@ -6,7 +6,7 @@
   %body{data: {'no-transition-cache': 'true'}}
     .jumbotron
       %h1
-        %center Research Map Project
+        %center School of Anthropology Research Map
     %nav.menu-ui#menu-ui
       %a.active#filter-all{href: :'#'} Show all
       %a#filter-donor{href: :'#'} Can visit?
@@ -35,7 +35,7 @@
               .field
                 = f.label :researcher_first_name_or_researcher_last_name_cont
                 = f.text_field :researcher_first_name_or_researcher_last_name_cont
-
+              .field
                 = f.label :location_cont
                 = f.text_field :location_cont
               %br

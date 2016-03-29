@@ -42,9 +42,25 @@ class TripPassesController < ApplicationController
       @trip_passes = TripPass.where(researcher: current_researcher).where(researcher_declined: false).where(researcher_accept: false)
       @declined_trips = TripPass.where(researcher: current_researcher).where(researcher_declined: true)
       @accepted_trips = TripPass.where(researcher: current_researcher).where(researcher_accept: true)
+
+      if @trip_passes.nil?
+        @trip_passes = Array(@trip_passes)
+      elsif @declined_trips.nil?
+        @declined_trips = Array(@declined_trips)
+      elsif @accepted_trips.nil?
+        @accepted_trips= Array(@accepted_trips)
+      else
+      end
+
       respond_to do |format|
         format.html # trip_requests.html.haml
-        format.json { render json: @trip_passes.map{|u| u.as_json(include: { researcher: { only: [:name] }, user: { only: [:name] } } ) } }
+        format.json { render :json =>
+                            {
+                              :newPasses => @trip_passes.map{|u| u.as_json(include: { researcher: { only: [:name] }, user: { only: [:name] } } ) },
+                              :acceptPasses => @accepted_trips.map{|u| u.as_json(include: { researcher: { only: [:name] }, user: { only: [:name] } } ) },
+                              :declinePasses => @declined_trips.map{|u| u.as_json(include: { researcher: { only: [:name] }, user: { only: [:name] } } ) }
+                            }
+                        }
       end
     else
       redirect_to root_url, alert: "You don't have access to this page!"

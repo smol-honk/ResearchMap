@@ -24,7 +24,7 @@
             %th
               = sort_link(@search, :dateEnd, "Ended")
 
-        %tbody
+        %tbody.bigTableBody
           - @researches.each do |research|
             %tr
               %td= link_to research.name, research

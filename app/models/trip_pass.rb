@@ -14,6 +14,7 @@ class TripPass < ActiveRecord::Base
 
   def decline
       self.update_attribute(:researcher_declined, true)
+      self.update_attribute(:researcher_accept, false)
   end
 
   def accepted_cancel
@@ -28,6 +29,7 @@ class TripPass < ActiveRecord::Base
 
   def accept
     self.update_attribute(:researcher_accept, true)
+    self.update_attribute(:researcher_declined, false)
   end
 
 end

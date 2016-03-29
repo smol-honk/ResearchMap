@@ -1,5 +1,5 @@
 !!!
-%html
+%html{:lang => "en"}
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title Research Map Project
@@ -47,7 +47,7 @@
     = render "shared/testbar"
 
   // Google map scripts
-  -# %script{:src => "http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"}
+  %script{:src => "http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"}
 
   =yield
 

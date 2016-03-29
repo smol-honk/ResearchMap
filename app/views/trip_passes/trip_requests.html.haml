@@ -1,26 +1,72 @@
 .container
   .jumbotron
-    %h1 Trip Requests
-  .page-header
-    %h1 New Trip Passes
-  -if @trip_passes.blank?
-    %h4 You don't have any new Trip Requests!
-  -else
-    = react_component 'NewTripPasses', {data: @trip_passes}
-  .page-header
-    %h1 Accepted Trip Passes
-  -if @accepted_trips.blank?
-    %h4 You haven't accepted any trips!
-  - else
-    = react_component 'AcceptedTripPasses', {data: @accepted_trips}
-  .page-header
-    %h1 Declined Trip Passes
-  -if @declined_trips.blank?
-    %h4 You haven't declined any trips!
-  -else
-    = react_component 'DeclinedTripPasses', {data: @declined_trips}
+    %h1
+      Trip Requests
+      %i.fa.fa-plane
+  = react_component 'TripPassBox', {newPasses: @trip_passes, acceptedPasses: @accepted_trips, declinedPasses: @declined_trips}
+  #box
   #accepted
   #declined
+  -# .panel-group#accordion{role: :"tablist", 'aria-multiselectable': :"true"}
+  -#   .panel.panel-default
+  -#     .panel-heading#headingOne{role: :"tab"}
+  -#       %h4.panel-title
+  -#         %a{role: :"button", 'data-toggle': :"collapse", 'data-parent': :"#accordion", href: :"#collapseOne", 'aria-expanded': :"true", 'aria-controls': :"collapseOne"}
+  -#           %i.fa.fa-exclamation-circle
+  -#           New Trip Requests!
+  -#     .panel-collapse.collapse.in#collapseOne{role: :'tabpanel', 'aria-labelledby': :'headingOne'}
+  -#       .panel-body
+  -#         -if @trip_passes.blank?
+  -#           %h4 You don't have any new Trip Requests!
+  -#         -else
+  -#           = react_component 'NewTripPasses', {data: @trip_passes}
+  -# .panel-group#accordion{role: :"tablist", 'aria-multiselectable': :"true"}
+  -#   .panel.panel-default
+  -#     .panel-heading#headingTwo{role: :"tab"}
+  -#       %h4.panel-title
+  -#         %a{role: :"button", 'data-toggle': :"collapse", 'data-parent': :"#accordion", href: :"#collapseTwo", 'aria-expanded': :"true", 'aria-controls': :"collapseTwo"}
+  -#           %i.fa.fa-check-circle
+  -#           Accepted Trip Requests!
+  -#     .panel-collapse.collapse.in#collapseTwo{role: :'tabpanel', 'aria-labelledby': :'headingTwo'}
+  -#       .panel-body
+  -#         -if @accepted_trips.blank?
+  -#           %h4 You haven't accepted any trips!
+  -#         - else
+  -#           = react_component 'AcceptedTripPasses', {data: @accepted_trips}
+  -#         #accepted
+  -# .panel-group#accordion{role: :"tablist", 'aria-multiselectable': :"true"}
+  -#   .panel.panel-default
+  -#     .panel-heading#headingThree{role: :"tab"}
+  -#       %h4.panel-title
+  -#         %a{role: :"button", 'data-toggle': :"collapse", 'data-parent': :"#accordion", href: :"#collapseThree", 'aria-expanded': :"true", 'aria-controls': :"collapseThree"}
+  -#           %i.fa.fa-times-circle
+  -#           Declined Trip Requests!
+  -#     .panel-collapse.collapse.in#collapseThree{role: :'tabpanel', 'aria-labelledby': :'headingThree'}
+  -#       .panel-body
+  -#         -if @declined_trips.blank?
+  -#           %h4 You haven't declined any trips!
+  -#         -else
+  -#           = react_component 'DeclinedTripPasses', {data: @declined_trips}
+  -#         #declined
+
+
+
+
+
+  -# .page-header
+  -#   %h1 Accepted Trip Passes
+  -# -if @accepted_trips.blank?
+  -#   %h4 You haven't accepted any trips!
+  -# - else
+  -#   = react_component 'AcceptedTripPasses', {data: @accepted_trips}
+  -# .page-header
+  -#   %h1 Declined Trip Passes
+  -# -if @declined_trips.blank?
+  -#   %h4 You haven't declined any trips!
+  -# -else
+  -#   = react_component 'DeclinedTripPasses', {data: @declined_trips}
+  -# #accepted
+  -# #declined
   -# %table.table-striped.table-reponsive.table-hover
   -#   %thead
   -#     %tr
