@@ -1,0 +1,57 @@
+/* line 1, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/researchers.scss */
+.profile.panel .picture {
+  width: auto;
+  height: auto;
+  min-width: 100%;
+  min-height: 100%;
+  position: relative;
+  overflow: hidden;
+  top: 10px;
+  left: 3%;
+  border: 6px solid rgba(255, 255, 255, 0.8);
+  border-radius: 3px;
+}
+/* line 12, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/researchers.scss */
+.profile.panel .picture img {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+}
+
+/* line 20, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/researchers.scss */
+.profile.panel .picture_mob {
+  position: relative;
+  width: 35%;
+  left: 35%;
+  bottom: 85%;
+}
+
+@media (max-width: 767px) {
+  /* line 28, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/researchers.scss */
+  .profile.panel .header {
+    text-align: center;
+  }
+
+  /* line 32, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/researchers.scss */
+  .profile.panel .nav {
+    margin-top: 30px;
+  }
+}
+/* line 37, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/researchers.scss */
+#profilePanel {
+  background-color: lightgray;
+  border-radius: 10px;
+}
+
+/* line 41, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/researchers.scss */
+#research {
+  height: unset !important;
+}
+
+/* line 45, /Users/lisazhang/Desktop/ResearchMap/app/assets/stylesheets/researchers.scss */
+#myTabContent {
+  background: white;
+  height: 20em;
+  overflow: scroll;
+}
