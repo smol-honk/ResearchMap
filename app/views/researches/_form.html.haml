@@ -31,20 +31,36 @@
     = f.label :inFieldEnd, "When will you leave the field?"
     = f.text_field :inFieldEnd, class: :"form-control", id: :"fieldEnd", title: :"Day of your in field departure", 'data-toggle': :'tooltip', 'data-placement': :'top'
   .form-group
-    Check the box if you are able, leave blank if not:
+    %label Check the box if you are able, leave blank if not:
     .checkbox
-      = f.check_box :available
+      = f.check_box(:available, include_hidden: false)
       = f.label :available, "Are you able to host visitors?"
 
-  .input-group
-    If you are able to host (Leave blank if not):
+  .form-group#day
+    %label If you are able to host (Leave blank if not):
     .checkbox
       = f.check_box(:day, include_hidden: false)
       = f.label :day, "Day Visit?"
-  .form-group
+
+  .form-group#week
     .checkbox
       = f.check_box(:week, include_hidden: false)
       = f.label :week, "Week Visit?"
+
+  .form-group
+    %label If you chose Day Visit, what day? (Leave blank if not):
+    = f.label :day_date, "Day Available"
+    = f.text_field :day_date, class: :"form-control", id: :"day_date"
+
+  .form-group
+    %label If you chose Week Visit, select the start of that week (Leave blank if not):
+    = f.label :weekStart, "First day of week available"
+    = f.text_field :weekStart, class: :"form-control", id: :"weekStart"
+
+  .form-group
+    %label If you chose Week Visit, select the end of that week (Leave blank if not):
+    = f.label :weekEnd, "Last day of week available"
+    = f.text_field :weekEnd, class: :"form-control", id: :"weekEnd"
 
   - if current_user.try(:admin?)
     .form-group

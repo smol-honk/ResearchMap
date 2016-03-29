@@ -59,25 +59,8 @@ var DeclinedTripPasses = React.createClass({
   },
   render: function(){
     return(
-      <div>
-          <table className = 'tripPassTable table table-striped table-reponsive table-hover'>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Location</th>
-                <th>Arrival</th>
-                <th>Departure</th>
-                <th>Accepted?</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <Trip_Pass_List_One btn = {this.state.btn} data={this.state.data} handleAccept = {this.onHandleAccept} handleDecline = {this.onHandleDecline}/>
-            </tbody>
-          </table>
-      </div>
-    )
+      <Trip_Pass_List_One btn = {this.state.btn} data={this.state.data} handleAccept = {this.onHandleAccept} handleDecline = {this.onHandleDecline}/>
+    );
   }
 });
 
@@ -95,9 +78,23 @@ var Trip_Pass_List_One = React.createClass({
       );
     }, this);
     return (
-      <tr>
+      <div className = "table-reponsive">
+          <table className = 'tripPassTable table-striped table-hover'>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Arrival</th>
+                <th>Departure</th>
+                <th>Accepted?</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
         {tripNodes}
-      </tr>
+            </tbody>
+          </table>
+      </div>
     );
   }
 });
@@ -113,33 +110,33 @@ var Trip_Pass_One_Button = React.createClass({
   },
   render: function(){
     return (
-      <tr>
-        <td>
-          {this.props.data.user.name}
-        </td>
-        <td>
-          {this.props.data.location}
-        </td>
-        <td>
-          {this.props.data.dateStart}
-        </td>
-        <td>
-          {this.props.data.dateEnd}
-        </td>
-        <td>
-          {translateBoolean(this.props.data.researcher_accept)}
-        </td>
-        <td>
-          <div className = "btn-group" role="group">
-            <button type = "button" onClick = {this.handleClick} className = "btn btn-info">{this.props.btn}</button>
-          </div>
-        </td>
-       </tr>
-    )
-  }
-});
+        <tr>
+          <td>
+            {this.props.data.user.name}
+          </td>
+          <td>
+            {this.props.data.location}
+          </td>
+          <td>
+            {this.props.data.dateStart}
+          </td>
+          <td>
+            {this.props.data.dateEnd}
+          </td>
+          <td>
+            {translateBoolean(this.props.data.researcher_accept)}
+          </td>
+          <td>
+            <div className = "btn-group" role="group">
+              <button type = "button" onClick = {this.handleClick} className = "btn btn-info">{this.props.btn}</button>
+            </div>
+          </td>
+        </tr>
+      );
+    }
+  });
 
 ReactDOM.render(
-  <AcceptedTripPasses />,
+  <DeclinedTripPasses />,
   document.getElementById('declined')
 );

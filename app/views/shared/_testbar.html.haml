@@ -1,13 +1,108 @@
-.container
-  .row
+%nav.navbar.navbar-default
+  .container-fluid
+    .navbar-header
+      %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.text MAIN MENU
+    / Collect the nav links, forms, and other content for toggling
+    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        %li
+          %a{:href => "/", data: {'no-turbolink': 'true'}} Research Map
+        %li
+          %a{:href => "/researches"} Research
+        %li
+          %a{:href => "/researchers"} Researchers
+          %span.sr-only (current)
+      %ul.nav.navbar-nav.navbar-right
+        -if current_user.try(:admin?)
+          %li.dropdown
+            %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+              Admin Portal
+              %span.caret
+            %ul.dropdown-menu
+              %li
+                = link_to "Edit/View Email Templates", templates_path
+              %li
+                = link_to "Edit/View Users", users_path
+              %li
+                = link_to "Edit/View Researchers", researchers_path
+              %li
+                = link_to "Edit/View Trip Passes", trip_passes_path
+        -elsif researcher_signed_in?
+          %li.dropdown
+            %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+              Researcher Portal
+              %span.caret
+            %ul.dropdown-menu
+              %li
+                = link_to "Add Research", new_research_path, data: {'no-turbolink': 'true'}
+              %li
+                = link_to "Edit/View Your Research", my_research_path
+              %li
+                = link_to "Your Trip Requests", trip_requests_path
+
+        %li.dropdown
+          %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+            - if user_signed_in?
+              Logged in as #{current_user.name}
+            - elsif researcher_signed_in?
+              Researcher logged in as #{current_researcher.name}
+            - else
+              Log In
+            %span.caret
+          %ul.dropdown-menu.dropdown-menu-right
+            // User menu
+            -if user_signed_in?
+              %li
+                = link_to "Your Profile", user_path(current_user.id)
+              %li
+                = link_to "Your Feed", activity_path
+              - if current_user.role.name == "Benefactor" || current_user.role.name == "Patron"
+                %li
+                  = link_to "Create a Trip Pass!", new_trip_pass_path, data: {'no-turbolink': true}
+              %li
+                =link_to conversations_path do
+                  Conversations
+                  %span.badge
+                    = @messages_count
+              %li
+                = link_to "Sign Out", destroy_user_session_path, method: :delete
+              // Researcher Menu
+            -elsif researcher_signed_in?
+              %li
+                = link_to "Your Profile", researcher_path(current_researcher.id)
+              %li
+                = link_to "Your Feed", activity_path
+              %li
+                =link_to conversations_path do
+                  Conversations
+                  %span.badge
+                    = @messages_count
+              %li
+                = link_to "Sign Out", destroy_researcher_session_path, method: :delete
+                // Guest Menu
+            -else
+              %li
+                = link_to "Sign In", new_user_session_path
+              %li
+                = link_to "Sign up", new_user_registration_path
+              %li.divider
+              %li
+                = link_to "Researcher Sign In", new_researcher_session_path
+
+
+
+-# .container
+  .nav-row-wrapper
     .navbar-header
       %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
         %span.sr-only Toggle navigation
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-    #navbar.navbar-collapse.collapse
-      %ul.nav.navbar-nav
+    %nav#navbar.navbar-collapse.collapse
+      %ul.nav.navbar-nav.navbar-default.region.region-navigation
         %li
           %a{:href => "/", data: {'no-turbolink': 'true'}} Research Map Project
         %li
@@ -16,7 +111,7 @@
           %a{:href => "/researchers"} Researchers
       .navbar-form.navbar-left
 
-      %ul.nav.navbar-nav.navbar-right
+      %ul.nav.navbar-nav.navbar-default.navbar-right
         - if current_user.try(:admin?)
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}

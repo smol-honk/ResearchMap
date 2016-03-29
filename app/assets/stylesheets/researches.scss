@@ -15,36 +15,36 @@
 //         width: 100%;
 //     }
 
-thead, tbody, tr, td, th { display: block; }
+// thead, tbody, tr, td, th { display: block; }
 
-tr:after {
-    content: ' ';
-    display: block;
-    visibility: hidden;
-    clear: both;
-}
+// tr:after {
+//     content: ' ';
+//     display: block;
+//     visibility: hidden;
+//     clear: both;
+// }
 
 .bigTableBody {
     height: 35em;
     overflow-y: auto;
 }
 
-thead {
-    /* fallback */
-}
+// thead {
+//     /* fallback */
+// }
 
 
-tbody td, thead th {
-    width: 14%;
-    float: left;
-    border-bottom: unset;
-}
+// tbody td, thead th {
+//     width: 14%;
+//     float: left;
+//     border-bottom: unset;
+// }
 
 
-.panel {
-    min-width: 768px;
-    margin: auto 60px;
-}
+// .panel {
+//     min-width: 768px;
+//     margin: auto 60px;
+// }
 
 #datepicker {
   width: 600px;

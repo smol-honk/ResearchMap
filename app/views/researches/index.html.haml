@@ -1,8 +1,6 @@
 .container
-  .jumbotron
+  .page-header
     %h1 UA Anthropology Research
-    %br
-    %br
     -if researcher_signed_in? || current_user.try(:admin?)
       = button_to 'New research', new_research_path, class: "btn btn-info", method: :get
   %br

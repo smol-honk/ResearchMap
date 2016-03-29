@@ -1,9 +1,10 @@
 .container
-  .row.profile.panel
+  .userProfile{style: :"padding-top: 2em;"}
+  .row.profile.panel#profilePanel
     .col-md-4.bg_blur
+      = image_tag(@user.avatar.thumb.url, class: :'img-rounded picture hidden-xs')
+      = image_tag(@user.avatar.thumb.url, class: :'img-rounded visible-xs picture_mob')
     .col-md-8.col-xs-12.info-col
-      = image_tag(@user.avatar.url, class: :'img-rounded picture hidden-xs')
-      = image_tag(@user.avatar.url, class: :'img-rounded visible-xs picture_mob')
       .header
         %h2
           = @user.first_name
@@ -11,48 +12,48 @@
           - if user_signed_in? and current_user == @user
             = link_to "Edit Profile", edit_user_registration_path, class: :"btn btn-primary btn-lg"
           - else
-            Hi
           %br
         %h4
           %i.fa.fa-building.fa-lg
-          My Work Place
+          - if @user.title.nil?
+            No Information
+          - else
+            = @user.title
         %h4
           %i.fa.fa-map-marker.fa-lg
           - if @user.current_location.nil?
             No Information
           - else
             = @user.current_location
-        %span
+        %h4
           = @user.headline
 
-      .btn-group.btn-block
-        = link_to user_following_path(@user), role: :"button", method: :get, class: :'button btn btn-inverse btn-lg' do
+      .btn-group.btn-block#buttons
+        = link_to user_following_path(@user), role: :"button", method: :get, class: :'button btn btn-red btn-lg' do
           %i.fa.fa-users.fa-lg
           Following
           = @following
 
-        = link_to user_likes_path(@user), role: :"button", method: :get, class: :'button btn btn-inverse btn-lg' do
+        = link_to user_likes_path(@user), role: :"button", method: :get, class: :'button btn btn-red btn-lg' do
           %i.fa.fa-thumbs-o-up.fa-lg
           Likes
           = @likes
-        = link_to user_trips_path(@user), role: :"button", method: :get, class: :'button btn btn-inverse btn-lg' do
+        = link_to user_trips_path(@user), role: :"button", method: :get, class: :'button btn btn-red btn-lg' do
           %i.fa.fa-suitcase.fa-lg
           My Trips!
 
     #profileInfo
     %ul.nav.nav-tabs
-      %li.active
-        %a{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#aboutme"}
+      %li
+        %h3{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#aboutme", style: :"color: transparent;"}
           %strong
             About Me
 
     #myTabContent.tab-content
-      #aboutme.tab-pane.fade
-        %strong
-          %u
-            About Me
-        %br
+      #aboutme.tab-pane.fade.active.in{style: :"padding-left: 1em;"}
+        %h2
+          About Me
         = @user.bio
   .adminEdit
     - if user_signed_in? && current_user.admin?
-      = link_to "Edit User", edit_user_path, class: :"btn btn-info"
+      = link_to "Edit #{@user.name}", edit_user_path, class: :"btn btn-info"

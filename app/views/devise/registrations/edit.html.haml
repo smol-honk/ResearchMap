@@ -30,9 +30,8 @@
       - elsif researcher_signed_in?
         - if current_researcher.avatar.url.present?
           = image_tag(current_researcher.avatar.url(:thumb))
-          = f.label :remove_avatar do
-            Remove Avatar
-            = f.check_box :remove_avatar
+          = f.check_box :remove_avatar
+          = f.label :remove_avatar
 
       = f.file_field :avatar
       = f.hidden_field :avatar_cache

@@ -1,6 +1,7 @@
 !!!
 %html{:lang => "en"}
   %head
+    %meta{:content => "width=device-width, initial-scale=1,\r\nmaximum-scale=1, user-scalable=yes", :name => "viewport"}/
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title Research Map Project
     / Normalize CSS
@@ -19,10 +20,12 @@
     = csrf_meta_tags
     -# = stylesheet_link_tag "eden"
 
-        - if notice
-      %p.alert.alert-success= notice
+    - if notice
+      %p.alert.alert-success
+        = notice
     - if alert
-      %p.alert.alert-danger= alert
+      %p.alert.alert-danger
+        = alert
 
   %body
     %header#region_header_ua.l-arizona-header.bg-red
@@ -34,16 +37,14 @@
       .container
         .row
           #site_identifier
-            %a{:href => "#"}
+            %a{:href => "http://www.anthropology.arizona.edu"}
               = image_tag "primary-logo.png"
           #utility_links
-
-          #search
-            %form
-              .form-item
-                %input{:maxlength => "128", :size => "15", :title => "Search", :type => "text", :value => ""}/
-              .form-actions
-                %input#edit-submit.form-submit{:name => "op", :type => "submit", :value => "Search"}/
+          -#
+          -# #search
+          -#   = search_form_for @search do |f|
+          -#     = f.search_field :researcher_first_name_or_researcher_last_name_or_location_or_name_cont, class: :'form-item'
+          -#     = f.submit 'Search', class: "btn btn-primary form-actions"
     = render "shared/testbar"
 
   // Google map scripts
@@ -75,12 +76,12 @@
       .row
         .col-md-12
           #footer_copyright.text-center
-            Wilbur Building, Room 1891   |   The University of Arizona   |   Tucson, AZ USA 85721
+            1009 East South Campus Drive   |   University of Arizona   |   Tucson, AZ 85721
             %br/
-            Phone: (520) 621-2211  |   Email: 
-            %a{:href => "#"}>
-              department.name@email.arizona.edu
+            Phone: 520.621.2585  |   Email: 
+            %a{:href => "mailto:anthro@email.arizona.edu"}>
+              anthro@email.arizona.edu
               %br/
             © 2016 The Arizona Board of Regents on behalf of the University of Arizona   | 
-            %a{:href => "#"} Feedback
+            %a{:href => "mailto:lisazhang@email.arizona.edu"} Feedback
     / /.container

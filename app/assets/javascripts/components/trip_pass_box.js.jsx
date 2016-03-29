@@ -14,7 +14,6 @@ var TripPassBox = React.createClass({
       type: 'get',
       dataType: 'json',
       success: function(data){
-        console.log(data);
         this.setState({acceptPasses: data.acceptPasses, declinePasses: data.declinePasses, newPasses: data.newPasses});
       }.bind(this),
       error: function(xhr, err, status){

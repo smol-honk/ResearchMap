@@ -11,10 +11,10 @@
     %b Researcher:
     = link_to @research.researcher.name, @research.researcher
   %p
-    %b Datestart:
+    %b Research Start Date:
     = @research.dateStart
   %p
-    %b Dateend:
+    %b Research End Date:
     = @research.dateEnd
   %p
     %b Available for Visits?:
@@ -23,9 +23,19 @@
     %p
       %b Week Visit?:
       = translate_bool(@research.week)
+      %br
+      - if @research.week
+        %b Available from:
+        = @research.weekStart.strftime("%-d %B %Y")
+        %b to
+        = @research.weekEnd.strftime("%-d %B %Y")
     %p
       %b Day Visit?:
       = translate_bool(@research.day)
+      - if @research.day
+        %p
+          %b Available on:
+          = @research.day_date
   %p
     %b Abstract:
     %br

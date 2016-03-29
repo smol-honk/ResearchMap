@@ -93,56 +93,67 @@ var Trip_Pass_List = React.createClass({
     this.props.handleDecline(id);
   },
   render: function(){
-    var tripNodes = this.props.data.map(function(trip){
+    var tripNodes = this.props.data.map(function(trip, id){
       return (
           <Trip_Pass btnDecline = {this.props.btnDecline} btnAccept = {this.props.btnAccept} onPassAccept = {this.accept_pass} onPassDecline = {this.decline_pass}  data = {trip} key = {trip.id} />
       );
     }, this);
     return (
-      <tr>
-        {tripNodes}
-      </tr>
+      <table className = 'tripPassTable table table-striped table-reponsive table-hover'>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Arrival</th>
+            <th>Departure</th>
+            <th>Accepted?</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {tripNodes}
+        </tbody>
+      </table>
     );
   }
 });
 
 var Trip_Pass = React.createClass({
   handleAcceptSubmit: function (){
-    console.log(this.props.data.id);
-    console.log(this.props);
     this.props.onPassAccept(this.props.data.id);
   },
   handleDeclineSubmit: function (){
     this.props.onPassDecline(this.props.data.id);
   },
   render: function(){
-    return (
+    return(
       <tr>
-        <td>
-          {this.props.data.user.name}
-        </td>
-        <td>
-          {this.props.data.location}
-        </td>
-        <td>
-          {this.props.data.dateStart}
-        </td>
-        <td>
-          {this.props.data.dateEnd}
-        </td>
-        <td>
-          {translateBoolean(this.props.data.researcher_accept)}
-        </td>
-        <td>
-          <div className = "btn-group" role="group">
-            <button type = "button" onClick = {this.handleAcceptSubmit} className = "btn btn-info">{this.props.btnAccept}</button>
-            <button type = "button" onClick = {this.handleDeclineSubmit} classId = {this.props.id} data-target = {this.props.id} data-toggle = "modal" className = "btn btn-default">{this.props.btnDecline}</button>
-          </div>
-        </td>
-       </tr>
-    )
-  }
-});
+          <td>
+            {this.props.data.user.name}
+          </td>
+          <td>
+            {this.props.data.location}
+          </td>
+          <td>
+            {this.props.data.dateStart}
+          </td>
+          <td>
+            {this.props.data.dateEnd}
+          </td>
+          <td>
+            {translateBoolean(this.props.data.researcher_accept)}
+          </td>
+          <td>
+            <div className = "btn-group" role="group">
+              <button type = "button" onClick = {this.handleAcceptSubmit} className = "btn btn-info">{this.props.btnAccept}</button>
+              <button type = "button" onClick = {this.handleDeclineSubmit} classId = {this.props.id} data-target = {this.props.id} data-toggle = "modal" className = "btn btn-default">{this.props.btnDecline}</button>
+            </div>
+          </td>
+      </tr>
+      );
+    }
+  });
 
 ReactDOM.render(
   <NewTripPasses />,

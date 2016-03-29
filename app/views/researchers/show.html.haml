@@ -1,127 +1,135 @@
 .container
-  .row.profile.panel#profilePanel
-    .col-md-4.bg_blur
-      = image_tag(@researcher.avatar.thumb.url, class: :'img-rounded picture hidden-xs')
-      = image_tag(@researcher.avatar.thumb.url, class: :'img-rounded visible-xs picture_mob')
-    .col-md-8.col-xs-12.info-col
-      .header
-        %h2
-          = @researcher.first_name
-          = @researcher.last_name
-          - if researcher_signed_in? and current_researcher == @researcher
-            = link_to "Edit Profile", edit_researcher_registration_path, class: :"btn btn-primary btn-lg"
-          - else
-            - if user_signed_in?
-              - if current_user.follows?(@researcher)
-                = link_to researcher_unfollow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-red btn-lg' do
-                  %i.fa.fa-user-times.fa-lg
-                  Unfollow
-              - else
-                = link_to researcher_follow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-red btn-lg' do
-                  %i.fa.fa-user-plus.fa-lg
-                  Follow
-            - elsif researcher_signed_in?
-              - if current_researcher == @researcher
-
-              - elsif current_researcher.follows?(@researcher)
-                = link_to researcher_unfollow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-red btn-lg' do
-                  %i.fa.fa-user-times.fa-lg
-                  Unfollow
-              - else
-                = link_to researcher_follow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-red btn-lg' do
-                  %i.fa.fa-user-plus.fa-lg
-                  Follow
+  .researcherProfile{style: :"padding-top: 2em;"}
+    .row.profile.panel#profilePanel
+      .col-md-4.bg_blur
+        = image_tag(@researcher.avatar.thumb.url, class: :'img-rounded picture hidden-xs')
+        = image_tag(@researcher.avatar.thumb.url, class: :'img-rounded visible-xs picture_mob')
+      .col-md-8.col-xs-12.info-col
+        .header
+          %h2
+            = @researcher.first_name
+            = @researcher.last_name
+            - if researcher_signed_in? and current_researcher == @researcher
+              = link_to "Edit Profile", edit_researcher_registration_path, class: :"btn btn-primary btn-lg"
             - else
-          %br
-        %h4
-          %i.fa.fa-building.fa-lg
-          = @researcher.title
-        %h4
-          %i.fa.fa-map-marker.fa-lg
-          - if @researcher.current_location.nil?
-            No Information
-          - else
-            = @researcher.current_location
-        %span
-          = @researcher.headline
+              - if user_signed_in?
+                - if current_user.follows?(@researcher)
+                  = link_to researcher_unfollow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-red btn-lg' do
+                    %i.fa.fa-user-times.fa-lg
+                    Unfollow
+                - else
+                  = link_to researcher_follow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-red btn-lg' do
+                    %i.fa.fa-user-plus.fa-lg
+                    Follow
+              - elsif researcher_signed_in?
+                - if current_researcher == @researcher
 
-      .btn-group.btn-block#buttons
-        = link_to researcher_following_path(@researcher), role: :"button", method: :get, class: :'button btn btn-red btn-lg' do
-          %i.fa.fa-users.fa-lg
-          Following
-          = @following
+                - elsif current_researcher.follows?(@researcher)
+                  = link_to researcher_unfollow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-red btn-lg' do
+                    %i.fa.fa-user-times.fa-lg
+                    Unfollow
+                - else
+                  = link_to researcher_follow_path(@researcher), role: :"button", method: :post, class: :'button btn btn-red btn-lg' do
+                    %i.fa.fa-user-plus.fa-lg
+                    Follow
+              - else
+            %br
+          %h4
+            %i.fa.fa-building.fa-lg
+            - if @researcher.title.nil?
+              No Information
+            -else
+              = @researcher.title
+          %h4
+            %i.fa.fa-map-marker.fa-lg
+            - if @researcher.current_location.nil?
+              No Information
+            - else
+              = @researcher.current_location
+          %h4
+            - if @researcher.headline.nil?
+              No Information
+            -else
+              = @researcher.headline
 
-        = link_to researcher_followers_path(@researcher), role: :"button", method: :get, class: :'button btn btn-red btn-lg' do
-          %i.fa.fa-users.fa-lg
-          Followers
-          = @followers
+        .btn-group.btn-block#buttons
+          = link_to researcher_following_path(@researcher), role: :"button", method: :get, class: :'button btn btn-red btn-lg' do
+            %i.fa.fa-users.fa-lg
+            Following
+            = @following
 
-        = link_to researcher_likes_path(@researcher), role: :"button", method: :get, class: :'button btn btn-red btn-lg' do
-          %i.fa.fa-users.fa-lg
-          Likes
-          = @likes.count
+          = link_to researcher_followers_path(@researcher), role: :"button", method: :get, class: :'button btn btn-red btn-lg' do
+            %i.fa.fa-users.fa-lg
+            Followers
+            = @followers
 
-    #profileInfo
-    %ul.nav.nav-tabs
-      %li.active
-        %a{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#home"}
-          %strong
-            Activity
-      %li
-        %a{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#profile"}
-          %strong
-            Research
-      %li
-        %a{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#aboutme"}
-          %strong
-            About Me
+          = link_to researcher_likes_path(@researcher), role: :"button", method: :get, class: :'button btn btn-red btn-lg' do
+            %i.fa.fa-users.fa-lg
+            Likes
+            = @likes.count
 
-    #myTabContent.tab-content
-      #home.tab-pane.fade.active.in
-        %p
-          - @activities.each do |activity|
-            .activity
-              = link_to activity.owner.first_name, activity.owner
-              = render_activity activity
-              on
-              = activity.created_at.localtime.to_date
-      #profile.tab-pane.fade
-        %p
-          %table.table-hover.table-striped.table-responsive
-            %thead
-              %tr
-                %th
-                  Title
-                %th
-                  Location
-                %th
-                  Research Started
-                %th
-                  Research Ended
-                %th
-                  Can visit?
-            %tbody#research
-              - @researches.each do |research|
-                %tr
-                  %td
-                    = link_to research.name, research
-                  %td= research.location
-                  %td= research.dateStart
-                  %td= research.dateEnd
-                  %td
-                    - if research.available?
-                      %i.fa.fa-check{style: :'color:green'}
-                    -else
-                      %i.fa.fa-times{style: :'color:red'}
-                  - if current_user.try(:admin?)
-                    %td= button_to 'Edit', edit_research_path(research), class: "btn btn-primary", method: :get
-                    %td= button_to 'Delete', research, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"
-      #aboutme.tab-pane.fade
-        %strong
-          %u
-            About Me
-        %br
-        = @researcher.bio
-  .adminEdit
-    - if user_signed_in? && current_user.admin?
-      = link_to "Edit me", edit_researcher_path, class: :"btn btn-info"
+      #profileInfo
+      %ul.nav.nav-tabs
+        %li.active
+          %a{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#home"}
+            %strong
+              Activity
+        %li
+          %a{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#profile"}
+            %strong
+              Research
+        %li
+          %a{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#aboutme"}
+            %strong
+              About Me
+
+      #myTabContent.tab-content
+        #home.tab-pane.fade.active.in{style: :"padding-left: 1em;"}
+          %p
+            - @activities.each do |activity|
+              .activity
+                = link_to activity.owner.first_name, activity.owner
+                = render_activity activity
+                on
+                = activity.created_at.localtime.to_date
+        #profile.tab-pane.fade
+          %p
+            .table-responsive
+              %table.table-hover.table-striped
+                %thead
+                  %tr
+                    %th
+                      Title
+                    %th
+                      Location
+                    %th
+                      Research Started
+                    %th
+                      Research Ended
+                    %th
+                      Can visit?
+                    - if current_user.try(:admin?)
+                      %th
+                      %th
+                %tbody#research
+                  - @researches.each do |research|
+                    %tr
+                      %td
+                        = link_to research.name, research
+                      %td= research.location
+                      %td= research.dateStart
+                      %td= research.dateEnd
+                      %td
+                        - if research.available?
+                          %i.fa.fa-check{style: :'color:green'}
+                        -else
+                          %i.fa.fa-times{style: :'color:red'}
+                      - if current_user.try(:admin?)
+                        %td= button_to 'Edit', edit_research_path(research), class: "btn btn-primary", method: :get
+                        %td= button_to 'Delete', research, method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"
+        #aboutme.tab-pane.fade{style: :"padding-left: 1em;"}
+          %h2 About Me
+          = @researcher.bio
+    .adminEdit
+      - if user_signed_in? && current_user.admin?
+        = link_to "Edit #{@researcher.name}", edit_researcher_path, class: :"btn btn-info"

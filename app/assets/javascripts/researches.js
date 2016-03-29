@@ -7,6 +7,14 @@ $(function() {
     $('#dateEnd').tooltip();
   });
 
+  $(function() {
+      $('#weekStart').pickadate();
+      $('#weekEnd').pickadate();
+      $('#day_date').pickadate();
+      $("#dateStart").attr("readonly", false);
+      $("#dateEnd").attr("readonly", false);
+    });
+
 $(function() {
     $('#fieldStart').pickadate();
     $('#fieldEnd').pickadate();
