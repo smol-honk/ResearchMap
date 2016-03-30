@@ -2,8 +2,8 @@
   .userProfile{style: :"padding-top: 2em;"}
   .row.profile.panel#profilePanel
     .col-md-4.bg_blur
-      = image_tag(@user.avatar.thumb.url, class: :'img-rounded picture hidden-xs')
-      = image_tag(@user.avatar.thumb.url, class: :'img-rounded visible-xs picture_mob')
+      = image_tag(@user.avatar.url(:thumb), class: :'img-rounded picture hidden-xs')
+      = image_tag(@user.avatar.url(:thumb), class: :'img-rounded visible-xs picture_mob')
     .col-md-8.col-xs-12.info-col
       .header
         %h2

@@ -7,13 +7,13 @@
     = devise_error_messages!
     .field
       = f.label :first_name
-      = f.text_field :first_name, autofocus: true
+      = f.text_field :first_name, class: :'form-control', autofocus: true
     .field
       = f.label :last_name
-      = f.text_field :last_name
+      = f.text_field :last_name, class: :'form-control'
     .field
       = f.label :email
-      = f.email_field :email
+      = f.email_field :email, class: :'form-control'
     - if devise_mapping.confirmable? && resource.pending_reconfirmation?
       %div
         Currently waiting confirmation for: #{resource.unconfirmed_email}
@@ -24,66 +24,65 @@
       - if user_signed_in?
         - if current_user.avatar.url.present?
           = image_tag(current_user.avatar.url(:thumb))
-          = f.label :remove_avatar do
-            Remove Avatar
+          .checkbox
             = f.check_box :remove_avatar
+            = f.label :remove_avatar
       - elsif researcher_signed_in?
         - if current_researcher.avatar.url.present?
           = image_tag(current_researcher.avatar.url(:thumb))
-          = f.check_box :remove_avatar
-          = f.label :remove_avatar
+          .checkbox
+            = f.check_box :remove_avatar
+            = f.label :remove_avatar
 
       = f.file_field :avatar
       = f.hidden_field :avatar_cache
       %br
     .field
       = f.label :title
-      = f.text_field :title
+      = f.text_field :title, class: :'form-control'
     .field
       = f.label :headline
-      = f.text_field :headline
+      = f.text_field :headline, class: :'form-control'
     .field
       = f.label :current_location, "Current Location"
-      = f.text_field :current_location
+      = f.text_field :current_location, class: :'form-control'
     .field
       = f.label :bio
-      = f.text_area :bio
-    - if researcher_signed_in?
-      .field
-        = f.label :available do
-          Can accept visitors?
-          = f.check_box :available, id: :'visitor'
-      .field#dayorweek{style: :"display: none"}
-        = f.label :day do
-          Day visit?
-          = f.check_box :day, id: :'dayselect'
-        = f.label :week do
-          Week visit?
-          = f.check_box :week, id: :'weekselect'
-      .field#day{style: :"display: none"}
-        = f.label :dateStart, "What day are you available? (Please keep time zone in mind)"
-        = f.date_field :day_available
-      .field#week{style: :"display: none"}
-        = f.label :dateStart, "Start of the week you're available"
-        = f.date_field :weekDateStart
-        = f.label :dateEnd, "End of the week when you're available"
-        = f.date_field :weekDateEnd
+      = f.text_area :bio, class: :'form-control'
+    -# - if researcher_signed_in?
+    -#   .field
+    -#     = f.label :available do
+    -#       Can accept visitors?
+    -#       = f.check_box :available, id: :'visitor'
+    -#   .field#dayorweek{style: :"display: none"}
+    -#     = f.label :day do
+    -#       Day visit?
+    -#       = f.check_box :day, id: :'dayselect'
+    -#     = f.label :week do
+    -#       Week visit?
+    -#       = f.check_box :week, id: :'weekselect'
+    -#   .field#day{style: :"display: none"}
+    -#     = f.label :dateStart, "What day are you available? (Please keep time zone in mind)"
+    -#     = f.date_field :day_available
+    -#   .field#week{style: :"display: none"}
+    -#     = f.label :dateStart, "Start of the week you're available"
+    -#     = f.date_field :weekDateStart
+    -#     = f.label :dateEnd, "End of the week when you're available"
+    -#     = f.date_field :weekDateEnd
     .field
       = f.label :password
       %i (leave blank if you don't want to change it)
-      %br/
-      = f.password_field :password, autocomplete: "off"
+      = f.password_field :password, autocomplete: "off", class: :'form-control'
     .field
       = f.label :password_confirmation
-      = f.password_field :password_confirmation, autocomplete: "off"
+      = f.password_field :password_confirmation, autocomplete: "off", class: :'form-control'
     .field
       = f.label :current_password
       %i (we need your current password to confirm your changes)
-      %br/
-      = f.password_field :current_password, autocomplete: "off"
+      = f.password_field :current_password, autocomplete: "off", class: :'form-control'
     .actions
-      = f.submit "Update"
-  %h3 Cancel my account
+      = f.submit "Update", class: :'btn btn-default btn-lg'
+  %h3 Cancel my account ** DANGER **
   %p
     Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
   = link_to "Back", :back

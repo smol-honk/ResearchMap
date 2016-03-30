@@ -23,7 +23,7 @@ var NewTripPasses = React.createClass({
       type: 'get',
       dataType: 'json',
       success: function(data){
-          this.setState({data: data});
+          this.setState({data: data.newPasses});
       }.bind(this),
       error: function(xhr, status, err){
         console.error(this.props.url, status, err.toString());
@@ -36,8 +36,8 @@ var NewTripPasses = React.createClass({
       url: Routes.trip_pass_accept_path(id),
       type: 'post',
       success: function(data){
-        this.loadTripsFromServer();
         this.props.updateAll();
+        this.loadTripsFromServer();
       }.bind(this),
       error: function(xhr, status, err){
         alert("An Error Occured!");
@@ -68,23 +68,8 @@ var NewTripPasses = React.createClass({
   },
   render: function(){
     return (
-        <table className = 'tripPassTable table table-striped table-reponsive table-hover'>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Location</th>
-              <th>Arrival</th>
-              <th>Departure</th>
-              <th>Accepted?</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <Trip_Pass_List btnDecline = {this.state.btnDecline} btnAccept = {this.state.btnAccept} data={this.state.data} handleAccept = {this.onHandleAccept} handleDecline = {this.onHandleDecline}/>
-          </tbody>
-        </table>
-    )
+      <Trip_Pass_List btnDecline = {this.state.btnDecline} btnAccept = {this.state.btnAccept} data={this.state.data} handleAccept = {this.onHandleAccept} handleDecline = {this.onHandleDecline}/>
+    );
   }
 });
 
@@ -96,7 +81,8 @@ var Trip_Pass_List = React.createClass({
     this.props.handleDecline(id);
   },
   render: function(){
-    var tripNodes = this.props.data.map(function(trip, id){
+    console.log(this.props.data);
+    var tripNodes = this.props.data.map(function(trip){
       return (
           <Trip_Pass btnDecline = {this.props.btnDecline} btnAccept = {this.props.btnAccept} onPassAccept = {this.accept_pass} onPassDecline = {this.decline_pass}  data = {trip} key = {trip.id} />
       );
@@ -160,5 +146,5 @@ var Trip_Pass = React.createClass({
 
 ReactDOM.render(
   <NewTripPasses />,
-  document.body
+  document.getElementById("new")
 );

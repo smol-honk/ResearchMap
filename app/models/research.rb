@@ -45,4 +45,7 @@ class Research < ActiveRecord::Base
     end
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    super - ['id', 'created_at', 'longitude', 'latitude', 'updated_at']
+  end
 end

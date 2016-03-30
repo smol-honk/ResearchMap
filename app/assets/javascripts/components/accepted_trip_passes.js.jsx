@@ -102,12 +102,17 @@ var Trip_Pass_List_One = React.createClass({
 });
 
 var Trip_Pass_One_Button = React.createClass({
+  getInitialState: function(){
+    return {btn: this.props.btn};
+  },
   handleClick: function (){
-    if (this.props.btn === 'Accept'){
+    if (this.state.btn === 'Accept'){
         this.props.onPassAccept(this.props.data.id);
+        this.setState({btn: "Accepting..."});
     }
-    else if (this.props.btn === 'Decline'){
+    else if (this.state.btn === 'Decline'){
       this.props.onPassDecline(this.props.data.id);
+      this.setState({btn: "Declining..."});
     }
   },
   render: function(){
@@ -130,7 +135,7 @@ var Trip_Pass_One_Button = React.createClass({
           </td>
           <td>
             <div className = "btn-group" role="group">
-              <button type = "button" onClick = {this.handleClick} className = "btn btn-info">{this.props.btn}</button>
+              <button type = "button" onClick = {this.handleClick} className = "btn btn-info">{this.state.btn}</button>
             </div>
           </td>
         </tr>

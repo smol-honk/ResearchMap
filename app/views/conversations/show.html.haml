@@ -1,5 +1,5 @@
 .container
-  %p
+  %p{style: :"padding-top: 1em;"}
     Chatting with
     \#{render 'conversations/participants', conversation: @conversation}
     = react_component('Conversation', {:convo => @conversation, :id => @conversation.id, :subject => @conversation.subject, :data => @convo.map{|u| u.message.as_json(include: { sender: { only: [:name, :avatar] } })}})

@@ -9,7 +9,11 @@ class TripPass < ActiveRecord::Base
 
   def setDays
     totalDays = user.days - (self.dateEnd - self.dateStart)
-    user.update_attribute(:days, totalDays)
+    if totalDays < 0
+      return false
+    else
+      user.update_attribute(:days, totalDays)
+    end
   end
 
   def decline

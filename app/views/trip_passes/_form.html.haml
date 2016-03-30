@@ -6,17 +6,17 @@
         %ul
           - @trip_pass.errors.full_messages.each do |msg|
             %li= msg
-    .form-group
-      = label_tag 'researcher', 'Choose researcher'
-      = select_tag('researcher', researcher_options, multiple: false, class: 'form-control')
+    -# .form-group
+    -#   = label_tag 'researcher', 'Choose researcher'
+    -#   = select_tag('researcher', researcher_options, multiple: false, class: 'form-control')
     .form-group
       = label_tag 'research', 'Which Research Will you Visit?'
       = select_tag('research', research_options, multiple: false, class: 'form-control')
     .form-group
       = f.label :dateStart, "Day of Arrival in field"
-      = f.text_field :dateStart, class: :"form-control", id: :"dateStart", title: :"Date of Arrival", 'data-toggle': :'tooltip', 'data-placement': :'top'
+      = f.text_field :dateStart, focus: :false, class: :"form-control", id: :"dateStart", title: :"Date of Arrival", 'data-toggle': :'tooltip', 'data-placement': :'top'
     .form-group
       = f.label :dateEnd, "Day of Departure from field"
-      = f.text_field :dateEnd, class: :"form-control", id: :"dateEnd", title: :"Date of Departure", 'data-toggle': :'tooltip', 'data-placement': :'top'
+      = f.text_field :dateEnd, focus: :false, class: :"form-control", id: :"dateEnd", title: :"Date of Departure", 'data-toggle': :'tooltip', 'data-placement': :'top'
     .actions
       = f.submit 'Submit', class: :"btn btn-primary"

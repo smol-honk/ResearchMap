@@ -129,8 +129,8 @@ class TripPassesController < ApplicationController
   def create
     @trip_pass = TripPass.new(trip_pass_params)
     @trip_pass.user = current_user
-    @trip_pass.researcher_id = params['researcher']
     @trip_pass.research_id = params['research']
+    @trip_pass.researcher_id = @trip_pass.research.researcher.id
     @trip_pass.location = Research.find(params['research']).location
 
     respond_to do |format|
@@ -139,7 +139,7 @@ class TripPassesController < ApplicationController
         format.html { redirect_to @trip_pass, notice: 'Trip pass was successfully created.' }
         format.json { render :show, status: :created, location: @trip_pass }
       else
-        format.html { render :new }
+        format.html { redirect_to new_trip_pass_path, alert: "You don't have enough days available for this trip pass!" }
         format.json { render json: @trip_pass.errors, status: :unprocessable_entity }
       end
     end

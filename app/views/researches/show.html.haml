@@ -3,42 +3,50 @@
     %h1
       = @research.name
   %p
-    %b
-      %i.fa.fa-map-marker
-      Location:
+    %h4
+      %u
+        Location
+        %i.fa.fa-map-marker
     = @research.location
   %p
-    %b Researcher:
+    %h4
+      %u Researcher
     = link_to @research.researcher.name, @research.researcher
   %p
-    %b Research Start Date:
-    = @research.dateStart
+    %h4
+      %u Research Start Date
+    = @research.dateStart.strftime("%-d %B %Y")
   %p
-    %b Research End Date:
-    = @research.dateEnd
+    %h4
+      %u Research End Date
+    = @research.dateEnd.strftime("%-d %B %Y")
   %p
-    %b Available for Visits?:
+    %h4
+      %u Available for Visits?
     = translate_bool(@research.available)
   -if @research.available
     %p
-      %b Week Visit?:
+      %h4
+        %u Week Visit?
       = translate_bool(@research.week)
       %br
-      - if @research.week
-        %b Available from:
+      - if @research.weekStart && @research.weekEnd
+        %h4
+          %u Available from:
         = @research.weekStart.strftime("%-d %B %Y")
         %b to
         = @research.weekEnd.strftime("%-d %B %Y")
     %p
-      %b Day Visit?:
+      %h4
+        %u Day Visit?
       = translate_bool(@research.day)
-      - if @research.day
+      - if @research.day_date
         %p
-          %b Available on:
-          = @research.day_date
+          %b Available on
+          = @research.day_date.strftime("%-d %B %Y")
   %p
-    %b Abstract:
-    %br
+    %h3
+      %u Abstract
     = @research.abstract
 
   .btn-block

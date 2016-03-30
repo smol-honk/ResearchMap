@@ -2,8 +2,8 @@
   .researcherProfile{style: :"padding-top: 2em;"}
     .row.profile.panel#profilePanel
       .col-md-4.bg_blur
-        = image_tag(@researcher.avatar.thumb.url, class: :'img-rounded picture hidden-xs')
-        = image_tag(@researcher.avatar.thumb.url, class: :'img-rounded visible-xs picture_mob')
+        = image_tag(@researcher.avatar.url(:thumb), class: :'img-rounded picture hidden-xs')
+        = image_tag(@researcher.avatar.url(:thumb), class: :'img-rounded visible-xs picture_mob')
       .col-md-8.col-xs-12.info-col
         .header
           %h2
@@ -52,7 +52,7 @@
             -else
               = @researcher.headline
 
-        .btn-group.btn-block#buttons
+        .btn-group.btn-block#buttons{style: :"padding-bottom: 2.5em;"}
           = link_to researcher_following_path(@researcher), role: :"button", method: :get, class: :'button btn btn-red btn-lg' do
             %i.fa.fa-users.fa-lg
             Following

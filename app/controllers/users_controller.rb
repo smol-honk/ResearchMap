@@ -1,3 +1,4 @@
+
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :edit, :destroy, :update, :import]
   def index
@@ -14,7 +15,8 @@ class UsersController < ApplicationController
   end
   def trips
     @user= User.find(params[:user_id])
-    @trip_passes = TripPass.where(user: @user).where(admin_approval: true)
+    # TODO: Update trip passes to reflect admin approval
+    @trip_passes = TripPass.where(user: @user)
   end
 
   def edit
@@ -79,7 +81,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :bio, :headline, :avatar, :avatar_cache, :remove_avatar, :role_id, :role)
+    params.require(:user).permit(:email, :password, :title, :current_location, :password_confirmation, :first_name, :last_name, :bio, :headline, :avatar, :avatar_cache, :remove_avatar, :role_id, :role)
   end
 
 end
