@@ -1,6 +1,6 @@
 var TripPassBox = React.createClass({
   getInitialState: function(){
-    return {newPasses: this.props.newPasses, acceptPasses: this.props.acceptedPasses, declinePasses: this.props.declinedPasses};
+    return {newPasses: this.props.newPasses, acceptPasses: this.props.acceptPasses, declinePasses: this.props.declinePasses};
   },
   componentDidMount: function(){
     this.getPassesFromServer();
@@ -39,7 +39,7 @@ var TripPassBox = React.createClass({
       return <h4>You don't have any accepted Trip Requests!</h4>;
     }
     else{
-      return <AcceptedTripPasses data = {this.state.newPasses} updateAll = {this.updateBox} />;
+      return <AcceptedTripPasses data = {this.state.acceptPasses} updateAll = {this.updateBox} />;
     }
   },
   declineRender: function(){
@@ -47,7 +47,7 @@ var TripPassBox = React.createClass({
       return <h4>You don't have any declined Trip Requests!</h4>;
     }
     else{
-      return <DeclinedTripPasses data = {this.state.newPasses} updateAll = {this.updateBox} />;
+      return <DeclinedTripPasses data = {this.state.declinePasses} updateAll = {this.updateBox} />;
     }
   },
   render: function(){
@@ -107,7 +107,6 @@ var TripPassBox = React.createClass({
           </div>
         </div>
     </div>
-
     );
   }
 });

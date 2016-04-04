@@ -13,6 +13,12 @@ class MessagesController < ApplicationController
     redirect_to conversation_path(conversation)
   end
 
+  def modal_send(body, recipient)
+    recipients = User.where(email: recipient) + Researcher.where(email: recipient)
+    modal_conversation = @current.send_message(recipients, body, "Regarding your recent Trip Request with #{@current.name}")
+    flash[:success] = 'Message sent!'
+  end
+
   private
   def get_user
     if researcher_signed_in?

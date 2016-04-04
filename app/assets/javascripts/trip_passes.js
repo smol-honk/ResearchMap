@@ -1,3 +1,5 @@
+// trip_passes.js
+
 $(function() {
     $('#dateStart').pickadate();
     $('#dateEnd').pickadate();

@@ -3,11 +3,13 @@
     %h1
       Trip Requests
       %i.fa.fa-plane
-  = react_component 'TripPassBox', {newPasses: @trip_passes, acceptedPasses: @accepted_trips, declinedPasses: @declined_trips}
+  = react_component 'TripPassBox', {newPasses: @trip_passes.map{|u| u.as_json(include: { researcher: { only: [:name] }, user: { only: [:name] } } ) }, acceptPasses: @accepted_trips.map{|u| u.as_json(include: { researcher: { only: [:name] }, user: { only: [:name] } } ) }, declinePasses: @declined_trips.map{|u| u.as_json(include: { researcher: { only: [:name] }, user: { only: [:name] } } ) }}
   #box
   #new
   #accepted
   #declined
+
+  #test
   -# .panel-group#accordion{role: :"tablist", 'aria-multiselectable': :"true"}
   -#   .panel.panel-default
   -#     .panel-heading#headingOne{role: :"tab"}
@@ -91,27 +93,27 @@
   -#             = button_to "accept", trip_pass_accept_path(pass), method: :post, class: :'btn btn-primary'
   -#             // Add a comment box for when they decline
   -#             = link_to "decline", trip_pass_decline_path(pass), method: :post, class: :'btn btn-danger', "data-target" => "##{pass.id}", "data-toggle" => "modal", remote: :true
-  -#             / Modal
-  -#             .modal.fade{id: :"#{pass.id}", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  -#               .modal-dialog
-  -#                 .modal-content
-  -#                   .modal-header
-  -#                     %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-  -#                       %span{"aria-hidden" => "true"} ×
-  -#                     %h4#myModalLabel.modal-title Send a message about why you can't
-  -#                   .modal-body
-  -#                     = form_tag messages_path, method: :post do
-  -#                       .form-group
-  -#                         = hidden_field_tag('recipients', pass.user.email)
-  -#                       .form-group
-  -#                         = hidden_field_tag('message[subject]', "Regarding your recent Trip Request with #{pass.researcher.name}")
-  -#                       .form-group
-  -#                         = label_tag 'message[body]', 'Message'
-  -#                         = text_area_tag 'message[body]', nil, cols: 3, height: :'40', class: 'form-control', required: true
-  -#                       .modal-footer
-  -#                         -# %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Cancel
-  -#                         = button_to "Cancel", trip_pass_cancel_path(pass), method: :post, class: :'btn btn-primary', "data-dismiss": :"modal"
-  -#                         = submit_tag 'Send', class: 'btn btn-primary'
+              / Modal
+              .modal.fade{id: :"#{pass.id}", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+                .modal-dialog
+                  .modal-content
+                    .modal-header
+                      %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                        %span{"aria-hidden" => "true"} ×
+                      %h4#myModalLabel.modal-title Send a message about why you can't
+                    .modal-body
+                      = form_tag messages_path, method: :post do
+                        .form-group
+                          = hidden_field_tag('recipients', pass.user.email)
+                        .form-group
+                          = hidden_field_tag('message[subject]', "Regarding your recent Trip Request with #{pass.researcher.name}")
+                        .form-group
+                          = label_tag 'message[body]', 'Message'
+                          = text_area_tag 'message[body]', nil, cols: 3, height: :'40', class: 'form-control', required: true
+                        .modal-footer
+                          -# %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Cancel
+                          = button_to "Cancel", trip_pass_cancel_path(pass), method: :post, class: :'btn btn-primary', "data-dismiss": :"modal"
+                          = submit_tag 'Send', class: 'btn btn-primary'
   -#
   -#         -else
   -#           %td{width: :"30%"}
