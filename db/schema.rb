@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160321232732) do
+ActiveRecord::Schema.define(version: 20160405181229) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -175,6 +175,7 @@ ActiveRecord::Schema.define(version: 20160321232732) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email",      limit: 255
     t.date     "locked_at"
+    t.integer  "failed_attempts",        limit: 4
   end
 
   add_index "researchers", ["confirmation_token"], name: "index_researchers_on_confirmation_token", unique: true, using: :btree
