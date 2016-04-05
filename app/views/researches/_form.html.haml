@@ -33,18 +33,18 @@
   .form-group
     %label Check the box if you are able, leave blank if not:
     .checkbox
-      = f.check_box(:available, include_hidden: false)
+      = f.check_box(:available)
       = f.label :available, "Are you able to host visitors?"
 
   .form-group#day
     %label If you are able to host (Leave blank if not):
     .checkbox
-      = f.check_box(:day, include_hidden: false)
+      = f.check_box(:day)
       = f.label :day, "Day Visit?"
 
   .form-group#week
     .checkbox
-      = f.check_box(:week, include_hidden: false)
+      = f.check_box(:week)
       = f.label :week, "Week Visit?"
 
   .form-group

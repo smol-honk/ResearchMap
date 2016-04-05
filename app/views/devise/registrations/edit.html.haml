@@ -14,6 +14,9 @@
     .field
       = f.label :email
       = f.email_field :email, class: :'form-control'
+    .field
+      = f.label :phone_number, "Phone Number"
+      = f.text_field :phone_number, class: :'form-control'
     - if devise_mapping.confirmable? && resource.pending_reconfirmation?
       %div
         Currently waiting confirmation for: #{resource.unconfirmed_email}

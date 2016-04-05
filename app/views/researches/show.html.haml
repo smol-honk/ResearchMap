@@ -2,51 +2,42 @@
   .page-header
     %h1
       = @research.name
+
+  .table-responsive
+    %table.table-striped
+      %thead
+        %tr
+          %th
+            Location
+          %th
+            Researcher
+          %th
+            Research Start Date
+          %th
+            Research End Date
+          %th
+            Available for Visits?
+      %tbody
+        %tr
+          %td
+            = @research.location
+          %td
+            = link_to @research.researcher.name, @research.researcher
+          %td
+            -if @research.dateStart.nil?
+              Contact Researcher for more information
+            -else
+              = @research.dateStart.strftime("%-d %B %Y")
+          %td
+            -if @research.dateEnd.nil?
+              Contact Researcher for more information
+            -else
+              = @research.dateEnd.strftime("%-d %B %Y")
+          %td
+            = translate_bool(@research.available)
   %p
-    %h4
-      %u
-        Location
-        %i.fa.fa-map-marker
-    = @research.location
-  %p
-    %h4
-      %u Researcher
-    = link_to @research.researcher.name, @research.researcher
-  %p
-    %h4
-      %u Research Start Date
-    = @research.dateStart.strftime("%-d %B %Y")
-  %p
-    %h4
-      %u Research End Date
-    = @research.dateEnd.strftime("%-d %B %Y")
-  %p
-    %h4
-      %u Available for Visits?
-    = translate_bool(@research.available)
-  -if @research.available
-    %p
-      %h4
-        %u Week Visit?
-      = translate_bool(@research.week)
-      %br
-      - if @research.weekStart && @research.weekEnd
-        %h4
-          %u Available from:
-        = @research.weekStart.strftime("%-d %B %Y")
-        %b to
-        = @research.weekEnd.strftime("%-d %B %Y")
-    %p
-      %h4
-        %u Day Visit?
-      = translate_bool(@research.day)
-      - if @research.day_date
-        %p
-          %b Available on
-          = @research.day_date.strftime("%-d %B %Y")
-  %p
-    %h3
-      %u Abstract
+    %h2
+      Abstract
     = @research.abstract
 
   .btn-block
@@ -59,7 +50,6 @@
           Like
     - else
 
-    %br
     %br
     - if @current.try(:admin?) or current_researcher == @research.researcher
       = link_to 'Edit', edit_research_path(@research), class: :'btn btn-primary', data: {'no-turbolink': 'true'}

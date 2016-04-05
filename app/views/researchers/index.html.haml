@@ -13,8 +13,6 @@
           %th
             = sort_link(@search, :last_name, "Last Name")
           %th
-            Current Location
-          %th
             Can Visit?
           %th
             Contact
@@ -27,8 +25,6 @@
               = link_to researcher.first_name, researcher
             %td
               = link_to researcher.last_name, researcher
-            %td
-              = researcher.current_location
             %td
               - if (Research.where(researcher: researcher).where(available: true).blank?)
                 %i.fa.fa-times{style: :'color:red'}

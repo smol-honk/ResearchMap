@@ -1,6 +1,6 @@
 .container
   .page-header
-    %h1 UA Anthropology Research
+    %h1 School of Anthropology Research
     -if researcher_signed_in? || current_user.try(:admin?)
       = button_to 'New research', new_research_path, class: "btn btn-info", method: :get
   %br
@@ -12,15 +12,17 @@
         %thead
           %tr
             %th
-              = sort_link(@search, :name, "Name")
+              = sort_link(@search, :name, "Title")
             %th
               = sort_link(@search, :researcher, "Researcher")
             %th
               = sort_link(@search, :location, "Location")
             %th
-              = sort_link(@search, :dateStart, "Started")
+              = sort_link(@search, :available, "Can Visit?")
             %th
-              = sort_link(@search, :dateEnd, "Ended")
+              = sort_link(@search, :dateStart, "Starts")
+            %th
+              = sort_link(@search, :dateEnd, "Ends")
 
         %tbody.bigTableBody
           - @researches.each do |research|
@@ -28,6 +30,13 @@
               %td= link_to research.name, research
               %td= research.researcher.name
               %td= research.location
+              %td
+                - if research.available.nil?
+                  %i.fa.fa-times{style: :'color:red'}
+                - elsif research.available == true
+                  %i.fa.fa-check{style: :'color:green'}
+                - else
+                  %i.fa.fa-times{style: :'color:red'}
               %td= research.dateStart
               %td= research.dateEnd
               - if current_user.try(:admin?)
