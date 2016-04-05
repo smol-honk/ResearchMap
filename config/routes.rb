@@ -2,10 +2,8 @@ Rails.application.routes.draw do
   resources :trip_passes
   devise_for :users, :path_prefix => 'profile', :controllers => { :confirmations => "confirmations" }
   devise_for :researchers, :path_prefix => 'profile', :controllers => { :confirmations => "confirmations" }
-  resources :users
 
   # devise_for :researchers, :path_prefix => 'profile'
-  resources :researchers
 
   resources :users, :researchers, :researches
 

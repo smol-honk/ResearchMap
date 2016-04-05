@@ -14,10 +14,12 @@ class Researcher < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable
 
-  geocoded_by :current_location
-  after_validation :geocode, :if => :current_location_changed?
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :first_name, :last_name, :email, :password, :bio, :title, :headline, :current_location, :avatar, :avatar_cache, :remove_avatar, :password_confirmation
+
+  geocoded_by :current_location
+  after_validation :geocode, :if => :current_location_changed?
+
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
       researcher = find_by_id(row["id"]) || new
@@ -60,12 +62,7 @@ class Researcher < ActiveRecord::Base
   end
 
   def password_required?
-    # Password is required if it is being set, but not for new records
-    if !persisted?
-      false
-    else
-      !password.nil? || !password_confirmation.nil?
-    end
+    super if confirmed?
   end
 
   def password_match?
@@ -74,6 +71,7 @@ class Researcher < ActiveRecord::Base
     self.errors[:password_confirmation] << "does not match password" if password != password_confirmation
     password == password_confirmation && !password.blank?
   end
+
 
   def mailboxer_email(object)
     return self.email
