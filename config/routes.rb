@@ -1,18 +1,9 @@
 Rails.application.routes.draw do
   resources :trip_passes
-  devise_for :users, :path_prefix => 'profile', :controllers => { :confirmations => "confirmations" }
-  devise_for :researchers, :path_prefix => 'profile', :controllers => { :confirmations => "confirmations" }
-
-  # devise_for :researchers, :path_prefix => 'profile'
+  devise_for :users, :path_prefix => 'profile', :controllers => { :users_invitations => "users/invitations" }
+  devise_for :researchers, :path_prefix => 'profile', :controllers => { :researchers_invitations => "researchers/invitations" }
 
   resources :users, :researchers, :researches
-
-  as :user do
-    patch "/user/confirm" => "confirmations#confirm", :as => :user_confirm
-  end
-  as :researcher do
-    patch "/researcher/confirm" => "confirmations#confirm", :as => :researcher_confirm
-  end
 
   resources :users do
     get 'following', to: 'follow#following'

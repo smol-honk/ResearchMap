@@ -18,6 +18,13 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:name, :first_name, :last_name, :email, :password, :password_confirmation, :remember_me) }
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :email, :password, :remember_me) }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :first_name, :last_name, :email, :password, :password_confirmation, :current_password, :bio, :title, :headline, :current_location, :avatar, :avatar_cache, :remove_avatar) }
+    # Only add some parameters
+    devise_parameter_sanitizer.for(:accept_invitation).concat [:first_name, :last_name, :phone]
+    # Override accepted parameters
+    devise_parameter_sanitizer.for(:accept_invitation) do |u|
+    u.permit(:first_name, :last_name, :phone_number, :password, :password_confirmation,
+             :invitation_token)
+    end
   end
 
   private

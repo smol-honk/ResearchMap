@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160405181229) do
+ActiveRecord::Schema.define(version: 20160412190228) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -176,10 +176,21 @@ ActiveRecord::Schema.define(version: 20160405181229) do
     t.string   "unconfirmed_email",      limit: 255
     t.date     "locked_at"
     t.integer  "failed_attempts",        limit: 4
+    t.string   "invitation_token",       limit: 255
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer  "invitation_limit",       limit: 4
+    t.integer  "invited_by_id",          limit: 4
+    t.string   "invited_by_type",        limit: 255
+    t.integer  "invitations_count",      limit: 4,     default: 0
   end
 
   add_index "researchers", ["confirmation_token"], name: "index_researchers_on_confirmation_token", unique: true, using: :btree
   add_index "researchers", ["email"], name: "index_researchers_on_email", unique: true, using: :btree
+  add_index "researchers", ["invitation_token"], name: "index_researchers_on_invitation_token", unique: true, using: :btree
+  add_index "researchers", ["invitations_count"], name: "index_researchers_on_invitations_count", using: :btree
+  add_index "researchers", ["invited_by_id"], name: "index_researchers_on_invited_by_id", using: :btree
   add_index "researchers", ["reset_password_token"], name: "index_researchers_on_reset_password_token", unique: true, using: :btree
 
   create_table "researches", force: :cascade do |t|
@@ -263,10 +274,21 @@ ActiveRecord::Schema.define(version: 20160405181229) do
     t.datetime "locked_at"
     t.integer  "days",                   limit: 4,     default: 0
     t.string   "phone_number",           limit: 255
+    t.string   "invitation_token",       limit: 255
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer  "invitation_limit",       limit: 4
+    t.integer  "invited_by_id",          limit: 4
+    t.string   "invited_by_type",        limit: 255
+    t.integer  "invitations_count",      limit: 4,     default: 0
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
+  add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
+  add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree

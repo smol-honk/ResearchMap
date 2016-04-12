@@ -1,26 +1,3 @@
--# .container
--#   %h2 Account Activation
--#   = form_for resource, :as => resource_name, :url => update_user_confirmation_path, :html => {:method => 'patch'}, :id => 'activation-form' do |f|
--#     = devise_error_messages!
--#     %fieldset
--#       %legend
--#         Account Activation
--#         - if resource.name
--#           for #{resource.name}
--#       - if @requires_password
--#         %p
--#           = f.label :password,'Choose a Password:'
--#           = f.password_field :password
--#         %p
--#           = f.label :password_confirmation,'Password Confirmation:'
--#           = f.password_field :password_confirmation
--#       = hidden_field_tag :confirmation_token,@confirmation_token
--#
--#       %p
--#         Don't forget to set up your profile after you confirm!
--#       %p= f.submit "Activate"
-  <%= form_for resource, :as => resource_name, :url => update_user_confirmation_path, :html => {:method => 'patch'}, :id => 'activation-form' do |f| %>
-
 %h2 You're almost done! Now create a password to securely access your account.
 = semantic_form_for(resource, :as => resource_name, :url => send(:"#{resource_name}_confirm_path")) do |form|
   = devise_error_messages!

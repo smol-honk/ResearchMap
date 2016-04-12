@@ -1,4 +1,3 @@
-
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :edit, :destroy, :update, :import]
   def index
@@ -81,7 +80,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :title, :current_location, :password_confirmation, :first_name, :last_name, :bio, :headline, :avatar, :avatar_cache, :remove_avatar, :role_id, :role)
+    params.require(:user).permit(:email, :password, :title, :current_location, :password_confirmation, :first_name, :last_name, :bio, :headline, :avatar, :avatar_cache, :remove_avatar, :role_id, :role, :phone_number)
   end
 
 end

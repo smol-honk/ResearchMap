@@ -1,27 +1,31 @@
 .container
   .page-header
     %h2 Sign up
-  = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:multipart => true}) do |f|
-    - # ...other form fields
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
     = devise_error_messages!
     .field
       = f.label :first_name
       %br/
       = f.text_field :first_name, autofocus: true
-    .field
-      = f.label :last_name
-      %br/
-      = f.text_field :last_name
+      .field
+        = f.label :last_name
+        %br/
+        = f.text_field :last_name
     .field
       = f.label :email
       %br/
       = f.email_field :email
     .field
-      Avatar
-      = f.label :avatar do
-        = f.file_field :avatar
-        = f.hidden_field :avatar_cache
-
+      = f.label :password
+      - if @minimum_password_length
+        %em
+          (#{@minimum_password_length} characters minimum)
+      %br/
+      = f.password_field :password, autocomplete: "off"
+    .field
+      = f.label :password_confirmation
+      %br/
+      = f.password_field :password_confirmation, autocomplete: "off"
     .actions
       = f.submit "Sign up"
   = render "devise/shared/links"
