@@ -1,3 +1,3 @@
-class Users::InvitationsController < Devise::InvitationsController
-
-end
+# class Users::InvitationsController < Devise::InvitationsController
+#
+# end
