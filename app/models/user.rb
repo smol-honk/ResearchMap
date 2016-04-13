@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :researchers
   has_many :researches
   before_save :assign_role
-  before_create :name
+  before_save :name
   belongs_to :trip_pass
   validates_presence_of :first_name, :last_name
 
@@ -35,7 +35,15 @@ class User < ActiveRecord::Base
   end
 
   def name
-    self.name = self.first_name + " " +  self.last_name
+    if self.first_name.nil? && !self.last_name.nil?
+      self.name = self.last_name
+    elsif !self.first_name.nil? && self.last_name.nil?
+      self.name = self.first_name
+    elsif self.first_name.nil? && self.last_name.nil?
+      self.name = ""
+    else
+      self.name = self.first_name + " " +  self.last_name
+    end
   end
 
   def admin?
