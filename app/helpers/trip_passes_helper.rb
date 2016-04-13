@@ -6,6 +6,15 @@ module TripPassesHelper
     end
     s.html_safe
   end
+
+  def user_options
+    s = ''
+    User.all.each do |user|
+      s << "<option value='#{user.id}'>#{user.first_name} #{user.last_name}</option>"
+    end
+    s.html_safe
+  end
+
   def research_options
     s = ''
     Research.where(available: true).order(:researcher_id).each do |research|

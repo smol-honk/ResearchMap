@@ -1,11 +1,7 @@
 .container
   .page-header
     %h1 Current Users
-  - if current_user.try(:admin?)
-    = link_to "Download User CSV", users_path(format: "csv"), class: :"btn btn-info"
-  %br
-  %br
-  %table.table-hover.table-bordered.table-responsive
+  %table.table-hover.table-bordered.table-responsive.table-striped
     %thead
       %tr
         %th ID
@@ -35,7 +31,13 @@
 
   - if current_user.try(:admin?)
     .page-header
-      %h2 Import Users
-    = form_tag import_users_path, multipart: true do
-      = file_field_tag :file
-      = submit_tag "Import Users", class: :"btn btn-primary btn-sm"
+      %h1 Administration
+    .row
+      .col-xs-8.col-sm-6
+        %h2 Download Researchers
+        = link_to "Download Users CSV", users_path(format: "csv"), class: :"btn btn-info"
+      .col-xs-4.col-sm-6
+        %h2 Import Users
+        = form_tag import_users_path, multipart: true do
+          = file_field_tag :file
+          = submit_tag "Import Users", class: :"btn btn-primary btn-sm"

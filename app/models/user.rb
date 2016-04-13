@@ -30,20 +30,33 @@ class User < ActiveRecord::Base
       elsif user.role_id == 2
         user.update_attribute :days, 1
       end
-      user.save!
+
+      inDatabase = User.all.map{|u| u.email}.include? user.email
+      if user.encrypted_password.blank? && !user.email.blank? && !inDatabase
+        user.invite!
+      else
+        user.save!
+      end
+    end
+  end
+
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      all.each do |user|
+        csv << user.attributes.values_at(*column_names)
+      end
     end
   end
 
   def name
-    if self.first_name.nil? && !self.last_name.nil?
-      self.name = self.last_name
-    elsif !self.first_name.nil? && self.last_name.nil?
-      self.name = self.first_name
-    elsif self.first_name.nil? && self.last_name.nil?
-      self.name = ""
-    else
-      self.name = self.first_name + " " +  self.last_name
+    if self.first_name.nil?
+      self.first_name = ""
     end
+    if self.last_name.nil?
+      self.last_name = ""
+    end
+    self.name = self.first_name + " " +  self.last_name
   end
 
   def admin?

@@ -128,7 +128,11 @@ class TripPassesController < ApplicationController
   # POST /trip_passes.json
   def create
     @trip_pass = TripPass.new(trip_pass_params)
-    @trip_pass.user = current_user
+    if current_user.try(:admin?)
+      @trip_pass.user_id = params['user']
+    else
+      @trip_pass.user = current_user
+    end
     @trip_pass.research_id = params['research']
     @trip_pass.researcher_id = @trip_pass.research.researcher.id
     @trip_pass.location = Research.find(params['research']).location

@@ -1,7 +1,9 @@
 .container
   .jumbotron
     %h1 New Trip Pass
-
-  =render 'form'
+  -if current_user.try(:admin?)
+    = render 'adminform'
+  -else
+    = render 'form'
 
   = link_to 'Back', trip_passes_path

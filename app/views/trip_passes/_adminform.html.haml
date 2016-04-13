@@ -1,0 +1,22 @@
+.container
+  = form_for @trip_pass do |f|
+    - if @trip_pass.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@trip_pass.errors.count, "error")} prohibited this trip_pass from being saved:"
+        %ul
+          - @trip_pass.errors.full_messages.each do |msg|
+            %li= msg
+    .form-group
+      = label_tag 'User', 'Choose User'
+      = select_tag('user', user_options, multiple: false, class: 'form-control')
+    .form-group
+      = label_tag 'research', 'Which Research Will you Visit?'
+      = select_tag('research', research_options, multiple: false, class: 'form-control')
+    .form-group
+      = f.label :dateStart, "Day of Arrival in field"
+      = f.text_field :dateStart, focus: :false, class: :"form-control", id: :"dateStart", title: :"Date of Arrival", 'data-toggle': :'tooltip', 'data-placement': :'top'
+    .form-group
+      = f.label :dateEnd, "Day of Departure from field"
+      = f.text_field :dateEnd, focus: :false, class: :"form-control", id: :"dateEnd", title: :"Date of Departure", 'data-toggle': :'tooltip', 'data-placement': :'top'
+    .actions
+      = f.submit 'Submit', class: :"btn btn-primary"
