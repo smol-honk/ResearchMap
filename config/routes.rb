@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :trip_passes
-  devise_for :users, :path_prefix => 'profile', :controllers => { :users_invitations => "users/invitations" }
-  devise_for :researchers, :path_prefix => 'profile', :controllers => { :researchers_invitations => "researchers/invitations" }
+  devise_for :users, :path_prefix => 'profile', :controllers => { :users_invitations => "devise/invitations" }
+  devise_for :researchers, :path_prefix => 'profile', :controllers => { :researchers_invitations => "devise/invitations" }
 
   resources :users, :researchers, :researches
 
