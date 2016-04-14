@@ -4,7 +4,6 @@
   .panel.panel-default
     .panel-heading
       Researchers
-
     %table.table.table-striped.table-responsive
       %thead
         %tr
@@ -26,13 +25,16 @@
             %td
               = link_to researcher.last_name, researcher
             %td
-              - if (Research.where(researcher: researcher).where(available: true).blank?)
-                %i.fa.fa-times{style: :'color:red'}
-              - else
+              - if (!Research.where(researcher: researcher).where(available: true).blank?)
                 %i.fa.fa-check{style: :'color:green'}
+              - elsif (!Research.where(researcher: researcher).where(unknown: true).blank?)
+                %i.fa.fa-question-circle{style: :'color:gray'}
+              - else
+                %i.fa.fa-times{style: :'color:red'}
+
             %td
-              %a.fa.fa-envelope-o{"data-target" => "##{researcher.first_name}", "data-toggle" => "modal", :href => "#"}
-              .modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1", id: :"#{researcher.first_name}"}
+              %a.fa.fa-envelope-o{"data-target" => "##{researcher.name_hash}", "data-toggle" => "modal", :href => "#"}
+              .modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1", id: :"#{researcher.name_hash}"}
                 .modal-dialog
                   .modal-content
                     .modal-header

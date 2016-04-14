@@ -32,11 +32,14 @@
               %td= research.location
               %td
                 - if research.available.nil?
-                  %i.fa.fa-times{style: :'color:red'}
+                  %i.fa.fa-question-circle{style: :'color:gray'}
+                - if research.unknown == true
+                  %i.fa.fa-question-circle{style: :'color:gray'}
                 - elsif research.available == true
                   %i.fa.fa-check{style: :'color:green'}
-                - else
+                - elsif research.available == false
                   %i.fa.fa-times{style: :'color:red'}
+
               %td= research.dateStart
               %td= research.dateEnd
               - if current_user.try(:admin?)

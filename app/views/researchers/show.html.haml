@@ -67,6 +67,31 @@
             %i.fa.fa-users.fa-lg
             Likes
             = @likes.count
+          %a.btn.btn-red.btn-lg{"data-target" => "##{@researcher.name_hash}", "data-toggle" => "modal", :href => "#", role: :"button"}
+            %i.fa.fa-envelope-o
+            Message
+          .modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1", id: :"#{@researcher.name_hash}"}
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                    %span{"aria-hidden" => "true"} ×
+                  %h4#myModalLabel.modal-title
+                  Send a Message to #{@researcher.name}
+                .modal-body
+                  = form_tag messages_path, method: :post do
+                    .form-group
+                      = hidden_field_tag('recipients', @researcher.email)
+                    .form-group
+                      = label_tag 'message[subject]', 'Subject'
+                      = text_field_tag 'message[subject]', nil, class: 'form-control', required: true
+                    .form-group
+                      = label_tag 'message[body]', 'Message'
+                      = text_area_tag 'message[body]', nil, cols: 3, height: :'40', class: 'form-control', required: true
+                    .modal-footer
+                      %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+                      = submit_tag 'Send', class: 'btn btn-primary'
+
 
       #profileInfo
       %ul.nav.nav-tabs

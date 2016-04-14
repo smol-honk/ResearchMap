@@ -23,10 +23,17 @@ class Research < ActiveRecord::Base
                   :weekEnd,
                   :researcher,
                   :researcher_id,
-                  :id
+                  :id,
+                  :unknown
 
   geocoded_by :location
   after_validation :geocode, :if => :location_changed?
+
+  def update_dates
+    if Time.now > dateEnd
+      self.update_attribute(:available, false)
+    end
+  end
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|

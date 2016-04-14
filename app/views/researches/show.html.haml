@@ -34,7 +34,10 @@
             -else
               = @research.dateEnd.strftime("%-d %B %Y")
           %td
-            = translate_bool(@research.available)
+            - if @research.unknown
+              Message Researcher for Details
+            - else
+              = translate_bool(@research.available)
   %p
     %h2
       Abstract

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160412190228) do
+ActiveRecord::Schema.define(version: 20160414184051) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -184,6 +184,7 @@ ActiveRecord::Schema.define(version: 20160412190228) do
     t.integer  "invited_by_id",          limit: 4
     t.string   "invited_by_type",        limit: 255
     t.integer  "invitations_count",      limit: 4,     default: 0
+    t.string   "name_hash",              limit: 255
   end
 
   add_index "researchers", ["confirmation_token"], name: "index_researchers_on_confirmation_token", unique: true, using: :btree
@@ -213,6 +214,7 @@ ActiveRecord::Schema.define(version: 20160412190228) do
     t.date     "weekStart"
     t.date     "weekEnd"
     t.string   "headline",      limit: 255
+    t.boolean  "unknown",       limit: 1
   end
 
   add_index "researches", ["researcher_id"], name: "index_researches_on_researcher_id", using: :btree

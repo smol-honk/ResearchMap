@@ -33,6 +33,12 @@
   .form-group
     %label Check the box if you are able, leave blank if not:
     .checkbox
+      = f.check_box(:unknown)
+      = f.label :unknown, "Want to host but don't know when?"
+
+  .form-group
+    %label Check the box if you are able, leave blank if not:
+    .checkbox
       = f.check_box(:available)
       = f.label :available, "Are you able to host visitors?"
 
