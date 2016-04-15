@@ -32,20 +32,20 @@
             %p
             = search_form_for @search do |f|
               .field
-                = f.label :researcher_first_name_or_researcher_last_name_cont
-                = f.text_field :researcher_first_name_or_researcher_last_name_cont
+                = f.label :researcher_name_cont
+                = f.search_field :researcher_name_cont
               .field
                 = f.label :location_cont
-                = f.text_field :location_cont
+                = f.search_field :location_cont
               %br
               .actions
                 = f.submit 'Search', class: "btn btn-primary"
-                %hr
+              %hr
+              %p
+                %strong Advanced Search
+                = f.condition_fields do |c|
+                  = render "condition_fields", f: c
                 %p
-                  %strong Advanced Search
-                  = f.condition_fields do |c|
-                    = render "condition_fields", f: c
-                  %p
-                    = link_to_add_fields "Add Conditions", f, :condition
+                  = link_to_add_fields "Add Conditions", f, :condition
               .actions
                 = f.submit 'Search', class: "btn btn-primary"

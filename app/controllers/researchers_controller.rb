@@ -1,5 +1,10 @@
 class ResearchersController < ApplicationController
   before_action :authenticate!, only: [:edit, :destroy, :update, :import]
+  def available_researchers
+    @researches = Research.where("available = true OR unknown = true")
+    @researchers = @researches.map { |r| r.researcher }
+  end
+
   def index
     @researchers = Researcher.all
     @search = Researcher.search(params[:q])

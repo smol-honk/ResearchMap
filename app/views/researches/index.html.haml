@@ -32,9 +32,9 @@
               %td= research.location
               %td
                 - if research.available.nil?
-                  %i.fa.fa-question-circle{style: :'color:gray'}
+                  %i.fa.fa-question-circle{style: :'color:gray', title: :"Researcher is open to hosting, but not sure on dates. Please contact researcher about visiting."}
                 - if research.unknown == true
-                  %i.fa.fa-question-circle{style: :'color:gray'}
+                  %i.fa.fa-question-circle{style: :'color:gray', title: :"Researcher is open to hosting, but not sure on dates. Please contact researcher about visiting."}
                 - elsif research.available == true
                   %i.fa.fa-check{style: :'color:green'}
                 - elsif research.available == false

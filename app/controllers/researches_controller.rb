@@ -6,8 +6,9 @@ class ResearchesController < ApplicationController
   def index
     # Fix the sorting issue after searching
     @researches = Research.all
-    @search = Research.search(params[:q])
     @researches = @search.result
+    @researches.build_sort if @researches.sort.empty?
+
     if user_signed_in? && current_user.admin?
       respond_to do |format|
         format.html

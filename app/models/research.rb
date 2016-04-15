@@ -30,8 +30,10 @@ class Research < ActiveRecord::Base
   after_validation :geocode, :if => :location_changed?
 
   def update_dates
-    if Time.now > dateEnd
-      self.update_attribute(:available, false)
+    if !dateEnd.nil?
+      if Time.now > dateEnd
+        self.update_attribute(:available, false)
+      end
     end
   end
 

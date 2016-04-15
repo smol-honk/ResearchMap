@@ -28,7 +28,7 @@
               - if (!Research.where(researcher: researcher).where(available: true).blank?)
                 %i.fa.fa-check{style: :'color:green'}
               - elsif (!Research.where(researcher: researcher).where(unknown: true).blank?)
-                %i.fa.fa-question-circle{style: :'color:gray'}
+                %i.fa.fa-question-circle{style: :'color:gray', title: :"Researcher is open to hosting, but not sure on dates. Please contact researcher about visiting."}
               - else
                 %i.fa.fa-times{style: :'color:red'}
 

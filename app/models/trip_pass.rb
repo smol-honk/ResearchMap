@@ -17,8 +17,10 @@ class TripPass < ActiveRecord::Base
   end
 
   def decline
+      return_days = (self.dateEnd - self.dateStart) + user.days
       self.update_attribute(:researcher_declined, true)
       self.update_attribute(:researcher_accept, false)
+      self.user.update_attribute(:days, return_days)
   end
 
   def accepted_cancel

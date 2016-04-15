@@ -1,0 +1,74 @@
+.container
+  %h1 School of Anthropology Visitable Researchers!
+  %br
+  .panel.panel-default
+    .panel-heading
+      Researchers
+    %table.table.table-striped.table-responsive
+      %thead
+        %tr
+          %th
+            First Name
+          %th
+            Last Name
+          %th
+            Can Visit?
+          %th
+            Contact
+          -# %th
+          -# %th
+      %tbody.bigTableBody
+        - @researchers.each do |researcher|
+          %tr
+            %td
+              = link_to researcher.first_name, researcher
+            %td
+              = link_to researcher.last_name, researcher
+            %td
+              - if (!Research.where(researcher: researcher).where(available: true).blank?)
+                %i.fa.fa-check{style: :'color:green'}
+              - elsif (!Research.where(researcher: researcher).where(unknown: true).blank?)
+                %i.fa.fa-question-circle{style: :'color:gray', title: :"Researcher is open to hosting, but not sure on dates. Please contact researcher about visiting."}
+              - else
+                %i.fa.fa-times{style: :'color:red'}
+
+            %td
+              %a.fa.fa-envelope-o{"data-target" => "##{researcher.name_hash}", "data-toggle" => "modal", :href => "#"}
+              .modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1", id: :"#{researcher.name_hash}"}
+                .modal-dialog
+                  .modal-content
+                    .modal-header
+                      %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                        %span{"aria-hidden" => "true"} ×
+                      %h4#myModalLabel.modal-title
+                      Send a Message to #{researcher.name}
+                    .modal-body
+                      = form_tag messages_path, method: :post do
+                        .form-group
+                          = hidden_field_tag('recipients', researcher.email)
+                        .form-group
+                          = label_tag 'message[subject]', 'Subject'
+                          = text_field_tag 'message[subject]', nil, class: 'form-control', required: true
+                        .form-group
+                          = label_tag 'message[body]', 'Message'
+                          = text_area_tag 'message[body]', nil, cols: 3, height: :'40', class: 'form-control', required: true
+                        .modal-footer
+                          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+                          = submit_tag 'Send', class: 'btn btn-primary'
+
+            - if current_user.try(:admin?)
+              %td= link_to 'Edit', edit_researcher_path(researcher), method: :get
+              %td= link_to 'Delete', researcher, method: :delete, :data => { :confirm => 'Are you sure?' }
+
+  -# - if current_user.try(:admin?)
+  -#   .page-header
+  -#     %h1 Administration
+  -#   .row
+  -#     .col-xs-8.col-sm-6
+  -#       %h2 Download Researchers
+  -#       = link_to "Download Researchers CSV", researchers_path(format: "csv"), class: :"btn btn-info"
+  -#     .col-xs-4.col-sm-6
+  -#       %h2 Import Researchers
+  -#       = form_tag import_researchers_path, multipart: true do
+  -#         = file_field_tag :file
+  -#         = submit_tag "Import Researchers", class: :"btn btn-primary btn-sm"
