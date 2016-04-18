@@ -8,13 +8,15 @@
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav
         %li
-          %a{:href => "/", data: {'no-turbolink': 'true'}} Anthropology Research Map
+          %a{:href => "/", data: {'no-turbolink': 'true'}} School of Anthropology Research Map
         %li
           %a{:href => "/researches"} Research
         %li
           %a{:href => "/researchers"} Researchers
+        -# %li
+        -#   %a{:href => "/available"} Visitable Researchers
         %li
-          %a{:href => "/available"} Visitable Researchers
+          %a{:href => "/search"} Search
           %span.sr-only (current)
       %ul.nav.navbar-nav.navbar-right
         -if current_user.try(:admin?)
@@ -49,7 +51,7 @@
             - if user_signed_in?
               Logged in as #{current_user.name}
             - elsif researcher_signed_in?
-              Researcher logged in as #{current_researcher.name}
+              Logged in as #{current_researcher.name}
             - else
               Log In
             %span.caret

@@ -7,17 +7,6 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
-// body {
-//   padding-top: 5em;
-// }
-
-// tr {
-//   padding: 4px;
-// }
-//
-// tbody td, thead th {
-//   margin-left: 1em;
-// }
 #googlemap {
     text-align: center;
     height: 500px;
@@ -27,4 +16,8 @@
 #form {
   padding-left: 2em;
   color: #00000;
+}
+
+li {
+  font-size: 15px;
 }

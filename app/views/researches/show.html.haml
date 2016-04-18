@@ -56,3 +56,8 @@
     %br
     - if @current.try(:admin?) or current_researcher == @research.researcher
       = link_to 'Edit', edit_research_path(@research), class: :'btn btn-primary', data: {'no-turbolink': 'true'}
+
+  #googlemap
+    %script{:src=> "//maps.google.com/maps/api/js?v=3.13&amp;sensor=false&amp;libraries=geometry", :type => "text/javascript"}
+    %script{:src => '//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js', :type =>'text/javascript'}
+    =image_tag("http://maps.google.com/maps/api/staticmap?size=850x800&sensor=false&zoom=16&markers=#{@research.latitude}%2C#{@research.longitude}")
