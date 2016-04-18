@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160414184051) do
+ActiveRecord::Schema.define(version: 20160415182513) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(version: 20160414184051) do
     t.string   "invited_by_type",        limit: 255
     t.integer  "invitations_count",      limit: 4,     default: 0
     t.string   "name_hash",              limit: 255
+    t.string   "discipline",             limit: 255
   end
 
   add_index "researchers", ["confirmation_token"], name: "index_researchers_on_confirmation_token", unique: true, using: :btree

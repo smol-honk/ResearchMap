@@ -1,10 +1,8 @@
 class WelcomeController < ApplicationController
   before_filter :set_researches, only: [:map]
+
   def index
-    @search = Research.ransack(params[:q])
-    @researches = @search.result(distinct: true)
-    # @search.build_condition
-    @search.build_sort if @search.sorts.empty?
+
   end
 
   def map

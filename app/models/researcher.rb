@@ -19,7 +19,7 @@ class Researcher < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name_hash, :name, :first_name, :last_name, :email, :password, :bio, :title, :headline, :current_location, :avatar, :avatar_cache, :remove_avatar, :password_confirmation
+  attr_accessible :discipline, :name_hash, :name, :first_name, :last_name, :email, :password, :bio, :title, :headline, :current_location, :avatar, :avatar_cache, :remove_avatar, :password_confirmation
 
   geocoded_by :current_location
   after_validation :geocode, :if => :current_location_changed?

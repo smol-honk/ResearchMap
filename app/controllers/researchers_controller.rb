@@ -15,6 +15,11 @@ class ResearchersController < ApplicationController
       format.xls
     end
   end
+  def edit
+    @researcher.discipline = params['discipline']
+    raise 'error'
+  end
+
   def update
     @researcher = Researcher.find(params[:id])
     if params[:researcher][:password].blank?
@@ -64,6 +69,6 @@ class ResearchersController < ApplicationController
   end
 
   def researcher_params
-    params.require(:researcher).permit(:email, :password, :password_confirmation, :first_name, :last_name, :bio, :headline, :avatar, :avatar_cache, :remove_avatar, :phone_number, :name, :current_location, :longitude, :latitude, :title, :available, :week, :day, :day_available, :weekDateStart, :weekDateEnd)
+    params.require(:researcher).permit(:discipline, :email, :password, :password_confirmation, :first_name, :last_name, :bio, :headline, :avatar, :avatar_cache, :remove_avatar, :phone_number, :name, :current_location, :longitude, :latitude, :title, :available, :week, :day, :day_available, :weekDateStart, :weekDateEnd)
   end
 end

@@ -1,14 +1,12 @@
 class ResearchesController < ApplicationController
-  before_action :set_research, only: [:show, :edit, :update, :destroy]
+  before_filter :set_research, only: [:show, :edit, :update, :destroy]
 
   # GET /researches
   # GET /researches.json
   def index
     # Fix the sorting issue after searching
     @researches = Research.all
-    @researches = @search.result
-    @researches.build_sort if @researches.sort.empty?
-
+    # @researches = @search.result
     if user_signed_in? && current_user.admin?
       respond_to do |format|
         format.html
@@ -16,6 +14,10 @@ class ResearchesController < ApplicationController
         format.xls
       end
     end
+  end
+
+  def search
+    redirect_to search_path and return
   end
 
   # GET /researches/1

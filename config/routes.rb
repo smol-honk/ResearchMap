@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  get 'search', to: 'search#index'
+
   resources :trip_passes
   devise_for :users, :path_prefix => 'profile', :controllers => { :users_invitations => "devise/invitations" }
   devise_for :researchers, :path_prefix => 'profile', :controllers => { :researchers_invitations => "devise/invitations" }
 
-  resources :users, :researchers, :researches
+  # resources :users, :researchers, :researches
+  get '/researches/search', to: 'researches#search', via: :all
 
   resources :users do
     get 'following', to: 'follow#following'
@@ -16,6 +19,7 @@ Rails.application.routes.draw do
     collection {post :import}
     post 'like', to: 'socializations#like'
     post 'unlike', to: 'socializations#unlike'
+
   end
 
   resources :conversations, only: [:index, :show, :destroy] do
@@ -48,12 +52,6 @@ Rails.application.routes.draw do
     post 'decline', to: 'trip_passes#decline', as: :decline
     post 'accepted_cancel', to: 'trip_passes#accepted_cancel', as: :accepted_cancel
     post 'declined_cancel', to: 'trip_passes#declined_cancel', as: :declined_cancel
-  end
-
-  resources :people do
-    collection do
-      get :search
-    end
   end
 
   get 'available', to: 'researchers#available_researchers', as: :available

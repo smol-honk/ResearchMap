@@ -52,11 +52,12 @@
     .field
       = f.label :bio
       = f.text_area :bio, class: :'form-control'
-    -# - if researcher_signed_in?
-    -#   .field
-    -#     = f.label :available do
-    -#       Can accept visitors?
-    -#       = f.check_box :available, id: :'visitor'
+    - if researcher_signed_in?
+      .field
+        = f.label 'discipline', "What's your discipline?"
+        = select_tag('discipline', "<option>Applied Anthropology</option><option>Biological Anthropology</option><option>Archaeology</option><option>Socio-Cultural Anthropology</option><option>Linguistic Anthropology</option>".html_safe, class: :"form-control", multiple: false)
+        -raise 'error'
+
     -#   .field#dayorweek{style: :"display: none"}
     -#     = f.label :day do
     -#       Day visit?
@@ -83,9 +84,12 @@
       = f.label :current_password
       %i (we need your current password to confirm your changes)
       = f.password_field :current_password, autocomplete: "off", class: :'form-control'
+    %br
     .actions
       = f.submit "Update", class: :'btn btn-default btn-lg'
-  %h3 Cancel my account ** DANGER **
+  .page-header
+    %h3
+      %u Cancel my account ** DANGER **
   %p
     Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
   = link_to "Back", :back

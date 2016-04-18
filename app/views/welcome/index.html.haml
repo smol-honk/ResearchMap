@@ -17,35 +17,4 @@
             %a#backToSize{href: :'#', title: :"Zoom out on map", 'data-toggle': :'tooltip', 'data-placement': :'top'} Locations
         .listings#listings
       #map
-
-  #searchanthro
-    .panel-group#accordion{role: :"tablist", 'aria-multiselectable': :"true"}
-      .panel.panel-default
-        .panel-heading#headingOne{role: :"tab"}
-          %h4.panel-title
-            %a{role: :"button", 'data-toggle': :"collapse", 'data-parent': :"#accordion", href: :"#collapseOne", 'aria-expanded': :"true", 'aria-controls': :"collapseOne"}
-              %i.fa.fa-search
-              Search Through Research!
-        .panel-collapse.collapse.in#collapseOne{role: :'tabpanel', 'aria-labelledby': :'headingOne'}
-          .panel-body
-            Search through Research by either Researcher or location! Advanced options available below.
-            %p
-            = search_form_for @search do |f|
-              .field
-                = f.label :researcher_name_cont
-                = f.search_field :researcher_name_cont
-              .field
-                = f.label :location_cont
-                = f.search_field :location_cont
-              %br
-              .actions
-                = f.submit 'Search', class: "btn btn-primary"
-              %hr
-              %p
-                %strong Advanced Search
-                = f.condition_fields do |c|
-                  = render "condition_fields", f: c
-                %p
-                  = link_to_add_fields "Add Conditions", f, :condition
-              .actions
-                = f.submit 'Search', class: "btn btn-primary"
+  

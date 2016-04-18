@@ -1,0 +1,94 @@
+.container
+  -if params[:q]
+    .panel.panel-default
+      .panel-heading
+        Research
+      .shorthead
+        %table.table-hover.table-striped.table-responsive
+          %thead
+            %tr
+              %th
+                = sort_link(@q, :name, "Title")
+              %th
+                = sort_link(@q, :researcher, "Researcher")
+              %th
+                = sort_link(@q, :location, "Location")
+              %th
+                = sort_link(@q, :available, "Can Visit?")
+              %th
+                = sort_link(@q, :dateStart, "Starts")
+              %th
+                = sort_link(@q, :dateEnd, "Ends")
+
+          %tbody.bigTableBody
+            - @researches.each do |research|
+              %tr
+                %td= link_to research.name, research
+                %td= research.researcher.name
+                %td= research.location
+                %td
+                  - if research.available.nil?
+                    %i.fa.fa-question-circle{style: :'color:gray', title: :"Researcher is open to hosting, but not sure on dates. Please contact researcher about visiting."}
+                  - if research.unknown == true
+                    %i.fa.fa-question-circle{style: :'color:gray', title: :"Researcher is open to hosting, but not sure on dates. Please contact researcher about visiting."}
+                  - elsif research.available == true
+                    %i.fa.fa-check{style: :'color:green'}
+                  - elsif research.available == false
+                    %i.fa.fa-times{style: :'color:red'}
+
+                %td= research.dateStart
+                %td= research.dateEnd
+                - if current_user.try(:admin?)
+                  %td
+                    = button_to 'Edit', edit_research_path(research), class: "btn btn-primary", method: :get
+                  %td
+                    = button_to 'Delete', research_path(research.id), method: :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"
+
+    #searchanthro
+      .panel-group
+        .panel.panel-default
+          .panel-heading
+            %h4.panel-title
+              %i.fa.fa-search
+              %b
+                Search Through Research!
+          .panel-body
+            Search through Research by either Researcher or location! Advanced options available below.
+            %p
+            = search_form_for @q, url: search_path do |f|
+              .col-md-6
+                .field
+                  = f.label :researcher_name_cont
+                  = f.search_field :researcher_name_cont
+                .field
+                  = f.label :location_cont
+                  = f.search_field :location_cont
+                .field
+                  = f.check_box :available_true, include_hidden: false
+                  = f.label :available_true, "Can Visit?"
+
+                .field
+                  = f.label :dateStart, "Start of Research"
+                  = f.date_field :dateStart_eq
+                .field
+                  = f.label :dateEnd, "End of Research"
+                  = f.date_field :dateEnd_eq
+
+              .col-md-6
+
+                .field
+                  = f.label :dateStart, "Research Starts After"
+                  = f.date_field :dateStart_gteq
+                .field
+                  = f.label :dateEnd, "Research Ends After"
+                  = f.date_field :dateEnd_gteq
+
+                .field
+                  = f.label :dateStart, "Research Starts Before"
+                  = f.date_field :dateStart_lteq
+                .field
+                  = f.label :dateEnd, "Research Ends Before"
+                  = f.date_field :dateEnd_lteq
+
+              .actions
+                = f.submit 'Search', class: "btn btn-primary"
