@@ -30,6 +30,10 @@ class ResearchesController < ApplicationController
       @current = current_researcher
     else
     end
+    respond_to do |format|
+      format.html
+      format.json {render json: @research}
+    end
   end
 
   # GET /researches/new
@@ -118,6 +122,6 @@ class ResearchesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def research_params
-      params.require(:research).permit(:name, :unknown, :location, :abstract, :dateStart, :dateEnd, :available, :week, :day, :weekStart, :weekEnd, :day_date, :inFieldStart, :inFieldEnd, :headline, :latitude, :longitude, :researcher, :researcher_id)
+      params.require(:research).permit(:name, :unknown, :location, :abstract, :dateStart, :dateEnd, :available, :weekStart, :weekEnd, :inFieldStart, :inFieldEnd, :headline, :latitude, :longitude, :researcher, :researcher_id)
     end
 end

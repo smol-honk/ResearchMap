@@ -41,31 +41,14 @@
     .checkbox
       = f.check_box(:available)
       = f.label :available, "Are you able to host visitors?"
-
-  .form-group#day
-    %label If you are able to host (Leave blank if not):
-    .checkbox
-      = f.check_box(:day)
-      = f.label :day, "Day Visit?"
-
-  .form-group#week
-    .checkbox
-      = f.check_box(:week)
-      = f.label :week, "Week Visit?"
-
   .form-group
-    %label If you chose Day Visit, what day? (Leave blank if not):
-    = f.label :day_date, "Day Available"
-    = f.text_field :day_date, class: :"form-control", id: :"day_date"
-
-  .form-group
-    %label If you chose Week Visit, select the start of that week (Leave blank if not):
-    = f.label :weekStart, "First day of week available"
+    %label Select the start of when you can host: (Leave blank if not hosting or don't know)
+    = f.label :weekStart, "First day available"
     = f.text_field :weekStart, class: :"form-control", id: :"weekStart"
 
   .form-group
-    %label If you chose Week Visit, select the end of that week (Leave blank if not):
-    = f.label :weekEnd, "Last day of week available"
+    %label Select the end of when you can host (Leave blank if not hosting or don't know):
+    = f.label :weekEnd, "Last day available"
     = f.text_field :weekEnd, class: :"form-control", id: :"weekEnd"
 
   - if current_user.try(:admin?)

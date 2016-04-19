@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415182513) do
+ActiveRecord::Schema.define(version: 20160419192038) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -209,9 +209,6 @@ ActiveRecord::Schema.define(version: 20160415182513) do
     t.date     "inFieldStart"
     t.date     "inFieldEnd"
     t.boolean  "available",     limit: 1
-    t.boolean  "day",           limit: 1
-    t.boolean  "week",          limit: 1
-    t.date     "day_date"
     t.date     "weekStart"
     t.date     "weekEnd"
     t.string   "headline",      limit: 255
