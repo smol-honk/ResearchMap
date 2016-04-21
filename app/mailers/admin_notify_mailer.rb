@@ -23,4 +23,10 @@ class AdminNotifyMailer < ApplicationMailer
     end
   end
 
+  def user_unaccept(trip_pass)
+    @trip_pass = trip_pass
+    @user = @trip_pass.user
+    mail(to: @user.email, subject: "#{@trip_pass.researcher.name} can no longer accept your Trip Request!")
+  end
+
 end

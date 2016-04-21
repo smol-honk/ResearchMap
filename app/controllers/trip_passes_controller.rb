@@ -111,6 +111,8 @@ class TripPassesController < ApplicationController
     @trip_pass = TripPass.find(params[:trip_pass_id])
     if @current == @trip_pass.researcher
       @trip_pass.decline()
+      AdminNotifyMailer.unaccept_trip_pass(@trip_pass).deliver_now
+      AdminNotifyMailer.user_unaccept(@trip_pass).deliver_now
       respond_to do |format|
         format.js {render :nothing => true}
       end

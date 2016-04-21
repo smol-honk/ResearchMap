@@ -36,6 +36,7 @@ var NewTripPasses = React.createClass({
       url: Routes.trip_pass_decline_path(id),
       type: 'post',
       success: function(data){
+        alert("Please message the user about why you declined.");
         this.props.updateAll();
       }.bind(this),
       error: function(xhr, status, err){
