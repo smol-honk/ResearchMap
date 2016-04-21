@@ -44,7 +44,10 @@
               %li
                 = link_to "Edit/View Your Research", my_research_path
               %li
-                = link_to "Your Trip Requests", trip_requests_path
+                =link_to trip_requests_path do
+                  Your Trip Requests
+                  %span.badge
+                    = @request_count
 
         %li.dropdown
           %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}

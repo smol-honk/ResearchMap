@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   protect_from_forgery with: :exception
 
-  before_filter :set_global_search_variable, :mail_count
+  before_filter :set_global_search_variable, :mail_count, :request_count
 
   def set_global_search_variable
     @researches = Research.all
@@ -28,6 +28,12 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def request_count
+    if researcher_signed_in?
+      @request_count = TripPass.where(researcher: current_researcher).where(researcher_accept: false).where(researcher_declined: false).count
+    end
+  end
 
   def mail_count
     if user_signed_in?

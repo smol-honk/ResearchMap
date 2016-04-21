@@ -55,6 +55,15 @@ class Researcher < ActiveRecord::Base
     self.name = self.first_name + " " +  self.last_name
   end
 
+  def has_new_requests?
+    new_requests = TripPass.where(researcher: self).where(researcher_accept: false).where(researcher_declined: false)
+    if new_requests.blank?
+      return false
+    else
+      return true
+    end
+  end
+
   def mailboxer_email(object)
     return self.email
   end
