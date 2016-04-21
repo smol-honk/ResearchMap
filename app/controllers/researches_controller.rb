@@ -6,7 +6,8 @@ class ResearchesController < ApplicationController
   def index
     # Fix the sorting issue after searching
     @researches = Research.all
-    # @researches = @search.result
+    @q = Research.ransack(params[:q])
+    @researches = @q.result
     if user_signed_in? && current_user.admin?
       respond_to do |format|
         format.html
