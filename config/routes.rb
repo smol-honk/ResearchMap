@@ -54,6 +54,7 @@ Rails.application.routes.draw do
     post 'declined_cancel', to: 'trip_passes#declined_cancel', as: :declined_cancel
   end
 
+  get 'sent_trips', to: 'users#sent_trips', as: :sent_trips
   get 'available', to: 'researchers#available_researchers', as: :available
   post 'decline_message', to: 'messages#modal_send', as: :modal_send
   get 'accepted_passes', to: 'trip_passes#getAcceptedPasses', as: :accepted_passes

@@ -1,0 +1,31 @@
+.container
+  .jumbotron
+    %h1 Sent Trip Passes
+  - if @trip_passes.nil?
+    %h1
+      You haven't created any Trip Passes!
+  - else
+    .shorthead
+      .panel.panel-default
+        %table.table-hover.table-striped.table-responsive
+          %thead.panel-heading
+            %tr
+              %th Location
+              %th Arrival
+              %th Departure
+              %th User
+              %th Researcher
+              %th Research
+              %th
+
+          %tbody
+            - @trip_passes.each do |trip_pass|
+              %tr
+                %td= trip_pass.location
+                %td= trip_pass.dateStart
+                %td= trip_pass.dateEnd
+                %td= trip_pass.user.name
+                %td= trip_pass.researcher.name
+                %td= trip_pass.research.name
+                %td= link_to 'Show', trip_pass
+    %br

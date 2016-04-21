@@ -3,7 +3,7 @@ class TripPassesController < ApplicationController
   before_action :authenticate!, :set_user
   before_action :hasDays, only: [:new]
   before_action :authenticate_researcher!, only: [:tripRequests]
-
+  before_action :authenticate_user!, only: [:my_trips]
 
   # GET /trip_passes
   # GET /trip_passes.json
@@ -70,6 +70,10 @@ class TripPassesController < ApplicationController
   # GET /trip_passes/1
   # GET /trip_passes/1.json
   def show
+      if @current == @trip_pass.user || @current.try(:admin?) || @current == @trip_pass.researcher
+      else
+        redirect_to root_url
+      end
   end
 
   def accepted_cancel
@@ -140,6 +144,7 @@ class TripPassesController < ApplicationController
     respond_to do |format|
       if @trip_pass.save
         TripPassMailer.trip_request(@trip_pass).deliver_now
+        AdminNotifyMailer.new_trip_pass(@trip_pass).deliver_now
         format.html { redirect_to @trip_pass, notice: 'Trip pass was successfully created.' }
         format.json { render :show, status: :created, location: @trip_pass }
       else

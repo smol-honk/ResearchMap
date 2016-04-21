@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :edit, :destroy, :update, :import]
+  before_action :authenticate_user!, only: [:index, :edit, :destroy, :update, :import, :sent_trips]
   def index
     if user_signed_in? && current_user.admin?
       @users = User.all
@@ -12,8 +12,14 @@ class UsersController < ApplicationController
       redirect_to root_url
     end
   end
+
+  def sent_trips
+    # TODO: Update trip passes to reflect admin approval
+    @trip_passes = TripPass.where(user: current_user)
+  end
+
   def trips
-    @user= User.find(params[:user_id])
+    @user = User.find(params[:user_id])
     # TODO: Update trip passes to reflect admin approval
     @trip_passes = TripPass.where(user: @user)
   end

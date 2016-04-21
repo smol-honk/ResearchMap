@@ -65,6 +65,8 @@
               - if current_user.role.name == "Benefactor" || current_user.role.name == "Patron"
                 %li
                   = link_to "Create a Trip Pass!", new_trip_pass_path, data: {'no-turbolink': true}
+                %li
+                  = link_to "Sent Trip Passes", sent_trips_path, data: {'no-turbolink': true}
               %li
                 =link_to conversations_path do
                   Conversations

@@ -6,6 +6,8 @@ class AdminNotifyMailer < ApplicationMailer
   end
 
   def new_trip_pass(trip_pass)
+    @url = root_url
+    @login = new_user_session_path
     @admin = User.where(role: 4)
     @trip_pass = trip_pass
     @admin.each do |admin|
