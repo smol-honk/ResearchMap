@@ -123,6 +123,6 @@ class ResearchesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def research_params
-      params.require(:research).permit(:name, :unknown, :location, :abstract, :dateStart, :dateEnd, :available, :weekStart, :weekEnd, :inFieldStart, :inFieldEnd, :headline, :latitude, :longitude, :researcher, :researcher_id)
+      params.require(:research).permit(:keywords, :name, :unknown, :location, :abstract, :dateStart, :dateEnd, :available, :weekStart, :weekEnd, :inFieldStart, :inFieldEnd, :headline, :latitude, :longitude, :researcher, :researcher_id)
     end
 end

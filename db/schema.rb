@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160419192038) do
+ActiveRecord::Schema.define(version: 20160422190115) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -213,6 +213,7 @@ ActiveRecord::Schema.define(version: 20160419192038) do
     t.date     "weekEnd"
     t.string   "headline",      limit: 255
     t.boolean  "unknown",       limit: 1
+    t.string   "keywords",      limit: 255
   end
 
   add_index "researches", ["researcher_id"], name: "index_researches_on_researcher_id", using: :btree

@@ -19,6 +19,10 @@
     = f.label :abstract
     = f.text_area :abstract, class: :"form-control", rows: :"5"
   .form-group
+    = f.label :keywords
+    = f.text_field :keywords, class: :"form-control"
+
+  .form-group
     = f.label :dateStart, "When does your Research Begin?"
     = f.text_field :dateStart, class: :"form-control", id: :"researchStart", title: :"Start of your Research", 'data-toggle': :'tooltip', 'data-placement': :'top'
   .form-group

@@ -51,43 +51,31 @@
           Search through Research by either Researcher or location! Advanced options available below.
           %p
           = search_form_for @q, url: search_path do |f|
-            .col-md-6
-              .field
-                = f.label :researcher_name_cont
-                = f.search_field :researcher_name_cont
+            .field
+              = f.label :researcher_name_cont
+              = f.search_field :researcher_name_cont
 
-              .field
-                = f.label :name_cont, "Research Title Contains"
-                = f.search_field :name_cont
+            .field
+              = f.label :name_cont, "Research Title Contains"
+              = f.search_field :name_cont
 
-              .field
-                = f.label :location_cont
-                = f.search_field :location_cont
-              .field
-                = f.check_box :available_or_unknown_true, include_hidden: false
-                = f.label :available_or_unknown_true, "Can Visit?"
+            .field
+              = f.label :location_cont
+              = f.search_field :location_cont
+            .field
+              = f.label :keywords_cont_any
+              = f.search_field :keywords_cont_any
 
-              .field
-                = f.label :dateStart, "Start of Research"
-                = f.date_field :dateStart_eq
-              .field
-                = f.label :dateEnd, "End of Research"
-                = f.date_field :dateEnd_eq
-            .col-md-6
+            .field
+              = f.check_box :available_or_unknown_true, include_hidden: false
+              = f.label :available_or_unknown_true, "Can Visit?"
 
-              .field
-                = f.label :dateStart, "Research Starts After"
-                = f.date_field :dateStart_gteq
-              .field
-                = f.label :dateEnd, "Research Ends After"
-                = f.date_field :dateEnd_gteq
-
-              .field
-                = f.label :dateStart, "Research Starts Before"
-                = f.date_field :dateStart_lteq
-              .field
-                = f.label :dateEnd, "Research Ends Before"
-                = f.date_field :dateEnd_lteq
+            .field
+              = f.label :dateStart, "Research Starts Around"
+              = f.date_field :dateStart_gteq
+            .field
+              = f.label :dateEnd, "Research Ends Around"
+              = f.date_field :dateEnd_lteq
 
             .actions
               = f.submit 'Search', class: "btn btn-primary"

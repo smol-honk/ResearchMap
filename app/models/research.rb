@@ -21,7 +21,8 @@ class Research < ActiveRecord::Base
                   :researcher,
                   :researcher_id,
                   :id,
-                  :unknown
+                  :unknown,
+                  :keywords
 
   geocoded_by :location
   after_validation :geocode, :if => :location_changed?
