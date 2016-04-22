@@ -22,6 +22,7 @@ class WelcomeController < ApplicationController
           bio: research.headline,
           location: research.location,
           available: research.available,
+          unknown: research.unknown,
           "marker-color": :"#00607d",
           "marker-size": :"medium",
           "marker-symbol": :"pitch"

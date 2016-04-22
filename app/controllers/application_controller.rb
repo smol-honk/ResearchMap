@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:name, :first_name, :last_name, :email, :password, :password_confirmation, :remember_me) }
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :email, :password, :remember_me) }
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:discipline, :name, :first_name, :last_name, :email, :password, :password_confirmation, :current_password, :bio, :title, :headline, :current_location, :avatar, :avatar_cache, :remove_avatar) }
+    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:phone_number, :discipline, :name, :first_name, :last_name, :email, :password, :password_confirmation, :current_password, :bio, :title, :headline, :current_location, :avatar, :avatar_cache, :remove_avatar) }
     # Only add some parameters
     devise_parameter_sanitizer.for(:accept_invitation).concat [:first_name, :last_name, :phone]
     # Override accepted parameters

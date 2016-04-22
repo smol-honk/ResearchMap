@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :first_name, :title, :current_location, :last_name, :email, :password, :password_confirmation, :type, :bio, :role, :role_id, :days, :headline, :avatar, :avatar_cache, :remove_avatar
+  attr_accessible :name, :first_name, :title, :current_location, :last_name, :email, :password, :password_confirmation, :type, :bio, :role, :role_id, :days, :headline, :avatar, :avatar_cache, :remove_avatar, :phone_number
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
