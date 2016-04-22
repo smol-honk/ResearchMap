@@ -16,6 +16,8 @@
               %th User
               %th Researcher
               %th Research
+              %th Researcher Accepted?
+              %th Researcher Declined?
               %th
 
           %tbody
@@ -27,5 +29,7 @@
                 %td= trip_pass.user.name
                 %td= trip_pass.researcher.name
                 %td= trip_pass.research.name
+                %td= translate_bool(trip_pass.researcher_accept)
+                %td= translate_bool(trip_pass.researcher_declined)
                 %td= link_to 'Show', trip_pass
     %br
