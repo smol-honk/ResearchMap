@@ -7,9 +7,23 @@ class TripPassesController < ApplicationController
 
   # GET /trip_passes
   # GET /trip_passes.json
+  def import
+    if user_signed_in? && current_user.admin?
+      TripPass.import(params[:file])
+      redirect_to :back, notice: "Trip Passes created/edited."
+    else
+      redirect_to :back
+    end
+  end
+
   def index
     if @current.try(:admin?)
       @trip_passes = TripPass.all
+      respond_to do |format|
+        format.html
+        format.csv { send_data @trip_passes.to_csv }
+        format.xls
+      end
     else
       redirect_to root_url
     end

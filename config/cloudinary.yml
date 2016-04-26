@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: hboywfinm
+  api_key: '894447139178765'
+  api_secret: X-yUIfHAygEnc5BzwnRt9iT8YMg
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: hboywfinm
+  api_key: '894447139178765'
+  api_secret: X-yUIfHAygEnc5BzwnRt9iT8YMg
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: hboywfinm
+  api_key: '894447139178765'
+  api_secret: X-yUIfHAygEnc5BzwnRt9iT8YMg
+  enhance_image_tag: true
+  static_image_support: false

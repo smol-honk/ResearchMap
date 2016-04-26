@@ -10,15 +10,6 @@ GIT
       polyamorous (~> 1.3)
 
 GIT
-  remote: git://github.com/carrierwaveuploader/carrierwave.git
-  revision: 58e967cc57c0a97fe81de3c31ef8f4f650923682
-  specs:
-    carrierwave (0.10.0)
-      activemodel (>= 4.0.0)
-      activesupport (>= 4.0.0)
-      mime-types (>= 1.16)
-
-GIT
   remote: git://github.com/ging/mailboxer.git
   revision: 99d16871375c0a34097d1ef122a9e42fc918794c
   specs:
@@ -90,6 +81,7 @@ GEM
     arel (6.0.3)
     autoprefixer-rails (6.3.6)
       execjs
+    aws_cf_signer (0.1.3)
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
@@ -109,11 +101,18 @@ GEM
     builder (3.2.2)
     byebug (8.2.4)
     cancan (1.6.10)
-    cancancan (1.13.1)
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
     carrierwave-crop (0.1.2)
       carrierwave (>= 0.8.0, < 0.11.0)
       jquery-rails
       rails (>= 3.2)
+    cloudinary (1.1.6)
+      aws_cf_signer
+      rest-client
     coderay (1.1.1)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
@@ -221,6 +220,7 @@ GEM
     mysql2 (0.3.20)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9.4)
+    netrc (0.11.0)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     ntlm-http (0.1.1)
@@ -298,6 +298,10 @@ GEM
     ref (2.0.0)
     responders (2.1.2)
       railties (>= 4.2.0, < 5.1)
+    rest-client (1.8.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     rmagick (2.15.4)
     rolify (5.1.0)
     roo (2.3.2)
@@ -363,9 +367,9 @@ DEPENDENCIES
   bootstrap-sass
   byebug
   cancan
-  cancancan
-  carrierwave!
+  carrierwave
   carrierwave-crop
+  cloudinary
   coffee-rails (~> 4.1.0)
   devise
   devise_invitable (~> 1.5.2)

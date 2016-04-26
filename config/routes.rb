@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 
   # resources :users, :researchers, :researches
   get '/researches/search', to: 'researches#search', via: :all
+  resources :trip_passes do
+    collection {post :import}
+  end
 
   resources :users do
     get 'following', to: 'follow#following'

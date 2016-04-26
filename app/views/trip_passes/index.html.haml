@@ -31,5 +31,17 @@
               %td= link_to 'Show', trip_pass
               %td= link_to 'Edit', edit_trip_pass_path(trip_pass)
               %td= link_to 'Destroy', trip_pass, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  - if current_user.try(:admin?)
+    .page-header
+      %h1 Administration
+    .row
+      .col-xs-8.col-sm-6
+        %h2 Download Trip Passes
+        = link_to "Download Trip Pass CSV", trip_passes_path(format: "csv"), class: :"btn btn-info"
+      .col-xs-4.col-sm-6
+        %h2 Import Trip Passes
+        = form_tag import_trip_passes_path, multipart: true do
+          = file_field_tag :file
+          = submit_tag "Import Trip Passes", class: :"btn btn-primary btn-sm"
 
-  %br
+    %br

@@ -1,3 +1,4 @@
+require 'csv'
 class TripPass < ActiveRecord::Base
   belongs_to :user
   belongs_to :researcher
@@ -6,6 +7,23 @@ class TripPass < ActiveRecord::Base
 
   geocoded_by :location
   after_validation :geocode
+
+  def self.import(file)
+    CSV.foreach(file.path, headers: true, encoding:'iso-8859-1:utf-8') do |row|
+      trip_pass = find_by_id(row["id"]) || new
+      trip_pass.attributes = row.to_hash.slice(*accessible_attributes)
+      trip_pass.save!
+    end
+  end
+
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      all.each do |trip_pass|
+        csv << trip_pass.attributes.values_at(*column_names)
+      end
+    end
+  end
 
   def setDays
     totalDays = user.days - (self.dateEnd - self.dateStart)
