@@ -40,8 +40,16 @@
                 - elsif research.available == false
                   %i.fa.fa-times{style: :'color:red'}
 
-              %td= research.dateStart
-              %td= research.dateEnd
+              %td
+                - if research.dateStart.nil?
+                  Contact Researcher for more details
+                -else
+                  = research.dateStart
+              %td
+                -if research.dateEnd.nil?
+                  Contact Researcher for more details
+                -else
+                  = research.dateEnd
               - if current_user.try(:admin?)
                 %td
                   = button_to 'Edit', edit_research_path(research), class: "btn btn-primary", method: :get

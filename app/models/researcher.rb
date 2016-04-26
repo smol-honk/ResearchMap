@@ -9,7 +9,7 @@ class Researcher < ActiveRecord::Base
   belongs_to :researchers
   belongs_to :trip_pass
   has_many :researches, dependent: :destroy
-  before_create :name
+  before_save :name
   validates_presence_of :first_name, :last_name
   before_create :gen_name_hash
   after_validation :gen_name_hash, :if => :name_hash_changed?
@@ -29,10 +29,10 @@ class Researcher < ActiveRecord::Base
   end
 
   def self.import(file)
-    CSV.foreach(file.path, headers: true) do |row|
+    CSV.foreach(file.path, headers: true, encoding:'iso-8859-1:utf-8') do |row|
       researcher = find_by_id(row["id"]) || new
       researcher.attributes = row.to_hash.slice(*accessible_attributes)
-      researcher.save!(validate: false)
+      researcher.save!
     end
   end
 

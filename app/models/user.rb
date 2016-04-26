@@ -89,6 +89,11 @@ class User < ActiveRecord::Base
     self.role = Role.find_by name: "Regular" if self.role.nil?
   end
 
+  def assign_regular
+    self.update_attribute :role_id, 1
+    self.update_attribute :days, 0
+  end
+
   def mailboxer_email(object)
     return self.email
   end

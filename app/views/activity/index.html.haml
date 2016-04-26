@@ -1,6 +1,9 @@
 .container
   .jumbotron
     %h1 Activity Feed
+  -if @activities.blank?
+    %h1
+      Activity Feed is empty!
   - @activities.each do |activity|
     .activity
       = link_to activity.owner.first_name, activity.owner
