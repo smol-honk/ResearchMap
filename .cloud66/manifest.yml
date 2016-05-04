@@ -1,0 +1,17 @@
+production:
+    mysql:
+        configuration:
+            version: 5.6
+            engine: mysql
+
+    rails:
+        configuration:
+            ruby_version: 2.2.1
+            asset_pipeline_precompile: true
+            do_initial_db_schema_load: false
+            reserved_server_memory: 0
+            passenger_process_memory: 200
+            locked_passenger_version: 4.0.59
+            activeprotect:
+            whitelist: 123.123.123.123,234.234.234.234
+
