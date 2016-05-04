@@ -38,6 +38,7 @@ class Researcher < ActiveRecord::Base
       else
         researcher.save!
       end
+    end
   end
 
 
