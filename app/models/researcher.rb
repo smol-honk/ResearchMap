@@ -1,3 +1,4 @@
+require 'csv'
 class Researcher < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
   acts_as_messageable
@@ -34,6 +35,7 @@ class Researcher < ActiveRecord::Base
       researcher.save!
     end
   end
+  
 
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
