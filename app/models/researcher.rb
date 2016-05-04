@@ -11,7 +11,7 @@ class Researcher < ActiveRecord::Base
   has_many :researches, dependent: :destroy
   before_save :name
   validates_presence_of :first_name, :last_name
-  before_create :gen_name_hash
+  # before_create :gen_name_hash
   after_validation :gen_name_hash, :if => :name_hash_changed?
 
 
