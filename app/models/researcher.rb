@@ -29,13 +29,17 @@ class Researcher < ActiveRecord::Base
   # end
 
   def self.import(file)
-    CSV.foreach(file.path, headers: true, encoding:'iso-8859-1:utf-8') do |row|
+    CSV.foreach(file.path, headers: true) do |row|
       researcher = find_by_id(row["id"]) || new
       researcher.attributes = row.to_hash.slice(*accessible_attributes)
-      researcher.save!
-    end
+      inDatabase = Researcher.all.map{|u| u.email}.include? researcher.email
+      if researcher.encrypted_password.blank? && !researcher.email.blank? && !inDatabase
+        researcher.invite!
+      else
+        researcher.save!
+      end
   end
-  
+
 
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
