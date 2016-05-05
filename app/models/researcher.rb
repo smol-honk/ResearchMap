@@ -12,8 +12,8 @@ class Researcher < ActiveRecord::Base
   has_many :researches, dependent: :destroy
   before_save :name
   validates_presence_of :first_name, :last_name
-  # before_create :gen_name_hash
-  # after_validation :gen_name_hash, :if => :name_hash_changed?
+  before_create :gen_name_hash
+  after_validation :gen_name_hash, :if => :name_hash_changed?
   geocoded_by :current_location
   after_validation :geocode, :if => :current_location_changed?
 
@@ -24,9 +24,9 @@ class Researcher < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :discipline, :phone_number, :name_hash, :name, :first_name, :last_name, :email, :password, :bio, :title, :headline, :current_location, :avatar, :avatar_cache, :remove_avatar, :password_confirmation
 
-  # def gen_name_hash
-  #   self.update_attribute(:name_hash, Digest::MD5.hexdigest(self.name))
-  # end
+  def gen_name_hash
+    self.update_attribute(:name_hash, Digest::MD5.hexdigest(self.name))
+  end
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|

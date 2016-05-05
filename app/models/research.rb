@@ -1,3 +1,4 @@
+require 'csv'
 class Research < ActiveRecord::Base
   self.table_name = "researches"
   include PublicActivity::Common
