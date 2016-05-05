@@ -37,7 +37,7 @@ class Research < ActiveRecord::Base
   end
 
   def self.import(file)
-    CSV.foreach(file.path, headers: true) do |row|
+    CSV.foreach(file.path, headers: true,encoding:'iso-8859-1:utf-8') do |row|
       research = find_by_id(row["id"]) || new
       research.attributes = row.to_hash.slice(*accessible_attributes)
       research.save!
