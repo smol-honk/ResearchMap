@@ -8,6 +8,43 @@ function convertUTCDateToLocalDate(date) {
     return newDate;
 }
 
+var Message = React.createClass({
+  render: function (){
+    var date = convertUTCDateToLocalDate(new Date(this.props.data.created_at));
+    return(
+      <div className = "media">
+        <div className = "pull-left">
+          <img className = 'img-circle' height = '55' width='55' src = {this.props.data.sender.avatar.thumb.url} />
+        </div>
+        <div className = "media-body">
+          <h6 className = "media-heading">
+            {this.props.data.sender.name} says at {date.toString()}
+          </h6>
+          {this.props.data.body}
+        </div>
+      </div>
+    );
+  }
+});
+
+var MessageList = React.createClass({
+    render: function(){
+        var messageNodes = this.props.data.map(function(mess){
+          return (
+            <div className = "message" key = {mess.id}>
+                <Message data={mess} key = {mess.id}/>
+            </div>
+          );
+        });
+        return(
+        <div className = 'messageList'>
+          {messageNodes}
+        </div>
+      );
+    }
+});
+
+
 var Conversation = React.createClass({
   getInitialState: function (){
     return {data: [], button: 'Send Message'};
@@ -69,41 +106,6 @@ var Conversation = React.createClass({
   }
 });
 
-var MessageList = React.createClass({
-    render: function(){
-        var messageNodes = this.props.data.map(function(mess){
-          return (
-            <div className = "message" key = {mess.id}>
-                <Message data={mess} key = {mess.id}/>
-            </div>
-          );
-        });
-        return(
-        <div className = 'messageList'>
-          {messageNodes}
-        </div>
-      );
-    }
-});
-
-var Message = React.createClass({
-  render: function (){
-    var date = convertUTCDateToLocalDate(new Date(this.props.data.created_at));
-    return(
-      <div className = "media">
-        <div className = "pull-left">
-          <img className = 'img-circle' height = '55' width='55' src = {this.props.data.sender.avatar.thumb.url} />
-        </div>
-        <div className = "media-body">
-          <h6 className = "media-heading">
-            {this.props.data.sender.name} says at {date.toString()}
-          </h6>
-          {this.props.data.body}
-        </div>
-      </div>
-    );
-  }
-});
 
 
 var Reply = React.createClass({
