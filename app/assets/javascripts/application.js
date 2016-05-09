@@ -26,7 +26,7 @@
 
 
 $(function() {
-	$("#geo-input").geocomplete();
+	$("#geocomplete").geocomplete();
 });
 
 $(function() {
