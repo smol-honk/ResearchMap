@@ -370,7 +370,6 @@ DEPENDENCIES
   carrierwave
   carrierwave-crop
   cloudinary
-  coffee-rails (~> 4.1.0)
   devise
   devise_invitable (~> 1.5.2)
   devise_token_auth
@@ -403,7 +402,7 @@ DEPENDENCIES
   rails (= 4.2.1)
   rails_12factor
   ransack!
-  react-rails (~> 1.6.0)
+  react-rails
   responders
   rmagick
   rolify

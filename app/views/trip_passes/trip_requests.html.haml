@@ -3,7 +3,9 @@
     %h1
       Trip Requests
       %i.fa.fa-plane
-  = react_component 'TripPassBox', {newPasses: @trip_passes.map{|u| u.as_json(include: { researcher: { only: [:name] }, user: { only: [:name] } } ) }, acceptPasses: @accepted_trips.map{|u| u.as_json(include: { researcher: { only: [:name] }, user: { only: [:name] } } ) }, declinePasses: @declined_trips.map{|u| u.as_json(include: { researcher: { only: [:name] }, user: { only: [:name] } } ) }}
+  = react_component('TripPassBox',{newPasses: @trip_passes.map{|u| u.as_json(include: { researcher: { only: [:name] }, user: { only: [:name] } } ) },
+                                   acceptPasses: @accepted_trips.map{|u| u.as_json(include: { researcher: { only: [:name] }, user: { only: [:name] } } ) },
+                                   declinePasses: @declined_trips.map{|u| u.as_json(include: { researcher: { only: [:name] }, user: { only: [:name] } } ) } })
   #box
   #new
   #accepted

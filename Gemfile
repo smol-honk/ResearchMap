@@ -7,7 +7,7 @@ gem 'mysql2', '~> 0.3.18'
 gem 'bootstrap-sass'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
+# gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'carrierwave'
@@ -16,7 +16,6 @@ gem 'carrierwave-crop'
 gem 'turbolinks'
 gem "iconv", "~> 1.0.3"
 gem 'geocoder'
-gem 'react-rails', '~> 1.6.0'
 gem 'devise_invitable', '~> 1.5.2'
 gem 'geocomplete_rails'
 gem 'mapbox-rails'
@@ -53,6 +52,7 @@ gem 'will_paginate', github: 'jonatack/will_paginate'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'haml-rails'
+gem 'react-rails'
 gem 'rails_12factor', group: :production
 
 group :development, :test do
