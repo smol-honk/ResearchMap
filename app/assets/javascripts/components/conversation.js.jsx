@@ -62,6 +62,8 @@ var Conversation = React.createClass({
   }
 });
 
+var test = React.createClass(Conversation);
+
 ReactDOM.render(
-  <Conversation />
+  <test />
 );
