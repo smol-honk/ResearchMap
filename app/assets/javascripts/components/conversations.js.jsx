@@ -1,4 +1,5 @@
 // TODO: Add Websocket to chat so it live updates
+//= require components
 
 function convertUTCDateToLocalDate(date) {
     var newDate = new Date(date.getTime()+ date.getTimezoneOffset() * 60 * 1000);
