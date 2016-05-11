@@ -5,6 +5,7 @@
     = react_component('Conversation', {:convo => @conversation,
                                        :id => @conversation.id,
                                        :subject => @conversation.subject,
-                                       :data => @convo.map{|u| u.message.as_json(include: { sender: { only: [:name, :avatar] } })}})
+                                       :data => @convo.map{|u| u.message.as_json(include: { sender: { only: [:name, :avatar] } })}},
+                                       {:prerender => false})
 
   -# -raise 'error'
