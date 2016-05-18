@@ -12,8 +12,7 @@ class Researcher < ActiveRecord::Base
   has_many :researches, dependent: :destroy
   validates_presence_of :first_name, :last_name
   before_save :name
-  # before_save :gen_name_hash
-  # after_validation :gen_name_hash, :if => :name_hash_changed?
+  after_save :gen_name_hash!
   geocoded_by :current_location
   after_validation :geocode, :if => :current_location_changed?
 
@@ -24,9 +23,6 @@ class Researcher < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :discipline, :phone_number, :name_hash, :name, :first_name, :last_name, :email, :password, :bio, :title, :headline, :current_location, :avatar, :avatar_cache, :remove_avatar, :password_confirmation
 
-  def gen_name_hash
-    self.update_attribute(:name_hash, Digest::MD5.hexdigest(self.name))
-  end
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
@@ -54,9 +50,13 @@ class Researcher < ActiveRecord::Base
   def name
     if self.first_name.nil?
       self.first_name = ""
+    else
+      self.first_name = self.first_name.capitalize.strip
     end
     if self.last_name.nil?
       self.last_name = ""
+    else
+      self.last_name = self.last_name.capitalize.strip
     end
     self.name = self.first_name + " " +  self.last_name
   end
@@ -72,6 +72,12 @@ class Researcher < ActiveRecord::Base
 
   def mailboxer_email(object)
     return self.email
+  end
+
+  def gen_name_hash!
+    if self.name_hash != Digest::MD5.hexdigest(self.name)
+      self.update_attribute(:name_hash, Digest::MD5.hexdigest(self.name))
+    end
   end
 
 end

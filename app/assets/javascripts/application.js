@@ -13,6 +13,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require jquery.geocomplete
+//= require geocomplete
 //= require picker
 //= require picker.date
 //= require picker.time
@@ -23,10 +24,6 @@
 //= require components
 //= require_tree .
 
-
-$(function() {
-	$("#geocomplete").geocomplete();
-});
 
 $(function() {
 	$('#datepicker').datepicker({
