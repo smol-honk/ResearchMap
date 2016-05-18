@@ -29,7 +29,7 @@ Rails.application.configure do
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = true
-  config.assets.precompile += %w(*.js.jsx)
+  config.assets.precompile += %w(*.jsx)
 
   # config.assets.precompile += %w( * )
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
