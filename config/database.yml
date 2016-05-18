@@ -50,5 +50,5 @@ test:
 production:
   <<: *default
   database: PeopleMap_production
-  username: PeopleMap
-  password: <%= ENV['PEOPLEMAP_DATABASE_PASSWORD'] %>
+  username: root
+  password: <%= ENV['database_pass'] %>

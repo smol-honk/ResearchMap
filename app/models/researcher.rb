@@ -10,10 +10,10 @@ class Researcher < ActiveRecord::Base
   belongs_to :researchers
   belongs_to :trip_pass
   has_many :researches, dependent: :destroy
-  before_save :name
   validates_presence_of :first_name, :last_name
-  before_create :gen_name_hash
-  after_validation :gen_name_hash, :if => :name_hash_changed?
+  before_save :name
+  # before_save :gen_name_hash
+  # after_validation :gen_name_hash, :if => :name_hash_changed?
   geocoded_by :current_location
   after_validation :geocode, :if => :current_location_changed?
 

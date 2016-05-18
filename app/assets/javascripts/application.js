@@ -10,15 +10,14 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
 //= require jquery_ujs
 //= require jquery-ui
 //= require jquery.geocomplete
 //= require picker
 //= require picker.date
 //= require picker.time
-//= require turbolinks
 //= require js-routes
+//= require turbolinks
 //= require react
 //= require react_ujs
 //= require components

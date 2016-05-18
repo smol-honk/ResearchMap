@@ -1,0 +1,1 @@
+!function(e,t){t.ReactRailsUJS.TurbolinksClassic={setup:function(){ReactRailsUJS.handleEvent(Turbolinks.EVENTS.CHANGE,function(){t.ReactRailsUJS.mountComponents()}),ReactRailsUJS.handleEvent(Turbolinks.EVENTS.BEFORE_UNLOAD,function(){t.ReactRailsUJS.unmountComponents()})}}}(document,window);

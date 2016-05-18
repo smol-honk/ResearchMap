@@ -40,7 +40,8 @@ gem 'omniauth-openid', :github => 'intridea/omniauth-openid'
 gem 'execjs'
 gem 'mechanize'
 gem 'nokogiri'
-gem 'therubyracer'
+gem "therubyracer", :platforms => :ruby
+gem "therubyrhino", :platforms => :jruby
 gem 'bootstrap-datepicker-rails'
 gem 'progress_bar'
 gem 'protected_attributes'
