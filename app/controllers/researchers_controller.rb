@@ -17,7 +17,6 @@ class ResearchersController < ApplicationController
   end
   def edit
     @researcher.discipline = params['discipline']
-    raise 'error'
   end
 
   def update
@@ -60,6 +59,14 @@ class ResearchersController < ApplicationController
       redirect_to :back, notice: "Researchers created/edited."
     else
       redirect_to :back
+    end
+  end
+
+  def destroy
+    @researcher.destroy
+    respond_to do |format|
+      format.html { redirect_to researchers_path, notice: 'Researcher was successfully destroyed.' }
+      format.json { head :no_content }
     end
   end
 
