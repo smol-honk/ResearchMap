@@ -63,6 +63,7 @@ class ResearchersController < ApplicationController
   end
 
   def destroy
+    @researcher = Researcher.find(params[:id])
     @researcher.destroy
     respond_to do |format|
       format.html { redirect_to researchers_path, notice: 'Researcher was successfully destroyed.' }
