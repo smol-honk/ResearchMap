@@ -52,11 +52,11 @@
     .field
       = f.label :bio
       = f.text_area :bio, class: :'form-control'
-    - if researcher_signed_in?
-      .field
-        = f.label 'discipline', "What's your discipline?"
-        = select_tag('discipline', "<option>Applied Anthropology</option><option>Biological Anthropology</option><option>Archaeology</option><option>Socio-Cultural Anthropology</option><option>Linguistic Anthropology</option>".html_safe, class: :"form-control", multiple: false)
-        -raise 'error'
+    -# - if researcher_signed_in?
+    -#   .field
+    -#     = f.label 'discipline', "What's your discipline?"
+    -#     = select_tag('discipline', "<option>Applied Anthropology</option><option>Biological Anthropology</option><option>Archaeology</option><option>Socio-Cultural Anthropology</option><option>Linguistic Anthropology</option>".html_safe, class: :"form-control", multiple: false)
+    -#     -raise 'error'
 
     -#   .field#dayorweek{style: :"display: none"}
     -#     = f.label :day do
@@ -93,40 +93,40 @@
   %p
     Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
   = link_to "Back", :back
-
-  :javascript
-    var visitor = document.getElementById('visitor');
-    var weekselect = document.getElementById('weekselect');
-    var dayselect = document.getElementById('dayselect');
-    var visit_div = document.getElementById('dayorweek');
-    var day_div = document.getElementById('day');
-    var week_div = document.getElementById('week');
-
-    var showHiddenVisitor = function(){
-       if(visitor.checked) {
-         visit_div.style['display'] = 'block';
-       } else {
-         visit_div.style['display'] = 'none';
-       }
-    }
-    var showHiddenWeek = function(){
-       if(weekselect.checked) {
-         week_div.style['display'] = 'block';
-       } else {
-         week_div.style['display'] = 'none';
-       }
-    }
-    var showHiddenDay = function(){
-       if(dayselect.checked) {
-         day_div.style['display'] = 'block';
-       } else {
-         day_div.style['display'] = 'none';
-       }
-    }
-
-    visitor.onclick = showHiddenVisitor;
-    dayselect.onclick = showHiddenDay;
-    weekselect.onclick = showHiddenWeek;
-    showHiddenVisitor();
-    showHiddenDay();
-    showHiddenWeek();
+  -#
+  -# :javascript
+  -#   var visitor = document.getElementById('visitor');
+  -#   var weekselect = document.getElementById('weekselect');
+  -#   var dayselect = document.getElementById('dayselect');
+  -#   var visit_div = document.getElementById('dayorweek');
+  -#   var day_div = document.getElementById('day');
+  -#   var week_div = document.getElementById('week');
+  -#
+  -#   var showHiddenVisitor = function(){
+  -#      if(visitor.checked) {
+  -#        visit_div.style['display'] = 'block';
+  -#      } else {
+  -#        visit_div.style['display'] = 'none';
+  -#      }
+  -#   }
+  -#   var showHiddenWeek = function(){
+  -#      if(weekselect.checked) {
+  -#        week_div.style['display'] = 'block';
+  -#      } else {
+  -#        week_div.style['display'] = 'none';
+  -#      }
+  -#   }
+  -#   var showHiddenDay = function(){
+  -#      if(dayselect.checked) {
+  -#        day_div.style['display'] = 'block';
+  -#      } else {
+  -#        day_div.style['display'] = 'none';
+  -#      }
+  -#   }
+  -#
+  -#   visitor.onclick = showHiddenVisitor;
+  -#   dayselect.onclick = showHiddenDay;
+  -#   weekselect.onclick = showHiddenWeek;
+  -#   showHiddenVisitor();
+  -#   showHiddenDay();
+  -#   showHiddenWeek();
