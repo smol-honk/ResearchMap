@@ -20,7 +20,7 @@
         - @followings.each do |following|
           %tr
             %td
-              = image_tag following.avatar.url(:thumb), class: :'img-circle', height: :'50px', width: :'50px'
+              = image_tag following.avatar.url(:thumb), class: :'img-circle', size: '50x50'
             %td
               = link_to following.first_name, following
             %td
