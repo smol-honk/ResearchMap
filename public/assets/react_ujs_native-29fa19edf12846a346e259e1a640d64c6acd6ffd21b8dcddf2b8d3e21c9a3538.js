@@ -1,0 +1,1 @@
+!function(e,t){var i="undefined"!=typeof t.jQuery&&t.jQuery;t.ReactRailsUJS.Native={setup:function(){i?i(function(){t.ReactRailsUJS.mountComponents()}):"addEventListener"in t?e.addEventListener("DOMContentLoaded",function(){t.ReactRailsUJS.mountComponents()}):t.attachEvent("onload",function(){t.ReactRailsUJS.mountComponents()})}}}(document,window);

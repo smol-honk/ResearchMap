@@ -195,13 +195,11 @@ GEM
       sprockets-rails
     json (1.8.3)
     jwt (1.5.1)
-    leaflet-rails (0.7.7)
     libv8 (3.16.14.13)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
-    mapbox-rails (1.6.1.1)
     mechanize (2.7.4)
       domain_name (~> 0.5, >= 0.5.1)
       http-cookie (~> 1.0)
@@ -388,9 +386,7 @@ DEPENDENCIES
   jquery-turbolinks
   jquery-ui-rails
   js-routes
-  leaflet-rails
   mailboxer!
-  mapbox-rails
   mechanize
   mysql2 (~> 0.3.18)
   nokogiri

@@ -1,0 +1,1 @@
+(function(){this.booleanFormat=function(t){return t.toString()}}).call(this);

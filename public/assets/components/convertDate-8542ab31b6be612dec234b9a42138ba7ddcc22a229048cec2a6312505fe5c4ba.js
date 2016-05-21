@@ -1,0 +1,1 @@
+function convertUTCDateToLocalDate(t){var e=new Date(t.getTime()+60*t.getTimezoneOffset()*1e3),i=t.getTimezoneOffset()/60,n=t.getHours();return e.setHours(n-i),e}

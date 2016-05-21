@@ -69,6 +69,7 @@ Rails.application.routes.draw do
   get 'activity', to: 'activity#index', as: :activity
   get 'welcome/map'
   # get 'profile/:id' => 'profile#show', as: :profile
+  get 'faq', to: 'welcome#FAQ', as: :faq
   get 'welcome/index'
   get 'welcome/data', :defaults => { format: :'json'}
   get 'people/index'

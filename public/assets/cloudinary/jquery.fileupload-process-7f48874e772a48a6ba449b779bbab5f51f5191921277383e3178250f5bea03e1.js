@@ -1,0 +1,11 @@
+/*
+ * jQuery File Upload Processing Plugin
+ * https://github.com/blueimp/jQuery-File-Upload
+ *
+ * Copyright 2012, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+!function(t){"use strict";"function"==typeof define&&define.amd?define(["jquery","./jquery.fileupload"],t):t("object"==typeof exports?require("jquery"):window.jQuery)}(function(t){"use strict";var e=t.blueimp.fileupload.prototype.options.add;t.widget("blueimp.fileupload",t.blueimp.fileupload,{options:{processQueue:[],add:function(i,n){var s=t(this);n.process(function(){return s.fileupload("process",n)}),e.call(this,i,n)}},processActions:{},_processFile:function(e,i){var n=this,s=t.Deferred().resolveWith(n,[e]),o=s.promise();return this._trigger("process",null,e),t.each(e.processQueue,function(e,s){var r=function(e){return i.errorThrown?t.Deferred().rejectWith(n,[i]).promise():n.processActions[s.action].call(n,e,s)};o=o.pipe(r,s.always&&r)}),o.done(function(){n._trigger("processdone",null,e),n._trigger("processalways",null,e)}).fail(function(){n._trigger("processfail",null,e),n._trigger("processalways",null,e)}),o},_transformProcessQueue:function(e){var i=[];t.each(e.processQueue,function(){var n={},s=this.action,o=this.prefix===!0?s:this.prefix;t.each(this,function(i,s){"string"===t.type(s)&&"@"===s.charAt(0)?n[i]=e[s.slice(1)||(o?o+i.charAt(0).toUpperCase()+i.slice(1):i)]:n[i]=s}),i.push(n)}),e.processQueue=i},processing:function(){return this._processing},process:function(e){var i=this,n=t.extend({},this.options,e);return n.processQueue&&n.processQueue.length&&(this._transformProcessQueue(n),0===this._processing&&this._trigger("processstart"),t.each(e.files,function(s){var o=s?t.extend({},n):n,r=function(){return e.errorThrown?t.Deferred().rejectWith(i,[e]).promise():i._processFile(o,e)};o.index=s,i._processing+=1,i._processingQueue=i._processingQueue.pipe(r,r).always(function(){i._processing-=1,0===i._processing&&i._trigger("processstop")})})),this._processingQueue},_create:function(){this._super(),this._processing=0,this._processingQueue=t.Deferred().resolveWith(this).promise()}})});

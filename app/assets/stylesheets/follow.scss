@@ -4,3 +4,13 @@
 // body {
 //   padding-top: 5em;
 // }
+
+.link-color{
+  a {
+    color: lightgray;
+  }
+
+  a:hover {
+    color: white;
+  }
+}
