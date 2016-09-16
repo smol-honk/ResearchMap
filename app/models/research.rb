@@ -5,28 +5,41 @@ class Research < ActiveRecord::Base
   acts_as_likeable
   belongs_to :researcher
   has_many :trip_pass
+  after_create :update_popup
 
   attr_accessible :name,
-                  :headline,
-                  :location,
-                  :latitude,
-                  :longitude,
-                  :abstract,
-                  :dateStart,
-                  :dateEnd,
-                  :inFieldStart,
-                  :inFieldEnd,
-                  :available,
-                  :weekStart,
-                  :weekEnd,
-                  :researcher,
-                  :researcher_id,
-                  :id,
-                  :unknown,
-                  :keywords
+  :headline,
+  :location,
+  :latitude,
+  :longitude,
+  :abstract,
+  :dateStart,
+  :dateEnd,
+  :inFieldStart,
+  :inFieldEnd,
+  :available,
+  :weekStart,
+  :weekEnd,
+  :researcher,
+  :researcher_id,
+  :id,
+  :unknown,
+  :keywords
 
   geocoded_by :location
   after_validation :geocode, :if => :location_changed?
+
+  def update_popup
+    self.update_attribute(:popup, getPopUpString(self));
+  end
+
+  def getPopUpString(research)
+    s = "<h3 class=\"blue\">" + research.name.to_s + "</h3>" + "<p>" + "<h5 id = \"thin\" class=\"red\">"+research.location.to_s+"</h5><h5 class=\"blue\" id = \"thin\">"+research.researcher.name.to_s+"</h5>"
+    if !research.headline.nil?
+      s += research.headline.to_s + "<br>" + "<a class = \"btn btn-default\" href =\"researches/" + research.id.to_s + "\"> Read More</a>"
+    end
+    return s
+  end
 
   def update_dates
     if !dateEnd.nil?

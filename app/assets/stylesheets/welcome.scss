@@ -1,33 +1,44 @@
 // Place all the styles related to the Welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
-
-body {
-    -webkit-font-smoothing:antialiased;
-}
-* {
-  -webkit-box-sizing:border-box;
-  -moz-box-sizing:border-box;
-  box-sizing:border-box;
-}
-
-.line-clamp {
-  display: -webkit-box;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
-}
+//
+//
+// body {
+//     -webkit-font-smoothing:antialiased;
+// }
+// * {
+//   -webkit-box-sizing:border-box;
+//   -moz-box-sizing:border-box;
+//   box-sizing:border-box;
+// }
+//
+// .line-clamp {
+//   display: -webkit-box;
+//   text-overflow: ellipsis;
+//   -webkit-line-clamp: 3;
+//   overflow: hidden;
+// }
 //
 // .panel.panel-default {
 //     margin: 0px;
 // }
 
 .listings {
-  height:81%;
-  overflow:auto;
+  height: 80%;
+  overflow: auto;
   padding-bottom:60px;
+}
 
+#thin{
+    font-weight: 100;
+}
+
+.red{
+  color: #AB0520 !important;
+}
+
+.blue {
+  color:#0C234B;
 }
 
 .listings .item {
@@ -39,20 +50,20 @@ body {
 .listings .item:last-child { border-bottom:none; }
 .listings .item .title {
   display:block;
-  color:navy;
+  color: #0C234B;
   font-weight:700;
   margin-bottom: 3px;
 }
 
 .listings .item .personTitle {
   padding-bottom: 5px;
-  color: maroon;
+  color: #AB0520;
 }
 .listings .item .title small { font-weight:400; }
 .listings .item.active .title,
 .listings .item .title:hover {
-    color: #8f1124;
-    text-decoration: none;
+  color: #8f1124;
+  text-decoration: none;
 }
 .listings .item.active {
   background-color:#f8f8f8;
@@ -81,67 +92,53 @@ body {
   visibility:hidden;
 }
 
-// .panel-group a{
-//     background-color: transparent;
-// }
-.leaflet-container p {
-    // font-family: 'Quicksand Book', Arial, sans-serif;
-}
-.leaflet-container a{
-    background-color: transparent;
-}
-
-.leaflet-container h3 {
-    color: slategray;
-    // font-family: 'Quicksand Book', Arial, sans-serif;
-}
-
-.popup {
-    // font-family: 'Quicksand Book', Arial, sans-serif;
-}
-
 #backToSize {
-    background-color: transparent;
-    text-decoration: none;
+  background-color: transparent;
+  text-decoration: none;
 }
-.sidebar {
-    border-radius: 6px;
-    z-index: 1000;
-    position: absolute;
-    width: 23.5%;
-    height: 500px;
-    left: 4%;
-    min-width: 195px;
-    background-color: lightgray;
-}
+
 
 .heading {
-    text-align: center;
-    // font-family: 'Quicksand Book', Arial, sans-serif;
+  // position: absolute;
+  text-align: center;
+  // margin: 3em;
+}
+.right{
+  position: absolute;
+  right:0;
+}
+
+.left{
+  position: absolute;
+  left:0;
+}
+.mapArea{
+  position: relative;
+  height: 100vh;
+}
+.sidebar {
+  display: inline-block;
+  width: 25%;
+  height: 100vh;
+  background-color: lightgray;
+  overflow: auto;
 }
 
 #map{
-    border-radius: 6px;
-    margin:0;
-    position: relative;
-    height: 500px;
-    left: 25.5%;
-    width: 76%;
-    .leaflet-popup-tip {
-      background: transparent;
-      transform: rotate(0deg);
-    }
+  display: inline-block;
+  height: 100vh;
+  width: 75%;
 }
 
 #searchanthro {
-    padding-top: 20px;
+  padding-top: 20px;
 }
 
 .leaflet-control-mapbox-geocoder-results{
   a:hover {
     width: 180px !important;
-    }
   }
+}
 
 
 .menu-ui {
@@ -153,32 +150,32 @@ body {
   border-radius:3px;
   width:120px;
   border:1px solid rgba(0,0,0,0.4);
-    }
+}
 .menu-ui a {
-font-size:13px;
-color:#404040;
-display:block;
-margin:0;padding:0;
-padding:10px;
-text-decoration:none;
-border-bottom:1px solid rgba(0,0,0,0.25);
-text-align:center;
+  font-size:13px;
+  color:#404040;
+  display:block;
+  margin:0;padding:0;
+  padding:10px;
+  text-decoration:none;
+  border-bottom:1px solid rgba(0,0,0,0.25);
+  text-align:center;
 }
 .menu-ui a:first-child {
   border-radius:3px 3px 0 0;
-  }
+}
 .menu-ui a:last-child {
   border:none;
   border-radius:0 0 3px 3px;
-  }
+}
 .menu-ui a:hover {
   background:#f8f8f8;
   color:#404040;
   text-decoration: none;
-  }
+}
 .menu-ui a.active,
 .menu-ui a.active:hover {
   background:slategray;
   color:#FFF;
   text-decoration: none;
-  }
+}

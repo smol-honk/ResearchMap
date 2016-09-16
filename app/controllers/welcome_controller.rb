@@ -4,7 +4,7 @@ class WelcomeController < ApplicationController
   def index
 
   end
-  
+
   def FAQ
   end
 
@@ -23,6 +23,7 @@ class WelcomeController < ApplicationController
           name: research.name,
           researcher: research.researcher.name,
           bio: research.headline,
+          popup: research.popup,
           location: research.location,
           available: research.available,
           unknown: research.unknown,

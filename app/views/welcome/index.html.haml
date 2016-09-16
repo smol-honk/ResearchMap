@@ -2,31 +2,30 @@
 / Scripts to allow Mapbox API to work
 %script{src: :'https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.js'}
 %link{href: :'https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.css', rel: :'stylesheet'}
+%body{data: {'no-transition-cache': 'true'}}
+  .mapArea
+    .sidebar.left
+      .heading
+        %h2
+          %i.fa.fa-globe
+          %a#backToSize{href: :'#', title: :"Zoom out on map", 'data-toggle': :'tooltip', 'data-placement': :'top'} Research Map
+      .listings#listings
+    .right#map
 .container
-  %body{data: {'no-transition-cache': 'true'}}
-    %h1
-      %center NoRMA
-    %nav.menu-ui#menu-ui
-      %a.active#filter-all{href: :'#'} Show all
-      %a#filter-donor{href: :'#'} Can visit?
-    .mapArea
-      .sidebar
-        .heading
-          %h2
-            %i.fa.fa-globe
-            %a#backToSize{href: :'#', title: :"Zoom out on map", 'data-toggle': :'tooltip', 'data-placement': :'top'} Locations
-        .listings#listings
-      #map
-
-      %br
-      .row
-        .panel.panel-default
-          .panel-heading
-            %h2.panel-title About Nexus of Researchers Map Application
-          .panel-body
-            NoRMA was created to allow Potential Graduate Students, Friends of Anthropology,
-            and those interested in the Research done by the School of Anthropology to contact
-            the Researchers directly, as well as visit Researchers if they are Patrons of Benefactors of the School of
-            Anthropology through Trip Passes. There are many ways to keep in touch with the Researchers by "Following" them, and keep track of the Research you
-            may have favorited or "Liked". The "Can Visit?" portion of Research is to let Patrons and Benefactors know that the Researcher
-            is available to host, and that way Patrons and Benefactors can see which Research is available to visit!            
+  %nav.menu-ui#menu-ui
+    %a.active#filter-all{href: :'#'} Show all
+    %a#filter-donor{href: :'#'} Can visit?
+  %h1
+    %center NoRMA
+  %br
+  .row
+    .panel.panel-default
+      .panel-heading
+        %h2.panel-title About Nexus of Researchers Map Application
+      .panel-body
+        NoRMA was created to allow Potential Graduate Students, Friends of Anthropology,
+        and those interested in the Research done by the School of Anthropology to contact
+        the Researchers directly, as well as visit Researchers if they are Patrons of Benefactors of the School of
+        Anthropology through Trip Passes. There are many ways to keep in touch with the Researchers by "Following" them, and keep track of the Research you
+        may have favorited or "Liked". The "Can Visit?" portion of Research is to let Patrons and Benefactors know that the Researcher
+        is available to host, and that way Patrons and Benefactors can see which Research is available to visit!

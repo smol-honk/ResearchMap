@@ -6,4 +6,5 @@ module ResearchesHelper
     end
     s.html_safe
   end
+
 end
