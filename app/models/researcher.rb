@@ -21,7 +21,7 @@ class Researcher < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :discipline, :phone_number, :name_hash, :name, :first_name, :last_name, :email, :password, :bio, :title, :headline, :current_location, :avatar, :avatar_cache, :remove_avatar, :password_confirmation
+  # attr_accessible :discipline, :phone_number, :name_hash, :name, :first_name, :last_name, :email, :password, :bio, :title, :headline, :current_location, :avatar, :avatar_cache, :remove_avatar, :password_confirmation
 
 
   def self.import(file)
@@ -74,10 +74,23 @@ class Researcher < ActiveRecord::Base
     return self.email
   end
 
+  def name
+      return self.first_name + " " + self.last_name
+  end
+
   def gen_name_hash!
     if self.name_hash != Digest::MD5.hexdigest(self.name)
       self.update_attribute(:name_hash, Digest::MD5.hexdigest(self.name))
     end
+  end
+
+  private
+  # Using a private method to encapsulate the permissible parameters is
+  # just a good pattern since you'll be able to reuse the same permit
+  # list between create and update. Also, you can specialize this method
+  # with per-user checking of permissible attributes.
+  def researcher_params
+    params.require(:researcher).permit(:discipline, :phone_number, :name_hash, :name, :first_name, :last_name, :email, :password, :bio, :title, :headline, :current_location, :avatar, :avatar_cache, :remove_avatar, :password_confirmation)
   end
 
 end

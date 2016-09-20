@@ -17,6 +17,7 @@ class ConversationsController < ApplicationController
 
   def show
     @convo = @conversation.receipts_for(@current)
+    @conversation.mark_as_read(@current)
     respond_to do |format|
       format.html # show.html.haml
       format.json { render json: @convo.map{|u| u.message.as_json(include: { sender: { only: [:name, :avatar] } })}}

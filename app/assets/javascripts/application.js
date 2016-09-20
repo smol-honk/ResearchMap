@@ -18,7 +18,6 @@
 //= require picker.date
 //= require picker.time
 //= require js-routes
-//= require turbolinks
 //= require react
 //= require react_ujs
 //= require components

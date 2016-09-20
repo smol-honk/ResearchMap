@@ -50,7 +50,6 @@ Rails.application.configure do
     :domain         => 'heroku.com',
     :enable_starttls_auto => true
   }
-
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end

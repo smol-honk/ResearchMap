@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160422190115) do
+ActiveRecord::Schema.define(version: 20160919171640) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -100,6 +100,9 @@ ActiveRecord::Schema.define(version: 20160422190115) do
     t.string   "mailbox_type",    limit: 25
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
+    t.boolean  "is_delivered",    limit: 1,   default: false
+    t.string   "delivery_method", limit: 255
+    t.string   "message_id",      limit: 255
   end
 
   add_index "mailboxer_receipts", ["notification_id"], name: "index_mailboxer_receipts_on_notification_id", using: :btree
@@ -214,6 +217,7 @@ ActiveRecord::Schema.define(version: 20160422190115) do
     t.string   "headline",      limit: 255
     t.boolean  "unknown",       limit: 1
     t.string   "keywords",      limit: 255
+    t.text     "popup",         limit: 65535
   end
 
   add_index "researches", ["researcher_id"], name: "index_researches_on_researcher_id", using: :btree

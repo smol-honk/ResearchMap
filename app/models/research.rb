@@ -7,24 +7,25 @@ class Research < ActiveRecord::Base
   has_many :trip_pass
   after_create :update_popup
 
-  attr_accessible :name,
-  :headline,
-  :location,
-  :latitude,
-  :longitude,
-  :abstract,
-  :dateStart,
-  :dateEnd,
-  :inFieldStart,
-  :inFieldEnd,
-  :available,
-  :weekStart,
-  :weekEnd,
-  :researcher,
-  :researcher_id,
-  :id,
-  :unknown,
-  :keywords
+  # attr_accessible
+  # :name,
+  # :headline,
+  # :location,
+  # :latitude,
+  # :longitude,
+  # :abstract,
+  # :dateStart,
+  # :dateEnd,
+  # :inFieldStart,
+  # :inFieldEnd,
+  # :available,
+  # :weekStart,
+  # :weekEnd,
+  # :researcher,
+  # :researcher_id,
+  # :id,
+  # :unknown,
+  # :keywords
 
   geocoded_by :location
   after_validation :geocode, :if => :location_changed?
@@ -68,5 +69,24 @@ class Research < ActiveRecord::Base
 
   def self.ransackable_attributes(auth_object = nil)
     super - ['id', 'created_at', 'longitude', 'latitude', 'updated_at']
+  end
+
+
+  private
+  # Using a private method to encapsulate the permissible parameters is
+  # just a good pattern since you'll be able to reuse the same permit
+  # list between create and update. Also, you can specialize this method
+  # with per-user checking of permissible attributes.
+  def research_params
+    params.require(:research).permit(:name, :headline, :location, :latitude, :longitude, :abstract, :dateStart, :dateEnd, :inFieldStart,
+    :inFieldEnd,
+    :available,
+    :weekStart,
+    :weekEnd,
+    :researcher,
+    :researcher_id,
+    :id,
+    :unknown,
+    :keywords)
   end
 end
