@@ -21,7 +21,7 @@ gem "js-routes"
 gem 'faker'
 gem 'figaro'
 gem 'rolify'
-gem 'rmagick'
+gem 'rmagick', require: false
 gem 'devise',           '~> 4.2'
 gem 'devise_invitable', '~> 1.7.0'
 gem 'socialization'
