@@ -1,0 +1,1 @@
+!function(e,t){t.ReactRailsUJS.Turbolinks={setup:function(){ReactRailsUJS.handleEvent("turbolinks:load",function(){t.ReactRailsUJS.mountComponents()}),ReactRailsUJS.handleEvent("turbolinks:before-render",function(){t.ReactRailsUJS.unmountComponents()})}}}(document,window);

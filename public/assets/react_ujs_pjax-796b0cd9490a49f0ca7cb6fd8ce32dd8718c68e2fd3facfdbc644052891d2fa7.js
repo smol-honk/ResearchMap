@@ -1,0 +1,1 @@
+!function(e,t){t.ReactRailsUJS.pjax={setup:function(){ReactRailsUJS.handleEvent("ready",function(){t.ReactRailsUJS.mountComponents()}),ReactRailsUJS.handleEvent("pjax:end",function(e){t.ReactRailsUJS.mountComponents(e.target)}),ReactRailsUJS.handleEvent("pjax:beforeReplace",function(e){t.ReactRailsUJS.unmountComponents(e.target)})}}}(document,window);

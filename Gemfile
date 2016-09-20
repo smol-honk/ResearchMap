@@ -10,7 +10,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'carrierwave'
+gem "carrierwave"
 gem 'cloudinary'
 gem 'carrierwave-crop'
 gem 'turbolinks'
@@ -21,7 +21,7 @@ gem "js-routes"
 gem 'faker'
 gem 'figaro'
 gem 'rolify'
-gem 'rmagick', require: false
+gem 'rmagick'
 gem 'devise',           '~> 4.2'
 gem 'devise_invitable', '~> 1.7.0'
 gem 'socialization'
