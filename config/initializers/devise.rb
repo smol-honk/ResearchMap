@@ -7,6 +7,23 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` on Rails 4+ applications as its `secret_key`
   # by default. You can change it below and use your own secret key.
   config.secret_key = '2680775627a35edf74c11cd6cd9e7985ea6578249bc476167f4c1ccea4fa43ed33013550c75987b089b920589f421f1cb8d129e77dafa7c9335017c6bd91455c'
+  config.cas_base_url = "https://webauth.arizona.edu/webauth/"
+  config.cas_create_user = false
+
+  # The CAS specification allows for the passing of a follow URL to be displayed when
+  # a user logs out on the CAS server. RubyCAS-Server also supports redirecting to a
+  # URL via the destination param. Set either of these urls and specify either nil,
+  # 'destination' or 'follow' as the logout_url_param. If the urls are blank but
+  # logout_url_param is set, a default will be detected for the service.
+  config.cas_destination_url = 'https://localhost:3000/'
+  config.cas_logout_url_param = 'destination'
+
+    # You can specify the name of the destination argument with the following option.
+  # e.g. the following option will change it from 'destination' to 'url'
+  config.cas_destination_logout_param_name = 'service'
+
+  # You can enable Single Sign Out, which by default is disabled.
+  # config.cas_enable_single_sign_out = true
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,

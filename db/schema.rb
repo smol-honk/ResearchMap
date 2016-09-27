@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920183435) do
+ActiveRecord::Schema.define(version: 20160927170647) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -144,59 +144,41 @@ ActiveRecord::Schema.define(version: 20160920183435) do
   end
 
   create_table "researchers", force: :cascade do |t|
-    t.string   "email",                  limit: 255,   default: "", null: false
-    t.string   "encrypted_password",     limit: 255,   default: "", null: false
-    t.string   "reset_password_token",   limit: 255
-    t.datetime "reset_password_sent_at"
+    t.string   "email",               limit: 255,   default: "", null: false
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,     default: 0,  null: false
+    t.integer  "sign_in_count",       limit: 4,     default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
-    t.string   "first_name",             limit: 255
-    t.string   "last_name",              limit: 255
-    t.string   "avatar",                 limit: 255
-    t.string   "current_location",       limit: 255
-    t.boolean  "available",              limit: 1
-    t.boolean  "week",                   limit: 1
-    t.boolean  "day",                    limit: 1
+    t.string   "current_sign_in_ip",  limit: 255
+    t.string   "last_sign_in_ip",     limit: 255
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.string   "first_name",          limit: 255
+    t.string   "last_name",           limit: 255
+    t.string   "avatar",              limit: 255
+    t.string   "current_location",    limit: 255
+    t.boolean  "available",           limit: 1
+    t.boolean  "week",                limit: 1
+    t.boolean  "day",                 limit: 1
     t.date     "day_available"
     t.date     "weekDateStart"
     t.date     "weekDateEnd"
-    t.float    "longitude",              limit: 24
-    t.float    "latitude",               limit: 24
-    t.string   "title",                  limit: 255
-    t.text     "bio",                    limit: 65535
-    t.string   "headline",               limit: 255
-    t.string   "name",                   limit: 255
-    t.string   "phone_number",           limit: 255
-    t.string   "confirmation_token",     limit: 255
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email",      limit: 255
+    t.float    "longitude",           limit: 24
+    t.float    "latitude",            limit: 24
+    t.string   "title",               limit: 255
+    t.text     "bio",                 limit: 65535
+    t.string   "headline",            limit: 255
+    t.string   "name",                limit: 255
+    t.string   "phone_number",        limit: 255
     t.date     "locked_at"
-    t.integer  "failed_attempts",        limit: 4
-    t.string   "invitation_token",       limit: 255
-    t.datetime "invitation_created_at"
-    t.datetime "invitation_sent_at"
-    t.datetime "invitation_accepted_at"
-    t.integer  "invitation_limit",       limit: 4
-    t.integer  "invited_by_id",          limit: 4
-    t.string   "invited_by_type",        limit: 255
-    t.integer  "invitations_count",      limit: 4,     default: 0
-    t.string   "name_hash",              limit: 255
-    t.string   "discipline",             limit: 255
+    t.integer  "failed_attempts",     limit: 4
+    t.string   "name_hash",           limit: 255
+    t.string   "discipline",          limit: 255
+    t.string   "username",            limit: 255
   end
 
-  add_index "researchers", ["confirmation_token"], name: "index_researchers_on_confirmation_token", unique: true, using: :btree
   add_index "researchers", ["email"], name: "index_researchers_on_email", unique: true, using: :btree
-  add_index "researchers", ["invitation_token"], name: "index_researchers_on_invitation_token", unique: true, using: :btree
-  add_index "researchers", ["invitations_count"], name: "index_researchers_on_invitations_count", using: :btree
-  add_index "researchers", ["invited_by_id"], name: "index_researchers_on_invited_by_id", using: :btree
-  add_index "researchers", ["reset_password_token"], name: "index_researchers_on_reset_password_token", unique: true, using: :btree
+  add_index "researchers", ["username"], name: "index_researchers_on_username", unique: true, using: :btree
 
   create_table "researches", force: :cascade do |t|
     t.string   "name",          limit: 255

@@ -44,6 +44,22 @@ class ResearchersController < ApplicationController
     end
   end
 
+  def create
+    @researcher = Researcher.new(researcher_params)
+    @researcher.email!
+    @researcher.save!
+    if @researcher.save
+      respond_to do |format|
+        format.html { redirect_to @researcher, notice: 'Researcher was successfully saved.' }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @researcher, alert: 'Researcher was not successfully saved.' }
+      end
+    end
+
+  end
+
   def show
     @researcher = Researcher.find(params[:id])
     @researches = Research.where(researcher_id:@researcher.id)
@@ -77,6 +93,6 @@ class ResearchersController < ApplicationController
   end
 
   def researcher_params
-    params.require(:researcher).permit(:discipline, :email, :password, :password_confirmation, :first_name, :last_name, :bio, :headline, :avatar, :avatar_cache, :remove_avatar, :phone_number, :name, :current_location, :longitude, :latitude, :title, :available, :week, :day, :day_available, :weekDateStart, :weekDateEnd)
+    params.require(:researcher).permit(:username, :discipline, :email, :password, :password_confirmation, :first_name, :last_name, :bio, :headline, :avatar, :avatar_cache, :remove_avatar, :phone_number, :name, :current_location, :longitude, :latitude, :title, :available, :week, :day, :day_available, :weekDateStart, :weekDateEnd)
   end
 end

@@ -54,4 +54,10 @@ class ApplicationController < ActionController::Base
       flash[:alert] = 'You need to be logged in to do that!'
     end
   end
+
+  # Overwriting the sign_out redirect path method
+  def after_sign_out_path_for(researcher)
+    root_path
+  end
+
 end

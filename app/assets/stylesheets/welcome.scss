@@ -140,14 +140,19 @@
   }
 }
 
+.leaflet-container a {
+    color: white !important;
+    font-weight: 400;
+    text-decoration: none;
+}
 
 .menu-ui {
+  margin: 1em;
   background:#fff;
-  position: relative;
-  top:7em;
-  left:63em;
+  position: absolute;
+  top:17em;
+  right:0;
   z-index:1;
-  border-radius:3px;
   width:120px;
   border:1px solid rgba(0,0,0,0.4);
 }
@@ -162,11 +167,9 @@
   text-align:center;
 }
 .menu-ui a:first-child {
-  border-radius:3px 3px 0 0;
 }
 .menu-ui a:last-child {
   border:none;
-  border-radius:0 0 3px 3px;
 }
 .menu-ui a:hover {
   background:#f8f8f8;
@@ -175,7 +178,7 @@
 }
 .menu-ui a.active,
 .menu-ui a.active:hover {
-  background:slategray;
+  background:#AB0520;
   color:#FFF;
   text-decoration: none;
 }

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :trip_passes
   devise_for :users, :path_prefix => 'profile', :controllers => { :users_invitations => "devise/invitations" }
   devise_for :researchers, :path_prefix => 'profile', :controllers => { :researchers_invitations => "devise/invitations" }
-
+  
   # resources :users, :researchers, :researches
   get '/researches/search', to: 'researches#search', via: :all
   resources :trip_passes do
@@ -64,6 +64,8 @@ Rails.application.routes.draw do
   get 'declined_passes', to: 'trip_passes#getDeclinedPasses', as: :declined_passes
   get 'trip_requests' => 'trip_passes#trip_requests', as: :trip_requests
   get 'import', to: 'admins#import', as: :import
+  get 'add_researcher', to: 'admins#addResearcher', as: :addResearcher
+  post 'add_researcher', to: 'admins#createResearcher'
   get 'templates', to: 'admins#templates', as: :templates
   get 'my_research', to: 'researchers#your_research', as: :my_research
   get 'activity', to: 'activity#index', as: :activity

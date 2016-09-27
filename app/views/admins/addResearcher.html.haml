@@ -1,0 +1,15 @@
+.container
+	%h1 Add Researcher 
+
+	= form_for @researcher do |f|
+		.form-group
+			= f.label :first_name
+			= f.text_field :first_name
+		.form-group
+			= f.label :last_name
+			= f.text_field :last_name
+		.form-group
+			= f.label :username, "NetID"
+			= f.text_field :username
+		.actions
+			= f.submit 'Submit', class: :"btn btn-primary"
