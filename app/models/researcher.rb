@@ -52,12 +52,15 @@ class Researcher < ActiveRecord::Base
         puts 'found researcher'
         researcher = link.click
         bio = researcher.at('.field-item').text.strip
+        picture = researcher.image_with(:src => /user_photo/)
+        picture = picture.url.to_s
+        self.remote_avatar_url = picture
+        self.save!
+        puts picture
         puts bio
         self.update_attribute(:bio, bio);
-        puts self.bio
-        # email = researcher.at('.views-field-field-public-email a').text.strip
-        # email = email.split("@").first
-        # puts email
+        title = researcher.at('.views-field-field-job-title').text.strip
+        self.update_attribute(:title, title);
       end
     end
   end
@@ -147,7 +150,7 @@ class Researcher < ActiveRecord::Base
   # list between create and update. Also, you can specialize this method
   # with per-user checking of permissible attributes.
   def researcher_params
-    params.require(:researcher).permit(:username, :discipline, :phone_number, :name_hash, :name, :first_name, :last_name, :email, :password, :bio, :title, :headline, :current_location, :avatar, :avatar_cache, :remove_avatar, :password_confirmation)
+    params.require(:researcher).permit(:username, :discipline, :phone_number, :name_hash, :name, :first_name, :last_name, :email, :password, :bio, :title, :headline, :current_location, {avatars: []}, :avatar_cache, :remove_avatar, :password_confirmation)
   end
 
 end
